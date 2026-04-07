@@ -1,0 +1,167 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/main/schemas/predicate-schema.json",
+  "title": "C2PA Conformance Predicates",
+  "description": "Schema for predicates.json: deterministic, machine-checkable conformance predicates derived from C2PA normative validation rules.",
+  "type": "object",
+  "required": [
+    "spec_version",
+    "predicate_schema_version",
+    "format_families",
+    "cross_cutting",
+    "coverage_summary"
+  ],
+  "additionalProperties": true,
+  "properties": {
+    "spec_version": {
+      "type": "string",
+      "description": "C2PA specification version these predicates target (e.g. '2.4')."
+    },
+    "predicate_schema_version": {
+      "type": "string",
+      "description": "Version of this predicate schema (e.g. '1.0.0')."
+    },
+    "format_families": {
+      "type": "object",
+      "description": "Predicate groups keyed by MIME format family name.",
+      "additionalProperties": {
+        "$ref": "#/$defs/format_family"
+      }
+    },
+    "cross_cutting": {
+      "type": "object",
+      "description": "Predicates that apply across all format families.",
+      "required": ["description", "predicates"],
+      "additionalProperties": true,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "predicates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/predicate"
+          }
+        }
+      }
+    },
+    "coverage_summary": {
+      "type": "object",
+      "description": "Aggregate coverage statistics for this predicates file.",
+      "required": [
+        "total_predicates",
+        "rules_formalized",
+        "total_v24_rules",
+        "coverage_percent",
+        "format_coverage"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "total_predicates": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "rules_formalized": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "total_v24_rules": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "coverage_percent": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "format_coverage": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    }
+  },
+  "$defs": {
+    "format_family": {
+      "type": "object",
+      "description": "A group of predicates covering one MIME format family.",
+      "required": ["description", "mime_types", "binding_mechanism", "predicates"],
+      "additionalProperties": true,
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "mime_types": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string"
+          }
+        },
+        "binding_mechanism": {
+          "type": "string"
+        },
+        "predicates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/predicate"
+          }
+        }
+      }
+    },
+    "predicate": {
+      "type": "object",
+      "description": "A single machine-checkable conformance predicate.",
+      "required": [
+        "predicate_id",
+        "source_rules",
+        "severity",
+        "title",
+        "description",
+        "condition"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "predicate_id": {
+          "type": "string",
+          "pattern": "^PRED-[A-Z]+-\\d{3}$",
+          "description": "Stable identifier for this predicate (e.g. PRED-IMAGE-001)."
+        },
+        "source_rules": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "pattern": "^VAL-[A-Z]+-\\d{4}$"
+          },
+          "description": "One or more validation rule IDs from validation-rules.json that this predicate formalizes."
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["shall", "must", "should", "may"],
+          "description": "RFC 2119 normative strength of the predicate."
+        },
+        "title": {
+          "type": "string",
+          "description": "Short human-readable name for this predicate."
+        },
+        "description": {
+          "type": "string",
+          "description": "Full prose description of what the predicate checks."
+        },
+        "condition": {
+          "type": "object",
+          "description": "Structured logical condition the predicate evaluates.",
+          "required": ["op"],
+          "additionalProperties": true,
+          "properties": {
+            "op": {
+              "type": "string",
+              "description": "Logical operator or check type (e.g. 'and', 'or', 'exists', 'equals')."
+            }
+          }
+        }
+      }
+    }
+  }
+}

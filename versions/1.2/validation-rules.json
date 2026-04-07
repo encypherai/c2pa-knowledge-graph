@@ -1,0 +1,970 @@
+{
+  "version": "1.2",
+  "rule_count": 82,
+  "summary": {
+    "total": 82,
+    "by_phase": {
+      "content": 11,
+      "assertion": 19,
+      "structural": 17,
+      "cryptographic": 13,
+      "timestamp": 1,
+      "ingredient": 7,
+      "trust": 14
+    },
+    "by_severity": {
+      "must": 33,
+      "shall": 26,
+      "may": 13,
+      "should": 6,
+      "must_not": 1,
+      "shall_not": 2,
+      "should_not": 1
+    }
+  },
+  "phases": {
+    "structural": [
+      {
+        "rule_id": "VAL-STRU-0013",
+        "description": "A validator must perform the above validation steps for the asset being presented and its manifest.",
+        "severity": "must",
+        "phase": "structural",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-STRU-0014",
+        "description": "If any of the above steps conclude the manifest is invalid, that manifest must be rejected with the indicated failure code.",
+        "severity": "must",
+        "phase": "structural",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-STRU-0002",
+        "description": "The manifest consumer shall look inside the asset for an embedded C2PA Manifest Store in the standard locations for embedding manifests to see if one is present.",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Embedded"
+      },
+      {
+        "rule_id": "VAL-STRU-0009",
+        "description": "There shall only be one such box in the active manifest, if more than one is located, the manifest shall be rejected with a failure code of claim.multiple.",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Locating the Claim",
+        "referenced_entities": [
+          "claim.multiple"
+        ]
+      },
+      {
+        "rule_id": "VAL-STRU-0010",
+        "description": "* If the rVals header is present, its contents shall be validated as described in  for the signer credential type.",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Validate the Credential Revocation Information",
+        "referenced_entities": [
+          "rVals"
+        ]
+      },
+      {
+        "rule_id": "VAL-STRU-0011",
+        "description": "* If the rVals header is not present, and the signer's credential is considered valid by the requirements of  and , a validator may choose to query the credential status method to determine if the credential is currently revoked.\n** If the validator does not query the credential status, the validator shall presume the credential is not revoked.\n** If the validator does query the credential status, it shall determine the status from the response as described in  for the signer's credential type.",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Validate the Credential Revocation Information",
+        "referenced_entities": [
+          "rVals"
+        ],
+        "source_text": "* If the rVals header is not present, and the signer's credential is considered valid by the requirements of  and , a validator may choose to query the credential status method to determine if the cre"
+      },
+      {
+        "rule_id": "VAL-STRU-0012",
+        "description": "A validator shall check for required and not-permitted assertions.",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Validate the correct assertions for the type of manifest"
+      },
+      {
+        "rule_id": "VAL-STRU-0016",
+        "description": "Endorsement validation shall only be attempted if the active manifest first meets a number of conditions:",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Validate the Endorsements"
+      },
+      {
+        "rule_id": "VAL-STRU-0017",
+        "description": "Because the segment lengths are inside the exclusion range, a validator shall match the total length of the exclusion range with that of the total length of all APP11 segments representing the C2PA Manifest to ensure that the length was not tampered with.",
+        "severity": "shall",
+        "phase": "structural",
+        "spec_section": "Hashing of JPEG-1 files",
+        "source_text": "Because the segment lengths are inside the exclusion range, a validator shall match the total length of the exclusion range with that of the total length of all APP11 segments representing the C2PA Ma"
+      },
+      {
+        "rule_id": "VAL-STRU-0003",
+        "description": "If there is no embedded C2PA Manifest Store, the following attempts should be made to locate one at a remote location.",
+        "severity": "should",
+        "phase": "structural",
+        "spec_section": "By Reference or URI"
+      },
+      {
+        "rule_id": "VAL-STRU-0004",
+        "description": "- If the asset was retrieved via an HTTP connection, the manifest consumer should look in the header of the HTTP response for a Link header, as defined in https://datatracker.ietf.org/doc/html/rfc8288[RFC 8288], containing a parameter of rel=c2pa-manifest.",
+        "severity": "should",
+        "phase": "structural",
+        "spec_section": "By Reference or URI",
+        "source_text": "- If the asset was retrieved via an HTTP connection, the manifest consumer should look in the header of the HTTP response for a Link header, as defined in https://datatracker.ietf.org/doc/html/rfc8288"
+      },
+      {
+        "rule_id": "VAL-STRU-0005",
+        "description": "- If the asset has XMP and the XMP contains a dcterms:provenance key, the provided URI should be used to locate the active manifest.",
+        "severity": "should",
+        "phase": "structural",
+        "spec_section": "By Reference or URI"
+      },
+      {
+        "rule_id": "VAL-STRU-0006",
+        "description": "- If no C2PA Manifest Store has been located, the manifest consumer should look for files at the same path or URI, but with a filename extension of .c2pa.",
+        "severity": "should",
+        "phase": "structural",
+        "spec_section": "By Reference or URI"
+      },
+      {
+        "rule_id": "VAL-STRU-0001",
+        "description": "The last C2PA Manifest superbox in the C2PA Manifest Store superbox is the active manifest, but locating the C2PA Manifest Store may involve looking in a number possible locations.",
+        "severity": "may",
+        "phase": "structural",
+        "spec_section": "Locating the Active Manifest"
+      },
+      {
+        "rule_id": "VAL-STRU-0007",
+        "description": "If the C2PA Manifest Store is not found, a manifest consumer may look in whatever additional places it deems most appropriate to locate it.",
+        "severity": "may",
+        "phase": "structural",
+        "spec_section": "By Reference or URI"
+      },
+      {
+        "rule_id": "VAL-STRU-0008",
+        "description": "A manifest consumer may wish to validate that the located C2PA Manifest Store is indeed the one associated with asset.",
+        "severity": "may",
+        "phase": "structural",
+        "spec_section": "Validating a Match"
+      },
+      {
+        "rule_id": "VAL-STRU-0015",
+        "description": "In authoring scenarios, it may be desirable to more prominently raise warnings so that a creator making use of such an asset with a flawed provenance history can make an informed decision of how to proceed.",
+        "severity": "may",
+        "phase": "structural",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "source_text": "In authoring scenarios, it may be desirable to more prominently raise warnings so that a creator making use of such an asset with a flawed provenance history can make an informed decision of how to pr"
+      }
+    ],
+    "cryptographic": [
+      {
+        "rule_id": "VAL-CRYP-0001",
+        "description": "The signature must be embedded in the same manifest as described in .",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature"
+      },
+      {
+        "rule_id": "VAL-CRYP-0002",
+        "description": "If the signature URI does not refer to a location within the same C2PA Manifest box (a self#jumbf location), the claim must be rejected.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature"
+      },
+      {
+        "rule_id": "VAL-CRYP-0003",
+        "description": "If no such field is present or the URI cannot be resolved, then the claim must be rejected with a failure code of claimSignature.missing.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature",
+        "referenced_entities": [
+          "claimSignature.missing"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0004",
+        "description": "If a chain of trust cannot be built from the credential to an entry in the trust anchor list, the claim must be rejected with a failure code of signingCredential.untrusted.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature",
+        "referenced_entities": [
+          "signingCredential.untrusted"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0005",
+        "description": "If the credential is not acceptable per the requirements of the credential's type, then the claim must be rejected with a failure code of signingCredential.invalid.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature",
+        "referenced_entities": [
+          "signingCredential.invalid"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0006",
+        "description": "If the signature algorithm is not on the allowed or deprecated list in , then the claim must be rejected with a failure code of algorithm.unsupported.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature",
+        "referenced_entities": [
+          "algorithm.unsupported"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0008",
+        "description": "If validation of the signature fails, then the claim must be rejected with a failure code of claimSignature.mismatch.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature",
+        "referenced_entities": [
+          "claimSignature.mismatch"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0010",
+        "description": "The claim must be rejected with a failure code of timeStamp.mismatch if it does not match.\n* The time attested by the Time Stamp Authority (TSA) falls within the validity period of the signing credential.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Time-Stamp",
+        "referenced_entities": [
+          "timeStamp.mismatch"
+        ],
+        "source_text": "The claim must be rejected with a failure code of timeStamp.mismatch if it does not match.\n* The time attested by the Time Stamp Authority (TSA) falls within the validity period of the signing credent"
+      },
+      {
+        "rule_id": "VAL-CRYP-0011",
+        "description": "The claim must be rejected with a failure code of signingCredential.expired if it does not.\n* The attested time falls within the validity period of the TSA's signing certificate, The claim must be rejected with a failure code of timeStamp.outsideValidity if it does not.\n* A trust chain can be built to an entry in the TSA trust store as described in .",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Time-Stamp",
+        "referenced_entities": [
+          "signingCredential.expired",
+          "timeStamp.outsideValidity"
+        ],
+        "source_text": "The claim must be rejected with a failure code of signingCredential.expired if it does not.\n* The attested time falls within the validity period of the TSA's signing certificate, The claim must be rej"
+      },
+      {
+        "rule_id": "VAL-CRYP-0012",
+        "description": "The claim must be rejected with a failure code of timeStamp.untrusted if a trust chain cannot be built.",
+        "severity": "must",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Time-Stamp",
+        "referenced_entities": [
+          "timeStamp.untrusted"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0013",
+        "description": "In all cases, if the credential is deemed revoked at the time of signing, the claim shall be rejected with a failure code of signingCredential.revoked.",
+        "severity": "shall",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Credential Revocation Information",
+        "referenced_entities": [
+          "signingCredential.revoked"
+        ]
+      },
+      {
+        "rule_id": "VAL-CRYP-0007",
+        "description": "After confirming the credential type and signing algorithm are acceptable, validation should proceed according to the specified procedure in .",
+        "severity": "should",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature"
+      },
+      {
+        "rule_id": "VAL-CRYP-0009",
+        "description": "Unless otherwise specified in  or , a header may appear in either bucket. https://datatracker.ietf.org/doc/html/rfc8152#section-3[RFC8152 section 3] describes COSE headers.",
+        "severity": "may",
+        "phase": "cryptographic",
+        "spec_section": "Validate the Signature"
+      }
+    ],
+    "trust": [
+      {
+        "rule_id": "VAL-TRUS-0005",
+        "description": "If the application chooses to display such data, it must flag the display with a warning about the failed integrity check, and that the data cannot be reliably attributed to the ingredient manifest's signer nor to the asset's manifest's signer.",
+        "severity": "must",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "source_text": "If the application chooses to display such data, it must flag the display with a warning about the failed integrity check, and that the data cannot be reliably attributed to the ingredient manifest's "
+      },
+      {
+        "rule_id": "VAL-TRUS-0006",
+        "description": "If the manifest is an update manifest, then the claim must be rejected with a failure code of manifest.update.wrongParents.\n* If the ingredient does have a c2pa_manifest field:\n.",
+        "severity": "must",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "manifest.update.wrongParents",
+          "c2pa_manifest"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0007",
+        "description": "If an alg field is not present in the hashed_uri structure, an alg field must be present in an enclosing structure, and the nearest instance present determines the hash algorithm.\n..",
+        "severity": "must",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "alg",
+          "hashed_uri"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0008",
+        "description": "If no alg field is found in any of these locations, the claim must be rejected with a failure code of ingredient.hashedURI.mismatch.\n.",
+        "severity": "must",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "alg",
+          "ingredient.hashedURI.mismatch"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0009",
+        "description": "If the hashes are not equal, the claim must be rejected with a failure code of ingredient.hashedURI.mismatch.\n.",
+        "severity": "must",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "ingredient.hashedURI.mismatch"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0012",
+        "description": "If admitted in this way, the validator must present each validationStatus present in the validationStatus field array as part of any exploration of the provenance history.",
+        "severity": "must",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "validationStatus"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0002",
+        "description": "For standard manifests, a validator may choose to optionally recurse through any ingredient manifests, however the parentOf ingredient of an update manifest shall be validated by the procedure below.",
+        "severity": "shall",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "parentOf"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0010",
+        "description": "If the ingredient contains a validationStatus field, each of the entries in the array shall be evaluated.",
+        "severity": "shall",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "validationStatus"
+        ]
+      },
+      {
+        "rule_id": "VAL-TRUS-0003",
+        "description": "There is no requirement that signers of ingredient manifests are trusted by the validator (except in the case of endorsement validation), and building of trust chains of signers of ingredients shall not be attempted.",
+        "severity": "shall_not",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "source_text": "There is no requirement that signers of ingredient manifests are trusted by the validator (except in the case of endorsement validation), and building of trust chains of signers of ingredients shall n"
+      },
+      {
+        "rule_id": "VAL-TRUS-0013",
+        "description": "Validators should perform full validation if exploration of the provenance history of the ingredient is requested to indicate where there are validation errors.\n+\n[NOTE]\nThe presence of a validationStatus with a failure code or with a success field with a value of false is an explicit statement by the signer that they acknowledged and have chosen to override validation errors in the ingredient's claim itself.\n+\n.",
+        "severity": "should",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "validationStatus",
+          "success",
+          "false"
+        ],
+        "source_text": "Validators should perform full validation if exploration of the provenance history of the ingredient is requested to indicate where there are validation errors.\n+\n[NOTE]\nThe presence of a validationSt"
+      },
+      {
+        "rule_id": "VAL-TRUS-0004",
+        "description": "Applications should not display data from ingredient manifests with failed integrity checks.",
+        "severity": "should_not",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-TRUS-0001",
+        "description": "An asset's manifest may list one or more ingredients.",
+        "severity": "may",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-TRUS-0011",
+        "description": "An admitted manifest is treated like an accepted manifest, but with an explicit indication that it may contain validation errors that are known to the signer.",
+        "severity": "may",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-TRUS-0014",
+        "description": "The validator may optionally recursively validate the ingredient's ingredients.",
+        "severity": "may",
+        "phase": "trust",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      }
+    ],
+    "assertion": [
+      {
+        "rule_id": "VAL-ASSE-0002",
+        "description": "When using custom labels, because they are not inherently success or failure codes, a boolean success or failure result must be returned as well.",
+        "severity": "must",
+        "phase": "assertion",
+        "spec_section": "Status Codes"
+      },
+      {
+        "rule_id": "VAL-ASSE-0010",
+        "description": "For each assertion, the validator must:",
+        "severity": "must",
+        "phase": "assertion",
+        "spec_section": "Assertion Validation"
+      },
+      {
+        "rule_id": "VAL-ASSE-0011",
+        "description": "Then, for each element of the claim's own redacted_assertions array, if any element of the claim's assertions array has a url field equal to that value, the claim must be rejected with a failure code of assertion.selfRedacted.",
+        "severity": "must",
+        "phase": "assertion",
+        "spec_section": "Assertion Validation",
+        "referenced_entities": [
+          "redacted_assertions",
+          "assertions",
+          "url",
+          "assertion.selfRedacted"
+        ],
+        "source_text": "Then, for each element of the claim's own redacted_assertions array, if any element of the claim's assertions array has a url field equal to that value, the claim must be rejected with a failure code "
+      },
+      {
+        "rule_id": "VAL-ASSE-0012",
+        "description": "A validator must first successfully validate a claim before attempting to retrieve external data listed in a cloud data assertion.",
+        "severity": "must",
+        "phase": "assertion",
+        "spec_section": "External Data Validation"
+      },
+      {
+        "rule_id": "VAL-ASSE-0015",
+        "description": "If a validator chooses to retrieve any of the external data in a cloud data assertion, the validator must:",
+        "severity": "must",
+        "phase": "assertion",
+        "spec_section": "External Data Validation"
+      },
+      {
+        "rule_id": "VAL-ASSE-0001",
+        "description": "The code shall conform to the same syntax as custom labels, e.g. com.litware.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Status Codes",
+        "referenced_entities": [
+          "com.litware"
+        ]
+      },
+      {
+        "rule_id": "VAL-ASSE-0003",
+        "description": "If there are multiple C2PA Manifest Stores present in an asset, they shall all be considered as invalid and the validation should treat this as if no manifests were located.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Embedded"
+      },
+      {
+        "rule_id": "VAL-ASSE-0004",
+        "description": "In the case where this asset is being added as an ingredient, none of these embedded C2PA manifests shall be included in the ingredient assertion.\n \n#### By Reference or URI",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Embedded"
+      },
+      {
+        "rule_id": "VAL-ASSE-0005",
+        "description": "If the C2PA Manifest Store was located then the hard binding assertion present in its active manifest shall be used to validate that it is the matching manifest and whether the asset has been modified without manifest updates.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Validating a Match",
+        "source_text": "If the C2PA Manifest Store was located then the hard binding assertion present in its active manifest shall be used to validate that it is the matching manifest and whether the asset has been modified"
+      },
+      {
+        "rule_id": "VAL-ASSE-0006",
+        "description": "Accordingly, the manifest consumer shall treat this as a non-matching hard binding and reject the manifest with a failure code of assertion.dataHash.mismatch if a data hash assertion is used or assertion.bmffHash.mismatch if a BMFF hash assertion is used.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Validating a Match",
+        "referenced_entities": [
+          "assertion.dataHash.mismatch",
+          "assertion.bmffHash.mismatch"
+        ],
+        "source_text": "Accordingly, the manifest consumer shall treat this as a non-matching hard binding and reject the manifest with a failure code of assertion.dataHash.mismatch if a data hash assertion is used or assert"
+      },
+      {
+        "rule_id": "VAL-ASSE-0008",
+        "description": "Therefore a validator, when processing a claim, shall gather the set of redacted assertion for each ingredient manifest based on each hashed_uri listed in the redacted_assertions field.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Preparing the list of redacted assertions",
+        "referenced_entities": [
+          "hashed_uri",
+          "redacted_assertions"
+        ]
+      },
+      {
+        "rule_id": "VAL-ASSE-0009",
+        "description": "A claim's redacted_assertions field shall never include a hashed_uri to any of its own assertions.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Preparing the list of redacted assertions",
+        "referenced_entities": [
+          "redacted_assertions",
+          "hashed_uri"
+        ]
+      },
+      {
+        "rule_id": "VAL-ASSE-0017",
+        "description": "When endorsement validation has completed, for each actions assertion in the active manifest where all actions are marked as __endorsed__, the actions assertion itself shall be marked as __endorsed__ in the validation results returned by the validator.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Validate the Endorsements",
+        "referenced_entities": [
+          "actions"
+        ],
+        "source_text": "When endorsement validation has completed, for each actions assertion in the active manifest where all actions are marked as __endorsed__, the actions assertion itself shall be marked as __endorsed__ "
+      },
+      {
+        "rule_id": "VAL-ASSE-0018",
+        "description": "Once a standard manifest (and its bindings) has been located, the exclusion range(s) shall be extracted from the c2pa.hash.data assertion.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Validating a data hash",
+        "referenced_entities": [
+          "c2pa.hash.data"
+        ]
+      },
+      {
+        "rule_id": "VAL-ASSE-0019",
+        "description": "If the resultant hash does not match the value of the hash field in the c2pa.hash.data, then the manifest shall be rejected with a failure code of assertion.dataHash.mismatch.",
+        "severity": "shall",
+        "phase": "assertion",
+        "spec_section": "Validating a data hash",
+        "referenced_entities": [
+          "hash",
+          "c2pa.hash.data",
+          "assertion.dataHash.mismatch"
+        ]
+      },
+      {
+        "rule_id": "VAL-ASSE-0013",
+        "description": "A validator must not attempt to retrieve external data from a rejected claim.",
+        "severity": "must_not",
+        "phase": "assertion",
+        "spec_section": "External Data Validation"
+      },
+      {
+        "rule_id": "VAL-ASSE-0014",
+        "description": "As the retrieval of external data is optional, the inability to retrieve or validate external data shall not cause a claim to become rejected.",
+        "severity": "shall_not",
+        "phase": "assertion",
+        "spec_section": "External Data Validation"
+      },
+      {
+        "rule_id": "VAL-ASSE-0007",
+        "description": "For each manifest, there may be a set of its assertions that were redacted from it.",
+        "severity": "may",
+        "phase": "assertion",
+        "spec_section": "Preparing the list of redacted assertions"
+      },
+      {
+        "rule_id": "VAL-ASSE-0016",
+        "description": "In order to provide resilience in the case of a claim generator unexpectedly adding multiple endorsement assertions to an assertion store, a validator may iterate through the validation process below with each endorsement, stopping the iteration immediately if an endorsement validates successfully.",
+        "severity": "may",
+        "phase": "assertion",
+        "spec_section": "Validate the Endorsements",
+        "source_text": "In order to provide resilience in the case of a claim generator unexpectedly adding multiple endorsement assertions to an assertion store, a validator may iterate through the validation process below "
+      }
+    ],
+    "ingredient": [
+      {
+        "rule_id": "VAL-INGR-0005",
+        "description": "If the manifest is an update manifest, or if a validator chooses to validate the ingredients of a standard manifest, then for each ingredient, it must recursively:",
+        "severity": "must",
+        "phase": "ingredient",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-INGR-0001",
+        "description": "In those cases, when validation is taking place, and the destination of the hashed_uri cannot be located (i.e., that data isn't present where it is supposed to be) then it shall be treated as a validation failure.",
+        "severity": "shall",
+        "phase": "ingredient",
+        "spec_section": "Validation of References",
+        "referenced_entities": [
+          "hashed_uri"
+        ],
+        "source_text": "In those cases, when validation is taking place, and the destination of the hashed_uri cannot be located (i.e., that data isn't present where it is supposed to be) then it shall be treated as a valida"
+      },
+      {
+        "rule_id": "VAL-INGR-0004",
+        "description": "However, the parentOf ingredient of an update manifest shall be surfaced.",
+        "severity": "shall",
+        "phase": "ingredient",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "referenced_entities": [
+          "parentOf"
+        ]
+      },
+      {
+        "rule_id": "VAL-INGR-0006",
+        "description": "If that manifest is also an update manifest, the search for a standard manifest shall recurse though the chain of ingredients.",
+        "severity": "shall",
+        "phase": "ingredient",
+        "spec_section": "Validate the Asset's Content"
+      },
+      {
+        "rule_id": "VAL-INGR-0007",
+        "description": "If no standard manifest is found, then the manifest shall be rejected with a failure code of manifest.update.wrongParents.",
+        "severity": "shall",
+        "phase": "ingredient",
+        "spec_section": "Validate the Asset's Content",
+        "referenced_entities": [
+          "manifest.update.wrongParents"
+        ]
+      },
+      {
+        "rule_id": "VAL-INGR-0002",
+        "description": "When ingredients are being added to an asset as part of an authoring workflow, the ingredient may undergo full validation and the results expressed in a validation status.",
+        "severity": "may",
+        "phase": "ingredient",
+        "spec_section": "Recursively Validating Integrity of Ingredients"
+      },
+      {
+        "rule_id": "VAL-INGR-0003",
+        "description": "For consumption scenarios, it is expected that problems with ingredient manifests from a standard manifest would be ignored during normal consumption use but may be surfaced as a warning if a user opts to explore the provenance history.",
+        "severity": "may",
+        "phase": "ingredient",
+        "spec_section": "Recursively Validating Integrity of Ingredients",
+        "source_text": "For consumption scenarios, it is expected that problems with ingredient manifests from a standard manifest would be ignored during normal consumption use but may be surfaced as a warning if a user opt"
+      }
+    ],
+    "timestamp": [
+      {
+        "rule_id": "VAL-TIME-0001",
+        "description": "If it is not, the claim must be rejected with a failure code of signingCredential.expired.",
+        "severity": "must",
+        "phase": "timestamp",
+        "spec_section": "Validate the Time-Stamp",
+        "referenced_entities": [
+          "signingCredential.expired"
+        ]
+      }
+    ],
+    "content": [
+      {
+        "rule_id": "VAL-CONT-0001",
+        "description": "This validation must be completed before a validator presents a successful result to a human user or begins to render any content.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validation"
+      },
+      {
+        "rule_id": "VAL-CONT-0004",
+        "description": "For any portions of an asset rendered for presentation to a user, including but not limited to audio, video, or text, the corresponding hard binding corresponding to the rendered content must be validated in accordance with .",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash",
+        "source_text": "For any portions of an asset rendered for presentation to a user, including but not limited to audio, video, or text, the corresponding hard binding corresponding to the rendered content must be valid"
+      },
+      {
+        "rule_id": "VAL-CONT-0005",
+        "description": "If at any time content fails to be validated, the validator must clearly signal to the user that some of the content does not match the claim, and if possible, should indicate what part of the content did not validate.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash",
+        "source_text": "If at any time content fails to be validated, the validator must clearly signal to the user that some of the content does not match the claim, and if possible, should indicate what part of the content"
+      },
+      {
+        "rule_id": "VAL-CONT-0006",
+        "description": "The validator must continue to report validation has failed, even if later portions of the content validate correctly.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash"
+      },
+      {
+        "rule_id": "VAL-CONT-0007",
+        "description": "As the content becomes available, the validator must validate each portion of the content before it is rendered as previously described.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash"
+      },
+      {
+        "rule_id": "VAL-CONT-0008",
+        "description": "In addition, the validator must validate that the sequence of said content is the same as when the manifest was produced.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash"
+      },
+      {
+        "rule_id": "VAL-CONT-0009",
+        "description": "Unless the player has explicitly signalled the validator that a discontinuity is expected (e.g., when the consumer performs a manual seek operation via the UI), the validator must clearly signal to the user that an unexpected discontinuity has occurred whenever the sequence does not match.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash",
+        "source_text": "Unless the player has explicitly signalled the validator that a discontinuity is expected (e.g., when the consumer performs a manual seek operation via the UI), the validator must clearly signal to th"
+      },
+      {
+        "rule_id": "VAL-CONT-0011",
+        "description": "In this case, the validator must clearly signal to the user that the content cannot be validated during the corresponding operation.",
+        "severity": "must",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash"
+      },
+      {
+        "rule_id": "VAL-CONT-0002",
+        "description": "If any update manifests were encountered then the length value of the exclusion range whose start value is the offset of the start of the entire C2PA manifest store shall be treated as the current length of the entire C2PA manifest store plus any file format specific extras.",
+        "severity": "shall",
+        "phase": "content",
+        "spec_section": "Validating a data hash",
+        "referenced_entities": [
+          "length",
+          "start"
+        ],
+        "source_text": "If any update manifests were encountered then the length value of the exclusion range whose start value is the offset of the start of the entire C2PA manifest store shall be treated as the current len"
+      },
+      {
+        "rule_id": "VAL-CONT-0003",
+        "description": "The hash algorithm (alg) specified in that c2pa.hash.data shall be computed over the bytes of the asset, minus those specified in the exclusion range(s).",
+        "severity": "shall",
+        "phase": "content",
+        "spec_section": "Validating a data hash",
+        "referenced_entities": [
+          "alg",
+          "c2pa.hash.data"
+        ]
+      },
+      {
+        "rule_id": "VAL-CONT-0010",
+        "description": "For content that is intentionally not being rendered as the claim generator originally intended, such as during fast-forward, rewind, or playback at a different speed, the validator may not be able to validate the content.",
+        "severity": "may",
+        "phase": "content",
+        "spec_section": "Validating a BMFF-hash",
+        "source_text": "For content that is intentionally not being rendered as the claim generator originally intended, such as during fast-forward, rewind, or playback at a different speed, the validator may not be able to"
+      }
+    ]
+  },
+  "status_codes": {
+    "success": [
+      {
+        "code": "assertion.accessible",
+        "meaning": "A non-embedded (remote) assertion was accessible at the time of validation.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.bmffHash.match",
+        "meaning": "Hash of a box-based asset matches the hash declared in the BMFF hash assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.dataHash.match",
+        "meaning": "Hash of a byte range of the asset matches the hash declared in the data hash assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.hashedURI.match",
+        "meaning": "The hash of the the referenced assertion in the ingredient's manifest matches the corresponding hash in the assertion's hashed URI in the claim.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "claimSignature.validated",
+        "meaning": "The claim signature referenced in the ingredient's claim validated.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "signingCredential.trusted",
+        "meaning": "The signing credential is listed on the validator's trust list.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "timeStamp.trusted",
+        "meaning": "The time-stamp credential is listed on the validator's trust list.",
+        "url_usage": "C2PA Claim Signature Box"
+      }
+    ],
+    "failure": [
+      {
+        "code": "algorithm.unsupported",
+        "meaning": "The value of an `alg` header, or other header that specifies an algorithm used to compute the value of another field, is unknown or unsupported.",
+        "url_usage": "C2PA Claim Box or C2PA Assertion"
+      },
+      {
+        "code": "assertion.action.redacted",
+        "meaning": "An `action` assertion was redacted when the ingredient's claim was created.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.bmffHash.mismatch",
+        "meaning": "The hash of a box-based asset does not match the hash declared in a BMFF hash assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.cbor.invalid",
+        "meaning": "The cbor of an assertion is not valid",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.cloud-data.actions",
+        "meaning": "An update manifest contains a cloud data assertion referencing an actions assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.cloud-data.hardBinding",
+        "meaning": "A hard binding assertion is in a cloud data assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.dataHash.mismatch",
+        "meaning": "The hash of a byte range of the asset does not match the hash declared in the data hash assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.hashedURI.mismatch",
+        "meaning": "The hash of the the referenced assertion in the manifest does not match the corresponding hash in the assertion's hashed URI in the claim.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.inaccessible",
+        "meaning": "A non-embedded (remote) assertion was inaccessible at the time of validation.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.json.invalid",
+        "meaning": "The JSON(-LD) of an assertion is not valid",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.missing",
+        "meaning": "An assertion listed in the ingredient's claim is missing from the ingredient's manifest.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "assertion.multipleHardBindings",
+        "meaning": "The manifest has more than one hard binding assertion.",
+        "url_usage": "C2PA Assertion Store Box"
+      },
+      {
+        "code": "assertion.notRedacted",
+        "meaning": "An assertion was declared as redacted in the ingredient's claim but is still present in the ingredient's manifest.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.required.missing",
+        "meaning": "A required field is not present in an assertion.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "assertion.selfRedacted",
+        "meaning": "An assertion was declared as redacted by its own claim.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "assertion.undeclared",
+        "meaning": "An assertion was found in the ingredient's manifest that was not explicitly declared in the ingredient's claim.",
+        "url_usage": "C2PA Claim Box or C2PA Assertion"
+      },
+      {
+        "code": "claim.cbor.invalid",
+        "meaning": "The cbor of the claim is not valid",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "claim.hardBindings.missing",
+        "meaning": "No hard bindings are present in the claim.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "claim.missing",
+        "meaning": "The referenced claim in the ingredient's manifest cannot be found.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "claim.multiple",
+        "meaning": "More than one claim box is present in the manifest.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "claim.required.missing",
+        "meaning": "A required field is not present in the claim.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "claimSignature.mismatch",
+        "meaning": "The claim signature referenced in the ingredient's claim failed to validate.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "claimSignature.missing",
+        "meaning": "The claim signature referenced in the ingredient's claim cannot be found in its manifest.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "general.error",
+        "meaning": "A value to be used when there was an error not specifically listed here.",
+        "url_usage": "C2PA Claim Box or C2PA Assertion"
+      },
+      {
+        "code": "ingredient.hashedURI.mismatch",
+        "meaning": "The hash of the the referenced ingredient claim in the manifest does not match the corresponding hash in the ingredient's hashed URI in the claim.",
+        "url_usage": "C2PA Assertion"
+      },
+      {
+        "code": "manifest.multipleParents",
+        "meaning": "The manifest has more than one ingredient whose `relationship` is `parentOf`.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "manifest.update.invalid",
+        "meaning": "The manifest is an update manifest, but it contains a disallowed assertion, such as a hard binding or actions assertions.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "manifest.update.wrongParents",
+        "meaning": "The manifest is an update manifest, but it contains either zero or multiple `parentOf` ingredients.",
+        "url_usage": "C2PA Claim Box"
+      },
+      {
+        "code": "signingCredential.expired",
+        "meaning": "The signing credential has expired.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "signingCredential.invalid",
+        "meaning": "The signing credential is not valid for signing.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "signingCredential.revoked",
+        "meaning": "The signing credential has been revoked by the issuer.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "signingCredential.untrusted",
+        "meaning": "The signing credential is not listed on the validator's trust list.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "timeStamp.mismatch",
+        "meaning": "The time-stamp does not correspond to the contents of the claim.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "timeStamp.outsideValidity",
+        "meaning": "The signed time-stamp attribute in the signature falls outside the validity window of the signing certificate or the TSA's certificate.",
+        "url_usage": "C2PA Claim Signature Box"
+      },
+      {
+        "code": "timeStamp.untrusted",
+        "meaning": "The time-stamp credential is not listed on the validator's trust list.",
+        "url_usage": "C2PA Claim Signature Box"
+      }
+    ]
+  }
+}

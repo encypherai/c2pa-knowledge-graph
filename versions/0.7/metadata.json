@@ -1,0 +1,122 @@
+{
+  "version": {
+    "version": "0.7",
+    "date": "2021-09-12",
+    "commit_hash": "",
+    "tag": "0.7"
+  },
+  "entities": {},
+  "relationships": [],
+  "validation_rules": [],
+  "enum_types": {},
+  "type_aliases": {},
+  "spec_conventions": {
+    "normative_language": {
+      "standard": "RFC 2119",
+      "rules": [
+        {
+          "keyword": "shall",
+          "meaning": "Absolute requirement. Equivalent to 'must'.",
+          "constraints": [
+            "Never use in informational, security, or threat analysis sections",
+            "Never use inside NOTE blocks",
+            "Same concept uses the same normative verb throughout the spec"
+          ]
+        },
+        {
+          "keyword": "should",
+          "meaning": "Recommended but exceptions exist with clear justification.",
+          "constraints": [
+            "Non-compliance must have clear justification",
+            "Do not use 'it is recommended that' -- use 'should' directly"
+          ]
+        },
+        {
+          "keyword": "may",
+          "meaning": "Truly optional behavior.",
+          "constraints": [
+            "Verify it does not mask a 'should'",
+            "Network access is always optional -- any retrieval uses 'may attempt'"
+          ]
+        }
+      ],
+      "anti_patterns": [
+        "'it is recommended that' -- replace with 'should'",
+        "'it is required' -- replace with 'shall'",
+        "Normative statements in NOTE blocks",
+        "Normative hedging in requirement text"
+      ]
+    },
+    "structural_placement": {
+      "rules": [
+        {
+          "section": "feature_definition",
+          "contains": "Mechanism description, data structures, CDDL schemas",
+          "must_not_contain": "Validation logic, security analysis, implementation guidance"
+        },
+        {
+          "section": "validation",
+          "contains": "How to validate the mechanism, status codes, error conditions",
+          "must_not_contain": "Feature description, security analysis"
+        },
+        {
+          "section": "threats_harms",
+          "contains": "Security analysis, threat model, risk assessment",
+          "must_not_contain": "Normative requirements ('shall'), validation logic"
+        }
+      ],
+      "principle": "The feature section defines the mechanism. Validation and security sections define how to check it. Guidance does not belong in normative spec text."
+    },
+    "cddl_conventions": {
+      "naming": "kebab-case for all CDDL rule names (e.g. region-map, action-items-map-v2)",
+      "extensibility": {
+        "open_enum": "Socket/plug pattern: $name /= value",
+        "open_group": "Double-dollar pattern: $$name //= group",
+        "forward_compat": "Include '* tstr => any' wildcard in maps for forward compatibility"
+      },
+      "field_rules": [
+        "Optional fields use '?' prefix",
+        "String fields use '.size (1..max-tstr-length)' constraint",
+        "URI fields reference $hashed-uri-map or jumbf-uri-type",
+        "CBOR diagnostic examples must match schema field names, types, and structure",
+        "Examples demonstrate the minimal valid case unless showing optional fields"
+      ]
+    },
+    "new_assertion_checklist": [
+      "Define data structure in feature section with CDDL schema",
+      "Add assertion label to the assertion label registry",
+      "Add validation rules to Validation.adoc specific assertion validation list",
+      "Add all status codes to consolidated status code tables (success/informational/failure)",
+      "Add security analysis to Threats_Harms.adoc if applicable",
+      "Include CBOR diagnostic example matching the schema",
+      "Verify extensibility: '* tstr => any' wildcard present"
+    ],
+    "semantic_terms": {
+      "manifest": "The C2PA Manifest -- a signed collection of assertions about an asset",
+      "manifest_store": "The container holding one or more manifests",
+      "active_manifest": "The current (most recent) manifest in a manifest chain",
+      "claim_generator": "The entity creating the manifest, not a software component",
+      "validator": "The entity performing validation of a manifest",
+      "trust": "Claim signature verification against a trust list -- distinct from integrity",
+      "integrity": "Hash verification of content bindings -- distinct from trust",
+      "componentOf": "Parent-to-child relationship ONLY. Never describe as child-to-parent.",
+      "parentOf": "The derived-from/predecessor relationship in Update Manifests"
+    },
+    "cross_reference_rules": [
+      "Every new assertion must appear in the Specific Assertion Validation list",
+      "Every new status code must appear in consolidated status code tables",
+      "hashed-uri references must use $hashed-uri-map in CDDL",
+      "Update Manifests have exactly one parentOf ingredient and no hard bindings",
+      "Network access is ALWAYS optional -- retrieval must use 'may attempt'"
+    ]
+  },
+  "status_codes": [],
+  "stats": {
+    "entity_count": 0,
+    "relationship_count": 0,
+    "rule_count": 0,
+    "enum_count": 0,
+    "type_alias_count": 0,
+    "status_code_count": 0
+  }
+}

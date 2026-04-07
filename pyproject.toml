@@ -1,0 +1,64 @@
+[project]
+name = "c2pa-knowledge-graph"
+version = "1.0.0"
+description = "Generate versioned RDF/OWL knowledge graphs from C2PA specification source files"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.11"
+authors = [
+    { name = "Encypher Corporation", email = "engineering@encypher.com" },
+]
+keywords = ["c2pa", "knowledge-graph", "rdf", "owl", "content-provenance", "mcp"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: Apache Software License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries",
+    "Topic :: Scientific/Engineering :: Information Analysis",
+]
+dependencies = [
+    "cddlparser>=0.6.0",
+    "rdflib>=7.0.0",
+    "jsonschema>=4.20.0",
+    "jsonschema-path>=0.3.0",
+    "click>=8.0.0",
+    "mcp[cli]>=1.0.0",
+]
+
+[project.scripts]
+c2pa-kg = "c2pa_kg.cli:cli"
+
+[project.urls]
+Homepage = "https://github.com/encypherai/c2pa-knowledge-graph"
+Repository = "https://github.com/encypherai/c2pa-knowledge-graph"
+Issues = "https://github.com/encypherai/c2pa-knowledge-graph/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/c2pa_kg"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 99
+target-version = "py311"
+src = ["src"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "ruff>=0.8.0",
+    "mypy>=1.13",
+]

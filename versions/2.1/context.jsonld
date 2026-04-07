@@ -1,0 +1,2231 @@
+{
+  "@context": {
+    "c2pa": "https://c2pa.org/ontology/",
+    "owl": "http://www.w3.org/2002/07/owl#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "dc": "http://purl.org/dc/terms/",
+    "schema": "https://schema.org/",
+    "skos": "http://www.w3.org/2004/02/skos/core#",
+    "@vocab": "https://c2pa.org/ontology/",
+    "ActionsMap": {
+      "@id": "https://c2pa.org/ontology/ActionsMap",
+      "@type": "@id"
+    },
+    "ActionItemsMap": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap",
+      "@type": "@id"
+    },
+    "ParametersMap": {
+      "@id": "https://c2pa.org/ontology/ParametersMap",
+      "@type": "@id"
+    },
+    "ActionsMapV2": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2",
+      "@type": "@id"
+    },
+    "ActionCommonMapV2": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2",
+      "@type": "@id"
+    },
+    "ActionItemMapV2": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2",
+      "@type": "@id"
+    },
+    "ActionTemplateMapV2": {
+      "@id": "https://c2pa.org/ontology/ActionTemplateMapV2",
+      "@type": "@id"
+    },
+    "ParametersMapV2": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2",
+      "@type": "@id"
+    },
+    "AssertionMetadataMap": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap",
+      "@type": "@id"
+    },
+    "SourceMap": {
+      "@id": "https://c2pa.org/ontology/SourceMap",
+      "@type": "@id"
+    },
+    "RatingMap": {
+      "@id": "https://c2pa.org/ontology/RatingMap",
+      "@type": "@id"
+    },
+    "LocalizationDataEntry": {
+      "@id": "https://c2pa.org/ontology/LocalizationDataEntry",
+      "@type": "@id"
+    },
+    "AssetRefMap": {
+      "@id": "https://c2pa.org/ontology/AssetRefMap",
+      "@type": "@id"
+    },
+    "AraReferenceBlockMap": {
+      "@id": "https://c2pa.org/ontology/AraReferenceBlockMap",
+      "@type": "@id"
+    },
+    "AraReferenceUriMap": {
+      "@id": "https://c2pa.org/ontology/AraReferenceUriMap",
+      "@type": "@id"
+    },
+    "AssetTypeMap": {
+      "@id": "https://c2pa.org/ontology/AssetTypeMap",
+      "@type": "@id"
+    },
+    "AssetTypes": {
+      "@id": "https://c2pa.org/ontology/AssetTypes",
+      "@type": "@id"
+    },
+    "BmffHashMap": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap",
+      "@type": "@id"
+    },
+    "ExclusionsMap": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap",
+      "@type": "@id"
+    },
+    "DataMap": {
+      "@id": "https://c2pa.org/ontology/DataMap",
+      "@type": "@id"
+    },
+    "SubsetMap": {
+      "@id": "https://c2pa.org/ontology/SubsetMap",
+      "@type": "@id"
+    },
+    "MerkleMap": {
+      "@id": "https://c2pa.org/ontology/MerkleMap",
+      "@type": "@id"
+    },
+    "BmffMerkleMap": {
+      "@id": "https://c2pa.org/ontology/BmffMerkleMap",
+      "@type": "@id"
+    },
+    "BoxMap": {
+      "@id": "https://c2pa.org/ontology/BoxMap",
+      "@type": "@id"
+    },
+    "BoxHashMap": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap",
+      "@type": "@id"
+    },
+    "ClaimMap": {
+      "@id": "https://c2pa.org/ontology/ClaimMap",
+      "@type": "@id"
+    },
+    "ClaimMapV2": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2",
+      "@type": "@id"
+    },
+    "GeneratorInfoMap": {
+      "@id": "https://c2pa.org/ontology/GeneratorInfoMap",
+      "@type": "@id"
+    },
+    "CloudDataMap": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap",
+      "@type": "@id"
+    },
+    "CollectionDataHashMap": {
+      "@id": "https://c2pa.org/ontology/CollectionDataHashMap",
+      "@type": "@id"
+    },
+    "UriHashedDataMap": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap",
+      "@type": "@id"
+    },
+    "DataBoxMap": {
+      "@id": "https://c2pa.org/ontology/DataBoxMap",
+      "@type": "@id"
+    },
+    "DataHashMap": {
+      "@id": "https://c2pa.org/ontology/DataHashMap",
+      "@type": "@id"
+    },
+    "ExclusionRangeMap": {
+      "@id": "https://c2pa.org/ontology/ExclusionRangeMap",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap",
+      "@type": "@id"
+    },
+    "EndorsementTargetMap": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap",
+      "@type": "@id"
+    },
+    "PublicCredential": {
+      "@id": "https://c2pa.org/ontology/PublicCredential",
+      "@type": "@id"
+    },
+    "FontUnicodeRangeMap": {
+      "@id": "https://c2pa.org/ontology/FontUnicodeRangeMap",
+      "@type": "@id"
+    },
+    "FontParameterUnicodeRangesMap": {
+      "@id": "https://c2pa.org/ontology/FontParameterUnicodeRangesMap",
+      "@type": "@id"
+    },
+    "FontParameterCreatedFromVariableFontMap": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap",
+      "@type": "@id"
+    },
+    "FontInfoMap": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap",
+      "@type": "@id"
+    },
+    "FontWeightMap": {
+      "@id": "https://c2pa.org/ontology/FontWeightMap",
+      "@type": "@id"
+    },
+    "FontEntityMap": {
+      "@id": "https://c2pa.org/ontology/FontEntityMap",
+      "@type": "@id"
+    },
+    "FontDesignerMap": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap",
+      "@type": "@id"
+    },
+    "HashedExtUriMap": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap",
+      "@type": "@id"
+    },
+    "HashedUriMap": {
+      "@id": "https://c2pa.org/ontology/HashedUriMap",
+      "@type": "@id"
+    },
+    "IngredientMap": {
+      "@id": "https://c2pa.org/ontology/IngredientMap",
+      "@type": "@id"
+    },
+    "IngredientMapV2": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2",
+      "@type": "@id"
+    },
+    "IngredientMapV3": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3",
+      "@type": "@id"
+    },
+    "ContextTypeChoice": {
+      "@id": "https://c2pa.org/ontology/ContextTypeChoice",
+      "@type": "@id"
+    },
+    "ContextSchema": {
+      "@id": "https://c2pa.org/ontology/ContextSchema",
+      "@type": "@id"
+    },
+    "GraphTypeChoice": {
+      "@id": "https://c2pa.org/ontology/GraphTypeChoice",
+      "@type": "@id"
+    },
+    "GraphType": {
+      "@id": "https://c2pa.org/ontology/GraphType",
+      "@type": "@id"
+    },
+    "ReverseSchema": {
+      "@id": "https://c2pa.org/ontology/ReverseSchema",
+      "@type": "@id"
+    },
+    "ReverseTypeChoice": {
+      "@id": "https://c2pa.org/ontology/ReverseTypeChoice",
+      "@type": "@id"
+    },
+    "CommonSchema": {
+      "@id": "https://c2pa.org/ontology/CommonSchema",
+      "@type": "@id"
+    },
+    "JsonldSchemaMap": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap",
+      "@type": "@id"
+    },
+    "Rvals": {
+      "@id": "https://c2pa.org/ontology/Rvals",
+      "@type": "@id"
+    },
+    "RegionMap": {
+      "@id": "https://c2pa.org/ontology/RegionMap",
+      "@type": "@id"
+    },
+    "RangeMap": {
+      "@id": "https://c2pa.org/ontology/RangeMap",
+      "@type": "@id"
+    },
+    "CoordinateMap": {
+      "@id": "https://c2pa.org/ontology/CoordinateMap",
+      "@type": "@id"
+    },
+    "ShapeMap": {
+      "@id": "https://c2pa.org/ontology/ShapeMap",
+      "@type": "@id"
+    },
+    "NptTimeMap": {
+      "@id": "https://c2pa.org/ontology/NptTimeMap",
+      "@type": "@id"
+    },
+    "WallClockTimeMap": {
+      "@id": "https://c2pa.org/ontology/WallClockTimeMap",
+      "@type": "@id"
+    },
+    "FrameMap": {
+      "@id": "https://c2pa.org/ontology/FrameMap",
+      "@type": "@id"
+    },
+    "TextSelectorMap": {
+      "@id": "https://c2pa.org/ontology/TextSelectorMap",
+      "@type": "@id"
+    },
+    "TextSelectorRangeMap": {
+      "@id": "https://c2pa.org/ontology/TextSelectorRangeMap",
+      "@type": "@id"
+    },
+    "TextMap": {
+      "@id": "https://c2pa.org/ontology/TextMap",
+      "@type": "@id"
+    },
+    "ItemMap": {
+      "@id": "https://c2pa.org/ontology/ItemMap",
+      "@type": "@id"
+    },
+    "SoftBindingMap": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap",
+      "@type": "@id"
+    },
+    "SoftBindingBlockMap": {
+      "@id": "https://c2pa.org/ontology/SoftBindingBlockMap",
+      "@type": "@id"
+    },
+    "SoftBindingScopeMap": {
+      "@id": "https://c2pa.org/ontology/SoftBindingScopeMap",
+      "@type": "@id"
+    },
+    "SoftBindingTimespanMap": {
+      "@id": "https://c2pa.org/ontology/SoftBindingTimespanMap",
+      "@type": "@id"
+    },
+    "TrainingMiningMapEntry": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMapEntry",
+      "@type": "@id"
+    },
+    "TrainingMiningMap": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap",
+      "@type": "@id"
+    },
+    "Tstcontainer": {
+      "@id": "https://c2pa.org/ontology/Tstcontainer",
+      "@type": "@id"
+    },
+    "Tsttoken": {
+      "@id": "https://c2pa.org/ontology/Tsttoken",
+      "@type": "@id"
+    },
+    "StatusMap": {
+      "@id": "https://c2pa.org/ontology/StatusMap",
+      "@type": "@id"
+    },
+    "StatusCodesMap": {
+      "@id": "https://c2pa.org/ontology/StatusCodesMap",
+      "@type": "@id"
+    },
+    "ValidationResultsMap": {
+      "@id": "https://c2pa.org/ontology/ValidationResultsMap",
+      "@type": "@id"
+    },
+    "IngredientDeltaValidationResultMap": {
+      "@id": "https://c2pa.org/ontology/IngredientDeltaValidationResultMap",
+      "@type": "@id"
+    },
+    "ActionsMap.actions": {
+      "@id": "https://c2pa.org/ontology/ActionsMap.actions",
+      "@container": "@list"
+    },
+    "ActionsMap.metadata": {
+      "@id": "https://c2pa.org/ontology/ActionsMap.metadata",
+      "@type": "@id"
+    },
+    "ActionItemsMap.action": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.action",
+      "@type": "@id"
+    },
+    "ActionItemsMap.when": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.when",
+      "@type": "xsd:dateTime"
+    },
+    "ActionItemsMap.softwareAgent": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.softwareAgent",
+      "@type": "xsd:string"
+    },
+    "ActionItemsMap.changed": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.changed",
+      "@type": "xsd:string"
+    },
+    "ActionItemsMap.instanceID": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.instanceID",
+      "@type": "@id"
+    },
+    "ActionItemsMap.parameters": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.parameters",
+      "@type": "@id"
+    },
+    "ActionItemsMap.digitalSourceType": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.digitalSourceType",
+      "@type": "xsd:string"
+    },
+    "ParametersMap.ingredient": {
+      "@id": "https://c2pa.org/ontology/ParametersMap.ingredient",
+      "@type": "@id"
+    },
+    "ParametersMap.description": {
+      "@id": "https://c2pa.org/ontology/ParametersMap.description",
+      "@type": "xsd:string"
+    },
+    "ActionsMapV2.actions": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2.actions",
+      "@container": "@list"
+    },
+    "ActionsMapV2.templates": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2.templates",
+      "@container": "@list"
+    },
+    "ActionsMapV2.softwareAgents": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2.softwareAgents",
+      "@container": "@list"
+    },
+    "ActionsMapV2.metadata": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2.metadata",
+      "@type": "@id"
+    },
+    "ActionCommonMapV2.action": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2.action",
+      "@type": "@id"
+    },
+    "ActionCommonMapV2.softwareAgent": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2.softwareAgent",
+      "@type": "@id"
+    },
+    "ActionCommonMapV2.softwareAgentIndex": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2.softwareAgentIndex",
+      "@type": "xsd:integer"
+    },
+    "ActionCommonMapV2.description": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2.description",
+      "@type": "xsd:string"
+    },
+    "ActionCommonMapV2.digitalSourceType": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2.digitalSourceType",
+      "@type": "xsd:string"
+    },
+    "ActionItemMapV2.when": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.when",
+      "@type": "xsd:dateTime"
+    },
+    "ActionItemMapV2.changes": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.changes",
+      "@container": "@list"
+    },
+    "ActionItemMapV2.related": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.related",
+      "@container": "@list"
+    },
+    "ActionItemMapV2.reason": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.reason",
+      "@type": "@id"
+    },
+    "ActionItemMapV2.parameters": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.parameters",
+      "@type": "@id"
+    },
+    "ActionTemplateMapV2.icon": {
+      "@id": "https://c2pa.org/ontology/ActionTemplateMapV2.icon"
+    },
+    "ActionTemplateMapV2.templateParameters": {
+      "@id": "https://c2pa.org/ontology/ActionTemplateMapV2.templateParameters",
+      "@type": "@id"
+    },
+    "ParametersMapV2.redacted": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.redacted",
+      "@type": "xsd:string"
+    },
+    "ParametersMapV2.ingredients": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.ingredients",
+      "@container": "@list"
+    },
+    "ParametersMapV2.sourceLanguage": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.sourceLanguage",
+      "@type": "xsd:string"
+    },
+    "ParametersMapV2.targetLanguage": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.targetLanguage",
+      "@type": "xsd:string"
+    },
+    "AssertionMetadataMap.dateTime": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.dateTime",
+      "@type": "xsd:dateTime"
+    },
+    "AssertionMetadataMap.reviewRatings": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.reviewRatings",
+      "@container": "@list"
+    },
+    "AssertionMetadataMap.reference": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.reference",
+      "@type": "@id"
+    },
+    "AssertionMetadataMap.dataSource": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.dataSource",
+      "@type": "@id"
+    },
+    "AssertionMetadataMap.localizations": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.localizations",
+      "@container": "@list"
+    },
+    "AssertionMetadataMap.regionOfInterest": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.regionOfInterest",
+      "@type": "@id"
+    },
+    "SourceMap.type": {
+      "@id": "https://c2pa.org/ontology/SourceMap.type",
+      "@type": "@id"
+    },
+    "SourceMap.details": {
+      "@id": "https://c2pa.org/ontology/SourceMap.details",
+      "@type": "xsd:string"
+    },
+    "RatingMap.value": {
+      "@id": "https://c2pa.org/ontology/RatingMap.value",
+      "@type": "@id"
+    },
+    "RatingMap.code": {
+      "@id": "https://c2pa.org/ontology/RatingMap.code",
+      "@type": "@id"
+    },
+    "RatingMap.explanation": {
+      "@id": "https://c2pa.org/ontology/RatingMap.explanation",
+      "@type": "xsd:string"
+    },
+    "AssetRefMap.references": {
+      "@id": "https://c2pa.org/ontology/AssetRefMap.references",
+      "@container": "@list"
+    },
+    "AraReferenceBlockMap.reference": {
+      "@id": "https://c2pa.org/ontology/AraReferenceBlockMap.reference",
+      "@type": "@id"
+    },
+    "AraReferenceBlockMap.description": {
+      "@id": "https://c2pa.org/ontology/AraReferenceBlockMap.description",
+      "@type": "xsd:string"
+    },
+    "AraReferenceUriMap.uri": {
+      "@id": "https://c2pa.org/ontology/AraReferenceUriMap.uri",
+      "@type": "xsd:string"
+    },
+    "AssetTypeMap.type": {
+      "@id": "https://c2pa.org/ontology/AssetTypeMap.type",
+      "@type": "@id"
+    },
+    "AssetTypeMap.version": {
+      "@id": "https://c2pa.org/ontology/AssetTypeMap.version",
+      "@type": "xsd:string"
+    },
+    "AssetTypes.types": {
+      "@id": "https://c2pa.org/ontology/AssetTypes.types",
+      "@container": "@list"
+    },
+    "AssetTypes.metadata": {
+      "@id": "https://c2pa.org/ontology/AssetTypes.metadata",
+      "@type": "@id"
+    },
+    "BmffHashMap.exclusions": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.exclusions",
+      "@container": "@list"
+    },
+    "BmffHashMap.alg": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.alg",
+      "@type": "xsd:string"
+    },
+    "BmffHashMap.hash": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.hash",
+      "@type": "xsd:base64Binary"
+    },
+    "BmffHashMap.merkle": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.merkle",
+      "@container": "@list"
+    },
+    "BmffHashMap.name": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.name",
+      "@type": "xsd:string"
+    },
+    "BmffHashMap.url": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.url",
+      "@type": "@id"
+    },
+    "ExclusionsMap.xpath": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.xpath",
+      "@type": "xsd:string"
+    },
+    "ExclusionsMap.length": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.length",
+      "@type": "xsd:integer"
+    },
+    "ExclusionsMap.data": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.data",
+      "@container": "@list"
+    },
+    "ExclusionsMap.subset": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.subset",
+      "@container": "@list"
+    },
+    "ExclusionsMap.version": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.version",
+      "@type": "xsd:integer"
+    },
+    "ExclusionsMap.flags": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.flags",
+      "@type": "@id"
+    },
+    "ExclusionsMap.exact": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.exact",
+      "@type": "xsd:boolean"
+    },
+    "DataMap.offset": {
+      "@id": "https://c2pa.org/ontology/DataMap.offset",
+      "@type": "xsd:integer"
+    },
+    "DataMap.value": {
+      "@id": "https://c2pa.org/ontology/DataMap.value",
+      "@type": "xsd:base64Binary"
+    },
+    "SubsetMap.offset": {
+      "@id": "https://c2pa.org/ontology/SubsetMap.offset",
+      "@type": "xsd:integer"
+    },
+    "SubsetMap.length": {
+      "@id": "https://c2pa.org/ontology/SubsetMap.length",
+      "@type": "xsd:integer"
+    },
+    "MerkleMap.uniqueId": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.uniqueId",
+      "@type": "xsd:integer"
+    },
+    "MerkleMap.localId": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.localId",
+      "@type": "xsd:integer"
+    },
+    "MerkleMap.count": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.count",
+      "@type": "xsd:integer"
+    },
+    "MerkleMap.alg": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.alg",
+      "@type": "xsd:string"
+    },
+    "MerkleMap.initHash": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.initHash",
+      "@type": "xsd:base64Binary"
+    },
+    "MerkleMap.hashes": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.hashes",
+      "@container": "@list"
+    },
+    "MerkleMap.fixedBlockSize": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.fixedBlockSize",
+      "@type": "xsd:integer"
+    },
+    "MerkleMap.variableBlockSizes": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.variableBlockSizes",
+      "@container": "@list"
+    },
+    "BmffMerkleMap.uniqueId": {
+      "@id": "https://c2pa.org/ontology/BmffMerkleMap.uniqueId",
+      "@type": "xsd:integer"
+    },
+    "BmffMerkleMap.localId": {
+      "@id": "https://c2pa.org/ontology/BmffMerkleMap.localId",
+      "@type": "xsd:integer"
+    },
+    "BmffMerkleMap.location": {
+      "@id": "https://c2pa.org/ontology/BmffMerkleMap.location",
+      "@type": "xsd:integer"
+    },
+    "BmffMerkleMap.hashes": {
+      "@id": "https://c2pa.org/ontology/BmffMerkleMap.hashes",
+      "@container": "@list"
+    },
+    "BoxMap.boxes": {
+      "@id": "https://c2pa.org/ontology/BoxMap.boxes",
+      "@container": "@list"
+    },
+    "BoxMap.alg": {
+      "@id": "https://c2pa.org/ontology/BoxMap.alg",
+      "@type": "xsd:string"
+    },
+    "BoxHashMap.names": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap.names",
+      "@container": "@list"
+    },
+    "BoxHashMap.alg": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap.alg",
+      "@type": "xsd:string"
+    },
+    "BoxHashMap.hash": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap.hash",
+      "@type": "xsd:base64Binary"
+    },
+    "BoxHashMap.pad": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap.pad",
+      "@type": "xsd:base64Binary"
+    },
+    "ClaimMap.claim_generator": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.claim_generator",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.claim_generator_info": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.claim_generator_info",
+      "@container": "@list"
+    },
+    "ClaimMap.signature": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.signature",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.assertions",
+      "@container": "@list"
+    },
+    "ClaimMap.dc:format": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.dc_format",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.instanceID": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.instanceID",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.dc:title": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.dc_title",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.redacted_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.redacted_assertions",
+      "@container": "@list"
+    },
+    "ClaimMap.alg": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.alg",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.alg_soft": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.alg_soft",
+      "@type": "xsd:string"
+    },
+    "ClaimMap.metadata": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.metadata",
+      "@type": "@id"
+    },
+    "ClaimMapV2.instanceID": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.instanceID",
+      "@type": "xsd:string"
+    },
+    "ClaimMapV2.claim_generator_info": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.claim_generator_info",
+      "@type": "@id"
+    },
+    "ClaimMapV2.signature": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.signature",
+      "@type": "xsd:string"
+    },
+    "ClaimMapV2.created_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.created_assertions",
+      "@container": "@list"
+    },
+    "ClaimMapV2.gathered_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.gathered_assertions",
+      "@container": "@list"
+    },
+    "ClaimMapV2.dc:title": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.dc_title",
+      "@type": "xsd:string"
+    },
+    "ClaimMapV2.redacted_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.redacted_assertions",
+      "@container": "@list"
+    },
+    "ClaimMapV2.alg": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.alg",
+      "@type": "xsd:string"
+    },
+    "ClaimMapV2.alg_soft": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.alg_soft",
+      "@type": "xsd:string"
+    },
+    "ClaimMapV2.metadata": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.metadata",
+      "@type": "@id"
+    },
+    "GeneratorInfoMap.name": {
+      "@id": "https://c2pa.org/ontology/GeneratorInfoMap.name",
+      "@type": "xsd:string"
+    },
+    "GeneratorInfoMap.version": {
+      "@id": "https://c2pa.org/ontology/GeneratorInfoMap.version",
+      "@type": "xsd:string"
+    },
+    "GeneratorInfoMap.icon": {
+      "@id": "https://c2pa.org/ontology/GeneratorInfoMap.icon"
+    },
+    "GeneratorInfoMap.operating_system": {
+      "@id": "https://c2pa.org/ontology/GeneratorInfoMap.operating_system",
+      "@type": "xsd:string"
+    },
+    "CloudDataMap.label": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.label",
+      "@type": "xsd:string"
+    },
+    "CloudDataMap.size": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.size",
+      "@type": "@id"
+    },
+    "CloudDataMap.location": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.location",
+      "@type": "@id"
+    },
+    "CloudDataMap.content_type": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.content_type",
+      "@type": "xsd:string"
+    },
+    "CloudDataMap.metadata": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.metadata",
+      "@type": "@id"
+    },
+    "CollectionDataHashMap.uris": {
+      "@id": "https://c2pa.org/ontology/CollectionDataHashMap.uris",
+      "@container": "@list"
+    },
+    "CollectionDataHashMap.alg": {
+      "@id": "https://c2pa.org/ontology/CollectionDataHashMap.alg",
+      "@type": "xsd:string"
+    },
+    "CollectionDataHashMap.zip_central_directory_hash": {
+      "@id": "https://c2pa.org/ontology/CollectionDataHashMap.zip_central_directory_hash",
+      "@type": "xsd:base64Binary"
+    },
+    "UriHashedDataMap.uri": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap.uri",
+      "@type": "@id"
+    },
+    "UriHashedDataMap.hash": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap.hash",
+      "@type": "xsd:base64Binary"
+    },
+    "UriHashedDataMap.size": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap.size",
+      "@type": "@id"
+    },
+    "UriHashedDataMap.dc:format": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap.dc_format",
+      "@type": "xsd:string"
+    },
+    "UriHashedDataMap.data_types": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap.data_types",
+      "@container": "@list"
+    },
+    "DataBoxMap.dc:format": {
+      "@id": "https://c2pa.org/ontology/DataBoxMap.dc_format",
+      "@type": "xsd:string"
+    },
+    "DataBoxMap.data": {
+      "@id": "https://c2pa.org/ontology/DataBoxMap.data",
+      "@type": "xsd:base64Binary"
+    },
+    "DataBoxMap.data_types": {
+      "@id": "https://c2pa.org/ontology/DataBoxMap.data_types",
+      "@container": "@list"
+    },
+    "DataHashMap.exclusions": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.exclusions",
+      "@container": "@list"
+    },
+    "DataHashMap.alg": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.alg",
+      "@type": "xsd:string"
+    },
+    "DataHashMap.hash": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.hash",
+      "@type": "xsd:base64Binary"
+    },
+    "DataHashMap.pad": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.pad",
+      "@type": "xsd:base64Binary"
+    },
+    "DataHashMap.pad2": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.pad2",
+      "@type": "xsd:base64Binary"
+    },
+    "DataHashMap.name": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.name",
+      "@type": "xsd:string"
+    },
+    "DataHashMap.url": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.url",
+      "@type": "@id"
+    },
+    "ExclusionRangeMap.start": {
+      "@id": "https://c2pa.org/ontology/ExclusionRangeMap.start",
+      "@type": "xsd:integer"
+    },
+    "ExclusionRangeMap.length": {
+      "@id": "https://c2pa.org/ontology/ExclusionRangeMap.length",
+      "@type": "xsd:integer"
+    },
+    "DepthmapGdepthMap.GDepth:Format": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Format",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:Near": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Near",
+      "@type": "xsd:decimal"
+    },
+    "DepthmapGdepthMap.GDepth:Far": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Far",
+      "@type": "xsd:decimal"
+    },
+    "DepthmapGdepthMap.GDepth:Mime": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Mime",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:Data": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Data",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:Units": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Units",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:MeasureType": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_MeasureType",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:ConfidenceMime": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_ConfidenceMime",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:Confidence": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Confidence",
+      "@type": "@id"
+    },
+    "DepthmapGdepthMap.GDepth:Manufacturer": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Manufacturer",
+      "@type": "xsd:string"
+    },
+    "DepthmapGdepthMap.GDepth:Model": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Model",
+      "@type": "xsd:string"
+    },
+    "DepthmapGdepthMap.GDepth:Software": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Software",
+      "@type": "xsd:string"
+    },
+    "DepthmapGdepthMap.GDepth:ImageWidth": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_ImageWidth",
+      "@type": "xsd:decimal"
+    },
+    "DepthmapGdepthMap.GDepth:ImageHeight": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_ImageHeight",
+      "@type": "xsd:decimal"
+    },
+    "DepthmapGdepthMap.metadata": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.metadata",
+      "@type": "@id"
+    },
+    "EndorsementTargetMap.endorseeCredential": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.endorseeCredential",
+      "@type": "@id"
+    },
+    "EndorsementTargetMap.notValidBefore": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.notValidBefore",
+      "@type": "xsd:dateTime"
+    },
+    "EndorsementTargetMap.notValidAfter": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.notValidAfter",
+      "@type": "xsd:dateTime"
+    },
+    "EndorsementTargetMap.metadata": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.metadata",
+      "@type": "@id"
+    },
+    "PublicCredential.$credential-type": {
+      "@id": "https://c2pa.org/ontology/PublicCredential.$credential_type"
+    },
+    "FontUnicodeRangeMap.start": {
+      "@id": "https://c2pa.org/ontology/FontUnicodeRangeMap.start",
+      "@type": "xsd:integer"
+    },
+    "FontUnicodeRangeMap.stop": {
+      "@id": "https://c2pa.org/ontology/FontUnicodeRangeMap.stop",
+      "@type": "xsd:integer"
+    },
+    "FontParameterUnicodeRangesMap.ranges": {
+      "@id": "https://c2pa.org/ontology/FontParameterUnicodeRangesMap.ranges",
+      "@container": "@list"
+    },
+    "FontParameterCreatedFromVariableFontMap.weight": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.weight",
+      "@type": "@id"
+    },
+    "FontParameterCreatedFromVariableFontMap.width": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.width",
+      "@type": "@id"
+    },
+    "FontParameterCreatedFromVariableFontMap.italic": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.italic",
+      "@type": "xsd:boolean"
+    },
+    "FontParameterCreatedFromVariableFontMap.slant": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.slant",
+      "@type": "@id"
+    },
+    "FontParameterCreatedFromVariableFontMap.optical-size": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.optical_size"
+    },
+    "FontInfoMap.fullName": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.fullName",
+      "@type": "xsd:string"
+    },
+    "FontInfoMap.version": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.version",
+      "@type": "xsd:string"
+    },
+    "FontInfoMap.versionUrl": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.versionUrl",
+      "@type": "@id"
+    },
+    "FontInfoMap.releaseDate": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.releaseDate",
+      "@type": "xsd:dateTime"
+    },
+    "FontInfoMap.familyName": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.familyName",
+      "@type": "xsd:string"
+    },
+    "FontInfoMap.style": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.style",
+      "@type": "@id"
+    },
+    "FontInfoMap.weight": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.weight",
+      "@type": "@id"
+    },
+    "FontInfoMap.postScriptName": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.postScriptName",
+      "@type": "xsd:string"
+    },
+    "FontInfoMap.format": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.format",
+      "@type": "@id"
+    },
+    "FontInfoMap.copyrightNotice": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.copyrightNotice",
+      "@type": "xsd:string"
+    },
+    "FontInfoMap.copyrightHolder": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.copyrightHolder",
+      "@type": "@id"
+    },
+    "FontInfoMap.copyrightYears": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.copyrightYears",
+      "@container": "@list"
+    },
+    "FontInfoMap.designers": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.designers",
+      "@container": "@list"
+    },
+    "FontInfoMap.designFoundry": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.designFoundry",
+      "@type": "@id"
+    },
+    "FontInfoMap.sourceFoundry": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.sourceFoundry",
+      "@type": "@id"
+    },
+    "FontInfoMap.identifier": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.identifier",
+      "@type": "xsd:string"
+    },
+    "FontWeightMap.class": {
+      "@id": "https://c2pa.org/ontology/FontWeightMap.class",
+      "@type": "@id"
+    },
+    "FontWeightMap.value": {
+      "@id": "https://c2pa.org/ontology/FontWeightMap.value",
+      "@type": "@id"
+    },
+    "FontEntityMap.name": {
+      "@id": "https://c2pa.org/ontology/FontEntityMap.name",
+      "@type": "xsd:string"
+    },
+    "FontEntityMap.url": {
+      "@id": "https://c2pa.org/ontology/FontEntityMap.url",
+      "@type": "@id"
+    },
+    "FontDesignerMap.person": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.person",
+      "@type": "@id"
+    },
+    "FontDesignerMap.foundry": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.foundry",
+      "@type": "@id"
+    },
+    "FontDesignerMap.contribution": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.contribution",
+      "@type": "xsd:string"
+    },
+    "FontDesignerMap.startDate": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.startDate",
+      "@type": "xsd:dateTime"
+    },
+    "FontDesignerMap.endDate": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.endDate",
+      "@type": "xsd:dateTime"
+    },
+    "HashedExtUriMap.url": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap.url",
+      "@type": "@id"
+    },
+    "HashedExtUriMap.alg": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap.alg",
+      "@type": "xsd:string"
+    },
+    "HashedExtUriMap.hash": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap.hash",
+      "@type": "xsd:base64Binary"
+    },
+    "HashedExtUriMap.dc:format": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap.dc_format",
+      "@type": "xsd:string"
+    },
+    "HashedExtUriMap.size": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap.size",
+      "@type": "@id"
+    },
+    "HashedExtUriMap.data_types": {
+      "@id": "https://c2pa.org/ontology/HashedExtUriMap.data_types",
+      "@container": "@list"
+    },
+    "HashedUriMap.url": {
+      "@id": "https://c2pa.org/ontology/HashedUriMap.url",
+      "@type": "xsd:string"
+    },
+    "HashedUriMap.alg": {
+      "@id": "https://c2pa.org/ontology/HashedUriMap.alg",
+      "@type": "xsd:string"
+    },
+    "HashedUriMap.hash": {
+      "@id": "https://c2pa.org/ontology/HashedUriMap.hash",
+      "@type": "xsd:base64Binary"
+    },
+    "IngredientMap.dc:title": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.dc_title",
+      "@type": "xsd:string"
+    },
+    "IngredientMap.dc:format": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.dc_format",
+      "@type": "xsd:string"
+    },
+    "IngredientMap.documentID": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.documentID",
+      "@type": "xsd:string"
+    },
+    "IngredientMap.instanceID": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.instanceID",
+      "@type": "xsd:string"
+    },
+    "IngredientMap.relationship": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.relationship",
+      "@type": "@id"
+    },
+    "IngredientMap.c2pa_manifest": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.c2pa_manifest",
+      "@type": "@id"
+    },
+    "IngredientMap.thumbnail": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.thumbnail",
+      "@type": "@id"
+    },
+    "IngredientMap.validationStatus": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.validationStatus",
+      "@container": "@list"
+    },
+    "IngredientMap.metadata": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.metadata",
+      "@type": "@id"
+    },
+    "IngredientMapV2.dc:title": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.dc_title",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV2.dc:format": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.dc_format",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV2.relationship": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.relationship",
+      "@type": "@id"
+    },
+    "IngredientMapV2.documentID": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.documentID",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV2.instanceID": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.instanceID",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV2.data": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.data"
+    },
+    "IngredientMapV2.data_types": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.data_types",
+      "@container": "@list"
+    },
+    "IngredientMapV2.c2pa_manifest": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.c2pa_manifest",
+      "@type": "@id"
+    },
+    "IngredientMapV2.thumbnail": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.thumbnail",
+      "@type": "@id"
+    },
+    "IngredientMapV2.validationStatus": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.validationStatus",
+      "@container": "@list"
+    },
+    "IngredientMapV2.description": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.description",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV2.informational_URI": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.informational_URI",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV2.metadata": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.metadata",
+      "@type": "@id"
+    },
+    "IngredientMapV3.dc:title": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.dc_title",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV3.dc:format": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.dc_format",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV3.relationship": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.relationship",
+      "@type": "@id"
+    },
+    "IngredientMapV3.validationResults": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.validationResults",
+      "@type": "@id"
+    },
+    "IngredientMapV3.instanceID": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.instanceID",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV3.data": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.data"
+    },
+    "IngredientMapV3.dataTypes": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.dataTypes",
+      "@container": "@list"
+    },
+    "IngredientMapV3.activeManifest": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.activeManifest",
+      "@type": "@id"
+    },
+    "IngredientMapV3.claimSignature": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.claimSignature",
+      "@type": "@id"
+    },
+    "IngredientMapV3.thumbnail": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.thumbnail",
+      "@type": "@id"
+    },
+    "IngredientMapV3.description": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.description",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV3.informationalURI": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.informationalURI",
+      "@type": "xsd:string"
+    },
+    "IngredientMapV3.metadata": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.metadata",
+      "@type": "@id"
+    },
+    "ContextSchema.@context": {
+      "@id": "https://c2pa.org/ontology/ContextSchema.@context",
+      "@type": "@id"
+    },
+    "CommonSchema.@id": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@id",
+      "@type": "@id"
+    },
+    "CommonSchema.@value": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@value",
+      "@type": "@id"
+    },
+    "CommonSchema.@language": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@language",
+      "@type": "@id"
+    },
+    "CommonSchema.@type": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@type",
+      "@type": "@id"
+    },
+    "CommonSchema.@container": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@container",
+      "@type": "@id"
+    },
+    "JsonldSchemaMap.context": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap.context",
+      "@type": "@id"
+    },
+    "JsonldSchemaMap.graph": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap.graph",
+      "@type": "@id"
+    },
+    "JsonldSchemaMap.common": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap.common",
+      "@type": "@id"
+    },
+    "Rvals.ocspVals": {
+      "@id": "https://c2pa.org/ontology/Rvals.ocspVals",
+      "@container": "@list"
+    },
+    "RegionMap.region": {
+      "@id": "https://c2pa.org/ontology/RegionMap.region",
+      "@container": "@list"
+    },
+    "RegionMap.name": {
+      "@id": "https://c2pa.org/ontology/RegionMap.name",
+      "@type": "xsd:string"
+    },
+    "RegionMap.identifier": {
+      "@id": "https://c2pa.org/ontology/RegionMap.identifier",
+      "@type": "xsd:string"
+    },
+    "RegionMap.type": {
+      "@id": "https://c2pa.org/ontology/RegionMap.type",
+      "@type": "xsd:string"
+    },
+    "RegionMap.role": {
+      "@id": "https://c2pa.org/ontology/RegionMap.role",
+      "@type": "@id"
+    },
+    "RegionMap.description": {
+      "@id": "https://c2pa.org/ontology/RegionMap.description",
+      "@type": "xsd:string"
+    },
+    "RegionMap.metadata": {
+      "@id": "https://c2pa.org/ontology/RegionMap.metadata",
+      "@type": "@id"
+    },
+    "RangeMap.type": {
+      "@id": "https://c2pa.org/ontology/RangeMap.type",
+      "@type": "@id"
+    },
+    "RangeMap.shape": {
+      "@id": "https://c2pa.org/ontology/RangeMap.shape",
+      "@type": "@id"
+    },
+    "RangeMap.time": {
+      "@id": "https://c2pa.org/ontology/RangeMap.time",
+      "@type": "@id"
+    },
+    "RangeMap.frame": {
+      "@id": "https://c2pa.org/ontology/RangeMap.frame",
+      "@type": "@id"
+    },
+    "RangeMap.text": {
+      "@id": "https://c2pa.org/ontology/RangeMap.text",
+      "@type": "@id"
+    },
+    "RangeMap.item": {
+      "@id": "https://c2pa.org/ontology/RangeMap.item",
+      "@type": "@id"
+    },
+    "CoordinateMap.x": {
+      "@id": "https://c2pa.org/ontology/CoordinateMap.x",
+      "@type": "xsd:decimal"
+    },
+    "CoordinateMap.y": {
+      "@id": "https://c2pa.org/ontology/CoordinateMap.y",
+      "@type": "xsd:decimal"
+    },
+    "ShapeMap.type": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.type",
+      "@type": "@id"
+    },
+    "ShapeMap.unit": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.unit",
+      "@type": "@id"
+    },
+    "ShapeMap.origin": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.origin",
+      "@type": "@id"
+    },
+    "ShapeMap.width": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.width",
+      "@type": "xsd:decimal"
+    },
+    "ShapeMap.height": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.height",
+      "@type": "xsd:decimal"
+    },
+    "ShapeMap.inside": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.inside",
+      "@type": "xsd:boolean"
+    },
+    "ShapeMap.vertices": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.vertices",
+      "@container": "@list"
+    },
+    "NptTimeMap.type": {
+      "@id": "https://c2pa.org/ontology/NptTimeMap.type",
+      "@type": "xsd:string"
+    },
+    "NptTimeMap.start": {
+      "@id": "https://c2pa.org/ontology/NptTimeMap.start",
+      "@type": "xsd:string"
+    },
+    "NptTimeMap.end": {
+      "@id": "https://c2pa.org/ontology/NptTimeMap.end",
+      "@type": "xsd:string"
+    },
+    "WallClockTimeMap.type": {
+      "@id": "https://c2pa.org/ontology/WallClockTimeMap.type",
+      "@type": "xsd:string"
+    },
+    "WallClockTimeMap.start": {
+      "@id": "https://c2pa.org/ontology/WallClockTimeMap.start",
+      "@type": "xsd:string"
+    },
+    "WallClockTimeMap.end": {
+      "@id": "https://c2pa.org/ontology/WallClockTimeMap.end",
+      "@type": "xsd:string"
+    },
+    "FrameMap.start": {
+      "@id": "https://c2pa.org/ontology/FrameMap.start",
+      "@type": "xsd:integer"
+    },
+    "FrameMap.end": {
+      "@id": "https://c2pa.org/ontology/FrameMap.end",
+      "@type": "xsd:integer"
+    },
+    "TextSelectorMap.fragment": {
+      "@id": "https://c2pa.org/ontology/TextSelectorMap.fragment",
+      "@type": "xsd:string"
+    },
+    "TextSelectorMap.start": {
+      "@id": "https://c2pa.org/ontology/TextSelectorMap.start",
+      "@type": "xsd:integer"
+    },
+    "TextSelectorMap.end": {
+      "@id": "https://c2pa.org/ontology/TextSelectorMap.end",
+      "@type": "xsd:integer"
+    },
+    "TextSelectorRangeMap.selector": {
+      "@id": "https://c2pa.org/ontology/TextSelectorRangeMap.selector",
+      "@type": "@id"
+    },
+    "TextSelectorRangeMap.end": {
+      "@id": "https://c2pa.org/ontology/TextSelectorRangeMap.end",
+      "@type": "@id"
+    },
+    "TextMap.selectors": {
+      "@id": "https://c2pa.org/ontology/TextMap.selectors",
+      "@container": "@list"
+    },
+    "ItemMap.identifier": {
+      "@id": "https://c2pa.org/ontology/ItemMap.identifier",
+      "@type": "xsd:string"
+    },
+    "ItemMap.value": {
+      "@id": "https://c2pa.org/ontology/ItemMap.value",
+      "@type": "xsd:string"
+    },
+    "SoftBindingMap.alg": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.alg",
+      "@type": "xsd:string"
+    },
+    "SoftBindingMap.blocks": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.blocks",
+      "@container": "@list"
+    },
+    "SoftBindingMap.pad": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.pad",
+      "@type": "xsd:base64Binary"
+    },
+    "SoftBindingMap.pad2": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.pad2",
+      "@type": "xsd:base64Binary"
+    },
+    "SoftBindingMap.name": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.name",
+      "@type": "xsd:string"
+    },
+    "SoftBindingMap.alg-params": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.alg_params",
+      "@type": "xsd:base64Binary"
+    },
+    "SoftBindingMap.url": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.url",
+      "@type": "@id"
+    },
+    "SoftBindingBlockMap.scope": {
+      "@id": "https://c2pa.org/ontology/SoftBindingBlockMap.scope",
+      "@type": "@id"
+    },
+    "SoftBindingBlockMap.value": {
+      "@id": "https://c2pa.org/ontology/SoftBindingBlockMap.value",
+      "@type": "xsd:base64Binary"
+    },
+    "SoftBindingScopeMap.extent": {
+      "@id": "https://c2pa.org/ontology/SoftBindingScopeMap.extent",
+      "@type": "xsd:base64Binary"
+    },
+    "SoftBindingScopeMap.timespan": {
+      "@id": "https://c2pa.org/ontology/SoftBindingScopeMap.timespan",
+      "@type": "@id"
+    },
+    "SoftBindingScopeMap.region": {
+      "@id": "https://c2pa.org/ontology/SoftBindingScopeMap.region",
+      "@type": "@id"
+    },
+    "SoftBindingTimespanMap.start": {
+      "@id": "https://c2pa.org/ontology/SoftBindingTimespanMap.start",
+      "@type": "xsd:integer"
+    },
+    "SoftBindingTimespanMap.end": {
+      "@id": "https://c2pa.org/ontology/SoftBindingTimespanMap.end",
+      "@type": "xsd:integer"
+    },
+    "TrainingMiningMapEntry.use": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMapEntry.use",
+      "@type": "@id"
+    },
+    "TrainingMiningMapEntry.constraint_info": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMapEntry.constraint_info",
+      "@type": "xsd:string"
+    },
+    "TrainingMiningMap.c2pa.data_mining": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_data_mining",
+      "@type": "@id"
+    },
+    "TrainingMiningMap.c2pa.ai_inference": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_ai_inference",
+      "@type": "@id"
+    },
+    "TrainingMiningMap.c2pa.ai_training": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_ai_training",
+      "@type": "@id"
+    },
+    "TrainingMiningMap.c2pa.ai_generative_training": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_ai_generative_training",
+      "@type": "@id"
+    },
+    "TrainingMiningMap.metadata": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.metadata",
+      "@type": "@id"
+    },
+    "Tstcontainer.tstTokens": {
+      "@id": "https://c2pa.org/ontology/Tstcontainer.tstTokens",
+      "@container": "@list"
+    },
+    "Tsttoken.val": {
+      "@id": "https://c2pa.org/ontology/Tsttoken.val",
+      "@type": "xsd:base64Binary"
+    },
+    "StatusMap.code": {
+      "@id": "https://c2pa.org/ontology/StatusMap.code",
+      "@type": "@id"
+    },
+    "StatusMap.url": {
+      "@id": "https://c2pa.org/ontology/StatusMap.url",
+      "@type": "xsd:string"
+    },
+    "StatusMap.explanation": {
+      "@id": "https://c2pa.org/ontology/StatusMap.explanation",
+      "@type": "xsd:string"
+    },
+    "StatusMap.success": {
+      "@id": "https://c2pa.org/ontology/StatusMap.success",
+      "@type": "xsd:boolean"
+    },
+    "StatusCodesMap.success": {
+      "@id": "https://c2pa.org/ontology/StatusCodesMap.success",
+      "@container": "@list"
+    },
+    "StatusCodesMap.informational": {
+      "@id": "https://c2pa.org/ontology/StatusCodesMap.informational",
+      "@container": "@list"
+    },
+    "StatusCodesMap.failure": {
+      "@id": "https://c2pa.org/ontology/StatusCodesMap.failure",
+      "@container": "@list"
+    },
+    "ValidationResultsMap.activeManifest": {
+      "@id": "https://c2pa.org/ontology/ValidationResultsMap.activeManifest",
+      "@type": "@id"
+    },
+    "ValidationResultsMap.ingredientDeltas": {
+      "@id": "https://c2pa.org/ontology/ValidationResultsMap.ingredientDeltas",
+      "@container": "@list"
+    },
+    "IngredientDeltaValidationResultMap.ingredientAssertionURI": {
+      "@id": "https://c2pa.org/ontology/IngredientDeltaValidationResultMap.ingredientAssertionURI",
+      "@type": "xsd:string"
+    },
+    "IngredientDeltaValidationResultMap.validationDeltas": {
+      "@id": "https://c2pa.org/ontology/IngredientDeltaValidationResultMap.validationDeltas",
+      "@type": "@id"
+    },
+    "actions": {
+      "@id": "https://c2pa.org/ontology/ActionsMap.actions"
+    },
+    "metadata": {
+      "@id": "https://c2pa.org/ontology/ActionsMap.metadata"
+    },
+    "action": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.action"
+    },
+    "when": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.when"
+    },
+    "softwareAgent": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.softwareAgent"
+    },
+    "changed": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.changed"
+    },
+    "instanceID": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.instanceID"
+    },
+    "parameters": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.parameters"
+    },
+    "digitalSourceType": {
+      "@id": "https://c2pa.org/ontology/ActionItemsMap.digitalSourceType"
+    },
+    "ingredient": {
+      "@id": "https://c2pa.org/ontology/ParametersMap.ingredient"
+    },
+    "description": {
+      "@id": "https://c2pa.org/ontology/ParametersMap.description"
+    },
+    "templates": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2.templates"
+    },
+    "softwareAgents": {
+      "@id": "https://c2pa.org/ontology/ActionsMapV2.softwareAgents"
+    },
+    "softwareAgentIndex": {
+      "@id": "https://c2pa.org/ontology/ActionCommonMapV2.softwareAgentIndex"
+    },
+    "changes": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.changes"
+    },
+    "related": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.related"
+    },
+    "reason": {
+      "@id": "https://c2pa.org/ontology/ActionItemMapV2.reason"
+    },
+    "icon": {
+      "@id": "https://c2pa.org/ontology/ActionTemplateMapV2.icon"
+    },
+    "templateParameters": {
+      "@id": "https://c2pa.org/ontology/ActionTemplateMapV2.templateParameters"
+    },
+    "redacted": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.redacted"
+    },
+    "ingredients": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.ingredients"
+    },
+    "sourceLanguage": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.sourceLanguage"
+    },
+    "targetLanguage": {
+      "@id": "https://c2pa.org/ontology/ParametersMapV2.targetLanguage"
+    },
+    "dateTime": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.dateTime"
+    },
+    "reviewRatings": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.reviewRatings"
+    },
+    "reference": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.reference"
+    },
+    "dataSource": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.dataSource"
+    },
+    "localizations": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.localizations"
+    },
+    "regionOfInterest": {
+      "@id": "https://c2pa.org/ontology/AssertionMetadataMap.regionOfInterest"
+    },
+    "type": {
+      "@id": "https://c2pa.org/ontology/SourceMap.type"
+    },
+    "details": {
+      "@id": "https://c2pa.org/ontology/SourceMap.details"
+    },
+    "value": {
+      "@id": "https://c2pa.org/ontology/RatingMap.value"
+    },
+    "code": {
+      "@id": "https://c2pa.org/ontology/RatingMap.code"
+    },
+    "explanation": {
+      "@id": "https://c2pa.org/ontology/RatingMap.explanation"
+    },
+    "references": {
+      "@id": "https://c2pa.org/ontology/AssetRefMap.references"
+    },
+    "uri": {
+      "@id": "https://c2pa.org/ontology/AraReferenceUriMap.uri"
+    },
+    "version": {
+      "@id": "https://c2pa.org/ontology/AssetTypeMap.version"
+    },
+    "types": {
+      "@id": "https://c2pa.org/ontology/AssetTypes.types"
+    },
+    "exclusions": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.exclusions"
+    },
+    "alg": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.alg"
+    },
+    "hash": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.hash"
+    },
+    "merkle": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.merkle"
+    },
+    "name": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.name"
+    },
+    "url": {
+      "@id": "https://c2pa.org/ontology/BmffHashMap.url"
+    },
+    "xpath": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.xpath"
+    },
+    "length": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.length"
+    },
+    "data": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.data"
+    },
+    "subset": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.subset"
+    },
+    "flags": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.flags"
+    },
+    "exact": {
+      "@id": "https://c2pa.org/ontology/ExclusionsMap.exact"
+    },
+    "offset": {
+      "@id": "https://c2pa.org/ontology/DataMap.offset"
+    },
+    "uniqueId": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.uniqueId"
+    },
+    "localId": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.localId"
+    },
+    "count": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.count"
+    },
+    "initHash": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.initHash"
+    },
+    "hashes": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.hashes"
+    },
+    "fixedBlockSize": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.fixedBlockSize"
+    },
+    "variableBlockSizes": {
+      "@id": "https://c2pa.org/ontology/MerkleMap.variableBlockSizes"
+    },
+    "location": {
+      "@id": "https://c2pa.org/ontology/BmffMerkleMap.location"
+    },
+    "boxes": {
+      "@id": "https://c2pa.org/ontology/BoxMap.boxes"
+    },
+    "names": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap.names"
+    },
+    "pad": {
+      "@id": "https://c2pa.org/ontology/BoxHashMap.pad"
+    },
+    "claim_generator": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.claim_generator"
+    },
+    "claim_generator_info": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.claim_generator_info"
+    },
+    "signature": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.signature"
+    },
+    "assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.assertions"
+    },
+    "dc:format": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.dc_format"
+    },
+    "dc:title": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.dc_title"
+    },
+    "redacted_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.redacted_assertions"
+    },
+    "alg_soft": {
+      "@id": "https://c2pa.org/ontology/ClaimMap.alg_soft"
+    },
+    "created_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.created_assertions"
+    },
+    "gathered_assertions": {
+      "@id": "https://c2pa.org/ontology/ClaimMapV2.gathered_assertions"
+    },
+    "operating_system": {
+      "@id": "https://c2pa.org/ontology/GeneratorInfoMap.operating_system"
+    },
+    "label": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.label"
+    },
+    "size": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.size"
+    },
+    "content_type": {
+      "@id": "https://c2pa.org/ontology/CloudDataMap.content_type"
+    },
+    "uris": {
+      "@id": "https://c2pa.org/ontology/CollectionDataHashMap.uris"
+    },
+    "zip_central_directory_hash": {
+      "@id": "https://c2pa.org/ontology/CollectionDataHashMap.zip_central_directory_hash"
+    },
+    "data_types": {
+      "@id": "https://c2pa.org/ontology/UriHashedDataMap.data_types"
+    },
+    "pad2": {
+      "@id": "https://c2pa.org/ontology/DataHashMap.pad2"
+    },
+    "start": {
+      "@id": "https://c2pa.org/ontology/ExclusionRangeMap.start"
+    },
+    "GDepth:Format": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Format"
+    },
+    "GDepth:Near": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Near"
+    },
+    "GDepth:Far": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Far"
+    },
+    "GDepth:Mime": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Mime"
+    },
+    "GDepth:Data": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Data"
+    },
+    "GDepth:Units": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Units"
+    },
+    "GDepth:MeasureType": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_MeasureType"
+    },
+    "GDepth:ConfidenceMime": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_ConfidenceMime"
+    },
+    "GDepth:Confidence": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Confidence"
+    },
+    "GDepth:Manufacturer": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Manufacturer"
+    },
+    "GDepth:Model": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Model"
+    },
+    "GDepth:Software": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_Software"
+    },
+    "GDepth:ImageWidth": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_ImageWidth"
+    },
+    "GDepth:ImageHeight": {
+      "@id": "https://c2pa.org/ontology/DepthmapGdepthMap.GDepth_ImageHeight"
+    },
+    "endorseeCredential": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.endorseeCredential"
+    },
+    "notValidBefore": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.notValidBefore"
+    },
+    "notValidAfter": {
+      "@id": "https://c2pa.org/ontology/EndorsementTargetMap.notValidAfter"
+    },
+    "$credential-type": {
+      "@id": "https://c2pa.org/ontology/PublicCredential.$credential_type"
+    },
+    "stop": {
+      "@id": "https://c2pa.org/ontology/FontUnicodeRangeMap.stop"
+    },
+    "ranges": {
+      "@id": "https://c2pa.org/ontology/FontParameterUnicodeRangesMap.ranges"
+    },
+    "weight": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.weight"
+    },
+    "width": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.width"
+    },
+    "italic": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.italic"
+    },
+    "slant": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.slant"
+    },
+    "optical-size": {
+      "@id": "https://c2pa.org/ontology/FontParameterCreatedFromVariableFontMap.optical_size"
+    },
+    "fullName": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.fullName"
+    },
+    "versionUrl": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.versionUrl"
+    },
+    "releaseDate": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.releaseDate"
+    },
+    "familyName": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.familyName"
+    },
+    "style": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.style"
+    },
+    "postScriptName": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.postScriptName"
+    },
+    "format": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.format"
+    },
+    "copyrightNotice": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.copyrightNotice"
+    },
+    "copyrightHolder": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.copyrightHolder"
+    },
+    "copyrightYears": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.copyrightYears"
+    },
+    "designers": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.designers"
+    },
+    "designFoundry": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.designFoundry"
+    },
+    "sourceFoundry": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.sourceFoundry"
+    },
+    "identifier": {
+      "@id": "https://c2pa.org/ontology/FontInfoMap.identifier"
+    },
+    "class": {
+      "@id": "https://c2pa.org/ontology/FontWeightMap.class"
+    },
+    "person": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.person"
+    },
+    "foundry": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.foundry"
+    },
+    "contribution": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.contribution"
+    },
+    "startDate": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.startDate"
+    },
+    "endDate": {
+      "@id": "https://c2pa.org/ontology/FontDesignerMap.endDate"
+    },
+    "documentID": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.documentID"
+    },
+    "relationship": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.relationship"
+    },
+    "c2pa_manifest": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.c2pa_manifest"
+    },
+    "thumbnail": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.thumbnail"
+    },
+    "validationStatus": {
+      "@id": "https://c2pa.org/ontology/IngredientMap.validationStatus"
+    },
+    "informational_URI": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV2.informational_URI"
+    },
+    "validationResults": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.validationResults"
+    },
+    "dataTypes": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.dataTypes"
+    },
+    "activeManifest": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.activeManifest"
+    },
+    "claimSignature": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.claimSignature"
+    },
+    "informationalURI": {
+      "@id": "https://c2pa.org/ontology/IngredientMapV3.informationalURI"
+    },
+    "@context": {
+      "@id": "https://c2pa.org/ontology/ContextSchema.@context"
+    },
+    "@id": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@id"
+    },
+    "@value": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@value"
+    },
+    "@language": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@language"
+    },
+    "@type": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@type"
+    },
+    "@container": {
+      "@id": "https://c2pa.org/ontology/CommonSchema.@container"
+    },
+    "context": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap.context"
+    },
+    "graph": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap.graph"
+    },
+    "common": {
+      "@id": "https://c2pa.org/ontology/JsonldSchemaMap.common"
+    },
+    "ocspVals": {
+      "@id": "https://c2pa.org/ontology/Rvals.ocspVals"
+    },
+    "region": {
+      "@id": "https://c2pa.org/ontology/RegionMap.region"
+    },
+    "role": {
+      "@id": "https://c2pa.org/ontology/RegionMap.role"
+    },
+    "shape": {
+      "@id": "https://c2pa.org/ontology/RangeMap.shape"
+    },
+    "time": {
+      "@id": "https://c2pa.org/ontology/RangeMap.time"
+    },
+    "frame": {
+      "@id": "https://c2pa.org/ontology/RangeMap.frame"
+    },
+    "text": {
+      "@id": "https://c2pa.org/ontology/RangeMap.text"
+    },
+    "item": {
+      "@id": "https://c2pa.org/ontology/RangeMap.item"
+    },
+    "x": {
+      "@id": "https://c2pa.org/ontology/CoordinateMap.x"
+    },
+    "y": {
+      "@id": "https://c2pa.org/ontology/CoordinateMap.y"
+    },
+    "unit": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.unit"
+    },
+    "origin": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.origin"
+    },
+    "height": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.height"
+    },
+    "inside": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.inside"
+    },
+    "vertices": {
+      "@id": "https://c2pa.org/ontology/ShapeMap.vertices"
+    },
+    "end": {
+      "@id": "https://c2pa.org/ontology/NptTimeMap.end"
+    },
+    "fragment": {
+      "@id": "https://c2pa.org/ontology/TextSelectorMap.fragment"
+    },
+    "selector": {
+      "@id": "https://c2pa.org/ontology/TextSelectorRangeMap.selector"
+    },
+    "selectors": {
+      "@id": "https://c2pa.org/ontology/TextMap.selectors"
+    },
+    "blocks": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.blocks"
+    },
+    "alg-params": {
+      "@id": "https://c2pa.org/ontology/SoftBindingMap.alg_params"
+    },
+    "scope": {
+      "@id": "https://c2pa.org/ontology/SoftBindingBlockMap.scope"
+    },
+    "extent": {
+      "@id": "https://c2pa.org/ontology/SoftBindingScopeMap.extent"
+    },
+    "timespan": {
+      "@id": "https://c2pa.org/ontology/SoftBindingScopeMap.timespan"
+    },
+    "use": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMapEntry.use"
+    },
+    "constraint_info": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMapEntry.constraint_info"
+    },
+    "c2pa.data_mining": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_data_mining"
+    },
+    "c2pa.ai_inference": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_ai_inference"
+    },
+    "c2pa.ai_training": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_ai_training"
+    },
+    "c2pa.ai_generative_training": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningMap.c2pa_ai_generative_training"
+    },
+    "tstTokens": {
+      "@id": "https://c2pa.org/ontology/Tstcontainer.tstTokens"
+    },
+    "val": {
+      "@id": "https://c2pa.org/ontology/Tsttoken.val"
+    },
+    "success": {
+      "@id": "https://c2pa.org/ontology/StatusMap.success"
+    },
+    "informational": {
+      "@id": "https://c2pa.org/ontology/StatusCodesMap.informational"
+    },
+    "failure": {
+      "@id": "https://c2pa.org/ontology/StatusCodesMap.failure"
+    },
+    "ingredientDeltas": {
+      "@id": "https://c2pa.org/ontology/ValidationResultsMap.ingredientDeltas"
+    },
+    "ingredientAssertionURI": {
+      "@id": "https://c2pa.org/ontology/IngredientDeltaValidationResultMap.ingredientAssertionURI"
+    },
+    "validationDeltas": {
+      "@id": "https://c2pa.org/ontology/IngredientDeltaValidationResultMap.validationDeltas"
+    },
+    "ActionChoice": {
+      "@id": "https://c2pa.org/ontology/ActionChoice",
+      "@type": "@id"
+    },
+    "ActionReason": {
+      "@id": "https://c2pa.org/ontology/ActionReason",
+      "@type": "@id"
+    },
+    "SourceType": {
+      "@id": "https://c2pa.org/ontology/SourceType",
+      "@type": "@id"
+    },
+    "ReviewCode": {
+      "@id": "https://c2pa.org/ontology/ReviewCode",
+      "@type": "@id"
+    },
+    "TypeChoice": {
+      "@id": "https://c2pa.org/ontology/TypeChoice",
+      "@type": "@id"
+    },
+    "MimeChoice": {
+      "@id": "https://c2pa.org/ontology/MimeChoice",
+      "@type": "@id"
+    },
+    "FormatChoice": {
+      "@id": "https://c2pa.org/ontology/FormatChoice",
+      "@type": "@id"
+    },
+    "UnitChoice": {
+      "@id": "https://c2pa.org/ontology/UnitChoice",
+      "@type": "@id"
+    },
+    "DepthMeasChoice": {
+      "@id": "https://c2pa.org/ontology/DepthMeasChoice",
+      "@type": "@id"
+    },
+    "CredentialType": {
+      "@id": "https://c2pa.org/ontology/CredentialType",
+      "@type": "@id"
+    },
+    "FontFormatChoice": {
+      "@id": "https://c2pa.org/ontology/FontFormatChoice",
+      "@type": "@id"
+    },
+    "FontWeightClass": {
+      "@id": "https://c2pa.org/ontology/FontWeightClass",
+      "@type": "@id"
+    },
+    "FontStyle": {
+      "@id": "https://c2pa.org/ontology/FontStyle",
+      "@type": "@id"
+    },
+    "RelationChoice": {
+      "@id": "https://c2pa.org/ontology/RelationChoice",
+      "@type": "@id"
+    },
+    "ValueTypeChoice": {
+      "@id": "https://c2pa.org/ontology/ValueTypeChoice",
+      "@type": "@id"
+    },
+    "TypeTypeChoice": {
+      "@id": "https://c2pa.org/ontology/TypeTypeChoice",
+      "@type": "@id"
+    },
+    "LanguageTypeChoice": {
+      "@id": "https://c2pa.org/ontology/LanguageTypeChoice",
+      "@type": "@id"
+    },
+    "NilOrStrTypeChoice": {
+      "@id": "https://c2pa.org/ontology/NilOrStrTypeChoice",
+      "@type": "@id"
+    },
+    "RangeChoice": {
+      "@id": "https://c2pa.org/ontology/RangeChoice",
+      "@type": "@id"
+    },
+    "ShapeChoice": {
+      "@id": "https://c2pa.org/ontology/ShapeChoice",
+      "@type": "@id"
+    },
+    "RoleChoice": {
+      "@id": "https://c2pa.org/ontology/RoleChoice",
+      "@type": "@id"
+    },
+    "TrainingMiningChoice": {
+      "@id": "https://c2pa.org/ontology/TrainingMiningChoice",
+      "@type": "@id"
+    },
+    "StatusCode": {
+      "@id": "https://c2pa.org/ontology/StatusCode",
+      "@type": "@id"
+    }
+  }
+}

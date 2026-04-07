@@ -1,0 +1,23 @@
+C2PA Knowledge Graph Generator
+Copyright 2026 Encypher Corporation
+
+This product includes software developed by Encypher Corporation
+Licensed under the Apache License, Version 2.0.
+
+This product generates derivative artifacts from the C2PA specification,
+which is published by the Coalition for Content Provenance and Authenticity
+(C2PA) under the Creative Commons Attribution 4.0 International License
+(CC-BY-4.0).
+
+  C2PA Specification
+  Copyright Coalition for Content Provenance and Authenticity (C2PA)
+  Licensed under CC-BY-4.0: https://creativecommons.org/licenses/by/4.0/
+  Source: https://github.com/c2pa-org/specs-core
+
+Generated artifacts (ontology.ttl, context.jsonld, validation-rules.json,
+metadata.json) are derived from CC-BY-4.0 licensed content and carry the
+same attribution requirement. When redistributing generated artifacts,
+attribution to C2PA is required per CC-BY-4.0 Section 3.
+
+The software itself (all Python source code, tests, and documentation in
+this repository) is licensed under the Apache License, Version 2.0.
