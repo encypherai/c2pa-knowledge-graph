@@ -294,6 +294,30 @@ class SpecVersion:
 
 
 @dataclass
+class ExternalSpecRef:
+    """A pointer from this KG to a sibling external specification KG.
+
+    Serialized into metadata.json under `external_specs` and emitted in the
+    Turtle ontology as owl:seeAlso on the ontology IRI.
+    """
+
+    spec: str
+    version: str
+    uri: str
+    description: str = ""
+
+    def to_dict(self) -> dict:
+        d: dict = {
+            "spec": self.spec,
+            "version": self.version,
+            "uri": self.uri,
+        }
+        if self.description:
+            d["description"] = self.description
+        return d
+
+
+@dataclass
 class EntityChange:
     """A change to an entity between spec versions."""
 
@@ -352,6 +376,7 @@ class KnowledgeGraph:
     type_aliases: dict[str, TypeAlias] = field(default_factory=dict)
     status_codes: list[StatusCode] = field(default_factory=list)
     spec_conventions: dict = field(default_factory=dict)
+    external_specs: list[ExternalSpecRef] = field(default_factory=list)
 
     C2PA_NAMESPACE = "https://c2pa.org/ontology/"
     C2PA_PREFIX = "c2pa"
@@ -413,6 +438,7 @@ class KnowledgeGraph:
             "type_aliases": {n: a.to_dict() for n, a in self.type_aliases.items()},
             "spec_conventions": self.spec_conventions,
             "status_codes": [s.to_dict() for s in self.status_codes],
+            "external_specs": [s.to_dict() for s in self.external_specs],
             "stats": {
                 "entity_count": self.entity_count,
                 "relationship_count": self.relationship_count,
@@ -420,6 +446,7 @@ class KnowledgeGraph:
                 "enum_count": len(self.enum_types),
                 "type_alias_count": len(self.type_aliases),
                 "status_code_count": len(self.status_codes),
+                "external_spec_count": len(self.external_specs),
             },
         }
 
@@ -513,6 +540,14 @@ def kg_from_dict(data: dict) -> KnowledgeGraph:
             meaning=sd.get("meaning", ""),
             url_usage=sd.get("url_usage", ""),
             category=sd.get("category", ""),
+        ))
+
+    for ed in data.get("external_specs", []):
+        kg.external_specs.append(ExternalSpecRef(
+            spec=ed.get("spec", ""),
+            version=ed.get("version", ""),
+            uri=ed.get("uri", ""),
+            description=ed.get("description", ""),
         ))
 
     return kg

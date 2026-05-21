@@ -22,6 +22,7 @@ from c2pa_kg.models import (
     Cardinality,
     Entity,
     EnumType,
+    ExternalSpecRef,
     KnowledgeGraph,
     Property,
     PropertyType,
@@ -288,6 +289,17 @@ def _add_enum(g: Graph, enum_type: EnumType) -> None:
 # Ontology header
 # ---------------------------------------------------------------------------
 
+def _add_external_spec(g: Graph, ontology_uri: URIRef, spec: ExternalSpecRef) -> None:
+    """Add an owl:seeAlso triple for a sibling external-spec KG."""
+    g.add((ontology_uri, RDFS.seeAlso, URIRef(spec.uri)))
+    if spec.description:
+        desc_bnode = URIRef(
+            f"{spec.uri}#{_sanitize(spec.spec)}-{_sanitize(spec.version)}"
+        )
+        g.add((desc_bnode, RDFS.comment, Literal(spec.description, lang="en")))
+        g.add((desc_bnode, RDFS.label, Literal(f"{spec.spec} {spec.version}", lang="en")))
+
+
 def _add_ontology_header(g: Graph, kg: KnowledgeGraph) -> None:
     """Add owl:Ontology metadata triples."""
     ontology_uri = C2PA[""]
@@ -304,6 +316,10 @@ def _add_ontology_header(g: Graph, kg: KnowledgeGraph) -> None:
 
     if kg.version.date:
         g.add((ontology_uri, DC["date"], Literal(kg.version.date, datatype=XSD.date)))
+
+    # owl:seeAlso for sibling external-spec KGs (e.g. cawg-knowledge-graph).
+    for ext in kg.external_specs:
+        _add_external_spec(g, ontology_uri, ext)
 
     # Bind common prefixes
     g.bind("c2pa", C2PA)

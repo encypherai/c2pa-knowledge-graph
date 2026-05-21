@@ -1,0 +1,18 @@
+{
+  "spec_version": "0.7",
+  "artifacts": {
+    "metadata": "versions/0.7/metadata.json",
+    "ontology": "versions/0.7/ontology.ttl",
+    "context": "versions/0.7/context.jsonld",
+    "validation_rules": "versions/0.7/validation-rules.json",
+    "predicates": "versions/0.7/predicates.json"
+  },
+  "urls": {
+    "metadata": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/v1.0.7/versions/0.7/metadata.json",
+    "ontology": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/v1.0.7/versions/0.7/ontology.ttl",
+    "context": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/v1.0.7/versions/0.7/context.jsonld",
+    "validation_rules": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/v1.0.7/versions/0.7/validation-rules.json",
+    "predicates": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/v1.0.7/versions/0.7/predicates.json",
+    "current_metadata": "https://raw.githubusercontent.com/encypherai/c2pa-knowledge-graph/spec-current/versions/0.7/metadata.json"
+  }
+}

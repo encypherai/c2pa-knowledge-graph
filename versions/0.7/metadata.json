@@ -111,12 +111,21 @@
     ]
   },
   "status_codes": [],
+  "external_specs": [
+    {
+      "spec": "cawg-identity",
+      "version": "1.2",
+      "uri": "https://github.com/encypherai/cawg-knowledge-graph",
+      "description": "CAWG identity assertion extends the C2PA identity assertion path with a named_actor / credential_holder model. See also: cawg-metadata, cawg-training-mining, cawg-endorsement, cawg-ux-guidance."
+    }
+  ],
   "stats": {
     "entity_count": 0,
     "relationship_count": 0,
     "rule_count": 0,
     "enum_count": 0,
     "type_alias_count": 0,
-    "status_code_count": 0
+    "status_code_count": 0,
+    "external_spec_count": 1
   }
 }

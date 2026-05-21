@@ -17,6 +17,7 @@ from pathlib import Path
 from c2pa_kg.models import (
     Cardinality,
     Entity,
+    ExternalSpecRef,
     KnowledgeGraph,
     PropertyType,
     Relationship,
@@ -36,6 +37,27 @@ _CDDL_SUBPATH = "docs/modules/specs/partials/schemas/cddl"
 _CRJSON_SUBPATH = "docs/modules/crJSON/partials/crJSON.schema.json"
 _VALIDATION_SUBPATH = "docs/modules/specs/partials/Validation/Validation.adoc"
 _ASSERTIONS_SUBPATH = "docs/modules/specs/partials/Standard_Assertions"
+
+
+# ---------------------------------------------------------------------------
+# Sibling KG external_specs link (C2PA KG -> CAWG KG).
+# CAWG assertions are defined on top of C2PA; the CAWG KG is the canonical
+# source for identity, metadata, training-mining, endorsement, and ux-guidance.
+# ---------------------------------------------------------------------------
+
+_C2PA_EXTERNAL_SPECS: list[ExternalSpecRef] = [
+    ExternalSpecRef(
+        spec="cawg-identity",
+        version="1.2",
+        uri="https://github.com/encypherai/cawg-knowledge-graph",
+        description=(
+            "CAWG identity assertion extends the C2PA identity assertion path "
+            "with a named_actor / credential_holder model. "
+            "See also: cawg-metadata, cawg-training-mining, cawg-endorsement, "
+            "cawg-ux-guidance."
+        ),
+    ),
+]
 
 
 # ---------------------------------------------------------------------------
@@ -517,5 +539,10 @@ def build_knowledge_graph(
     # 7. Infer cross-entity relationships from property references
     # ------------------------------------------------------------------
     _infer_relationships(kg)
+
+    # ------------------------------------------------------------------
+    # 8. Attach sibling KG external_specs links (CAWG knowledge graph).
+    # ------------------------------------------------------------------
+    kg.external_specs.extend(_C2PA_EXTERNAL_SPECS)
 
     return kg

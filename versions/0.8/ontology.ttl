@@ -8,6 +8,10 @@ c2pa: a owl:Ontology ;
     rdfs:label "C2PA Ontology"@en ;
     dc1:date "2021-11-11"^^xsd:date ;
     rdfs:comment "OWL ontology generated from the C2PA specification source files. Entities, properties, and relationships are derived primarily from CDDL schemas, supplemented by JSON Schema and AsciiDoc documentation."@en ;
+    rdfs:seeAlso <https://github.com/encypherai/cawg-knowledge-graph> ;
     owl:versionIRI <https://c2pa.org/ontology/v0.8/> ;
     owl:versionInfo "0.8" .
+
+<https://github.com/encypherai/cawg-knowledge-graph#cawg-identity-1.2> rdfs:label "cawg-identity 1.2"@en ;
+    rdfs:comment "CAWG identity assertion extends the C2PA identity assertion path with a named_actor / credential_holder model. See also: cawg-metadata, cawg-training-mining, cawg-endorsement, cawg-ux-guidance."@en .
 

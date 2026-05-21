@@ -9,6 +9,7 @@ c2pa: a owl:Ontology ;
     rdfs:label "C2PA Ontology"@en ;
     dc1:date "2025-09-22"^^xsd:date ;
     rdfs:comment "OWL ontology generated from the C2PA specification source files. Entities, properties, and relationships are derived primarily from CDDL schemas, supplemented by JSON Schema and AsciiDoc documentation."@en ;
+    rdfs:seeAlso <https://github.com/encypherai/cawg-knowledge-graph> ;
     owl:versionIRI <https://c2pa.org/ontology/v2.2/> ;
     owl:versionInfo "2.2" .
 
@@ -897,6 +898,9 @@ c2pa:ValidationResultsMap.ingredientDeltas a owl:ObjectProperty ;
     rdfs:domain c2pa:ValidationResultsMap ;
     rdfs:range c2pa:IngredientDeltaValidationResultMap ;
     c2pa:relationshipType "belongs_to" .
+
+<https://github.com/encypherai/cawg-knowledge-graph#cawg-identity-1.2> rdfs:label "cawg-identity 1.2"@en ;
+    rdfs:comment "CAWG identity assertion extends the C2PA identity assertion path with a named_actor / credential_holder model. See also: cawg-metadata, cawg-training-mining, cawg-endorsement, cawg-ux-guidance."@en .
 
 c2pa:ActionCommonMapV2.description a owl:DatatypeProperty ;
     rdfs:label "description"@en ;
@@ -2339,10 +2343,10 @@ c2pa:TextSelectorRangeMap.end a owl:ObjectProperty ;
 c2pa:TimeStampMap a owl:Class ;
     rdfs:label "TimeStampMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty <https://c2pa.org/ontology/TimeStampMap.$$time_stamp_entry> ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty <https://c2pa.org/ontology/TimeStampMap.$$time_stamp_entry> ] ;
     owl:sameAs <https://c2pa.org/ontology/$time-stamp-map> ;
     c2pa:extensible true .
@@ -2505,10 +2509,10 @@ c2pa:AraReferenceBlockMap.reference a owl:ObjectProperty ;
 c2pa:AraReferenceUriMap a owl:Class ;
     rdfs:label "AraReferenceUriMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:AraReferenceUriMap.uri ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:AraReferenceUriMap.uri ] ;
     owl:sameAs c2pa:ara-reference-uri-map .
 
@@ -2555,11 +2559,11 @@ c2pa:BoxHashMap.pad a owl:DatatypeProperty ;
 c2pa:BoxMap a owl:Class ;
     rdfs:label "BoxMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BoxMap.alg ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BoxMap.boxes ] ;
+            owl:onProperty c2pa:BoxMap.boxes ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BoxMap.alg ] ;
     owl:sameAs c2pa:box-map .
 
 c2pa:ClaimMap.claim_generator a owl:DatatypeProperty ;
@@ -3238,23 +3242,23 @@ c2pa:AraReferenceBlockMap a owl:Class ;
     rdfs:label "AraReferenceBlockMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AraReferenceBlockMap.description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:AraReferenceBlockMap.reference ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AraReferenceBlockMap.reference ] ;
+            owl:onProperty c2pa:AraReferenceBlockMap.reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:AraReferenceBlockMap.description ] ;
     owl:sameAs c2pa:ara-reference-block-map .
 
 c2pa:AssetTypes a owl:Class ;
     rdfs:label "AssetTypes"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssetTypes.dc_format ],
+            owl:onProperty c2pa:AssetTypes.metadata ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssetTypes.metadata ] ;
+            owl:onProperty c2pa:AssetTypes.dc_format ] ;
     owl:sameAs c2pa:asset-types .
 
 c2pa:CollectionDataHashMap a owl:Class ;
@@ -3264,13 +3268,13 @@ c2pa:CollectionDataHashMap a owl:Class ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CollectionDataHashMap.uris ],
         [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CollectionDataHashMap.alg ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CollectionDataHashMap.zip_central_directory_hash ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CollectionDataHashMap.alg ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CollectionDataHashMap.alg ] ;
     owl:sameAs <https://c2pa.org/ontology/$collection-data-hash-map> ;
     c2pa:extensible true .
@@ -3283,44 +3287,44 @@ c2pa:DataBoxMap a owl:Class ;
             owl:onProperty c2pa:DataBoxMap.dc_format ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataBoxMap.dc_format ],
+            owl:onProperty c2pa:DataBoxMap.data ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:DataBoxMap.data ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataBoxMap.data ] ;
+            owl:onProperty c2pa:DataBoxMap.dc_format ] ;
     owl:sameAs c2pa:data-box-map .
 
 c2pa:DataMap a owl:Class ;
     rdfs:label "DataMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataMap.offset ],
+            owl:onProperty c2pa:DataMap.value ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataMap.value ],
+            owl:onProperty c2pa:DataMap.offset ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataMap.value ],
+            owl:onProperty c2pa:DataMap.offset ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataMap.offset ] ;
+            owl:onProperty c2pa:DataMap.value ] ;
     owl:sameAs c2pa:data-map .
 
 c2pa:ExclusionRangeMap a owl:Class ;
     rdfs:label "ExclusionRangeMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ExclusionRangeMap.length ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ExclusionRangeMap.length ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ExclusionRangeMap.length ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ExclusionRangeMap.start ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ExclusionRangeMap.start ] ;
     owl:sameAs c2pa:EXCLUSION_RANGE-map .
 
@@ -3336,10 +3340,10 @@ c2pa:FontUnicodeRangeMap a owl:Class ;
             owl:onProperty c2pa:FontUnicodeRangeMap.stop ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontUnicodeRangeMap.start ],
+            owl:onProperty c2pa:FontUnicodeRangeMap.stop ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontUnicodeRangeMap.stop ],
+            owl:onProperty c2pa:FontUnicodeRangeMap.start ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontUnicodeRangeMap.start ] ;
@@ -3349,17 +3353,17 @@ c2pa:FontWeightMap a owl:Class ;
     rdfs:label "FontWeightMap"@en ;
     rdfs:comment "Data for a font weight"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontWeightMap.value ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontWeightMap.class ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontWeightMap.value ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontWeightMap.class ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontWeightMap.class ] ;
+            owl:onProperty c2pa:FontWeightMap.value ] ;
     owl:sameAs c2pa:font-weight-map .
 
 c2pa:FrameMap a owl:Class ;
@@ -3392,14 +3396,14 @@ c2pa:IngredientDeltaValidationResultMap a owl:Class ;
 c2pa:ItemMap a owl:Class ;
     rdfs:label "ItemMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ItemMap.value ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ItemMap.value ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ItemMap.identifier ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ItemMap.value ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ItemMap.identifier ] ;
@@ -3410,19 +3414,19 @@ c2pa:JsonldSchemaMap a owl:Class ;
     rdfs:comment "Schema for JSON-LD CDDL"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:JsonldSchemaMap.graph ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:JsonldSchemaMap.graph ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:JsonldSchemaMap.common ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:JsonldSchemaMap.graph ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:JsonldSchemaMap.context ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:JsonldSchemaMap.common ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:JsonldSchemaMap.graph ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:JsonldSchemaMap.context ] ;
@@ -3445,10 +3449,10 @@ c2pa:ParametersMap a owl:Class ;
     rdfs:label "ParametersMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ParametersMap.ingredient ],
+            owl:onProperty c2pa:ParametersMap.description ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ParametersMap.description ] ;
+            owl:onProperty c2pa:ParametersMap.ingredient ] ;
     owl:sameAs c2pa:parameters-map .
 
 c2pa:SoftBindingBlockMap a owl:Class ;
@@ -3458,13 +3462,13 @@ c2pa:SoftBindingBlockMap a owl:Class ;
             owl:onProperty c2pa:SoftBindingBlockMap.scope ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:SoftBindingBlockMap.scope ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SoftBindingBlockMap.value ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingBlockMap.value ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingBlockMap.scope ] ;
+            owl:onProperty c2pa:SoftBindingBlockMap.value ] ;
     owl:sameAs c2pa:soft-binding-block-map .
 
 c2pa:SoftBindingTimespanMap a owl:Class ;
@@ -3474,10 +3478,10 @@ c2pa:SoftBindingTimespanMap a owl:Class ;
             owl:onProperty c2pa:SoftBindingTimespanMap.start ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingTimespanMap.start ],
+            owl:onProperty c2pa:SoftBindingTimespanMap.end ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingTimespanMap.end ],
+            owl:onProperty c2pa:SoftBindingTimespanMap.start ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SoftBindingTimespanMap.end ] ;
@@ -3488,10 +3492,10 @@ c2pa:SourceMap a owl:Class ;
     rdfs:comment "NOTE: an earlier version of this specification also included an \"actors\" field, however this was removed in version 2.0."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SourceMap.details ],
+            owl:onProperty c2pa:SourceMap.type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SourceMap.type ],
+            owl:onProperty c2pa:SourceMap.details ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SourceMap.type ] ;
@@ -3501,12 +3505,12 @@ c2pa:SubsetMap a owl:Class ;
     rdfs:label "SubsetMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SubsetMap.offset ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SubsetMap.length ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:SubsetMap.offset ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SubsetMap.length ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
@@ -3518,13 +3522,13 @@ c2pa:TextSelectorRangeMap a owl:Class ;
     rdfs:comment "one or two text-selector-maps used to identify the range"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:TextSelectorRangeMap.end ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:TextSelectorRangeMap.selector ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:TextSelectorRangeMap.selector ] ;
+            owl:onProperty c2pa:TextSelectorRangeMap.selector ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:TextSelectorRangeMap.end ] ;
     owl:sameAs c2pa:text-selector-range-map .
 
 c2pa:ValidationResultsMap a owl:Class ;
@@ -3542,21 +3546,18 @@ c2pa:WallClockTimeMap a owl:Class ;
             owl:onProperty c2pa:WallClockTimeMap.type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:WallClockTimeMap.start ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:WallClockTimeMap.type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:WallClockTimeMap.end ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:WallClockTimeMap.start ] ;
+            owl:onProperty c2pa:WallClockTimeMap.end ] ;
     owl:sameAs c2pa:wall-clock-time-map .
 
 c2pa:ActionCommonMapV2 a owl:Class ;
     rdfs:label "ActionCommonMapV2"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionCommonMapV2.softwareAgentIndex ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionCommonMapV2.softwareAgent ],
         [ a owl:Restriction ;
@@ -3564,23 +3565,26 @@ c2pa:ActionCommonMapV2 a owl:Class ;
             owl:onProperty c2pa:ActionCommonMapV2.digitalSourceType ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionCommonMapV2.description ] ;
+            owl:onProperty c2pa:ActionCommonMapV2.description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ActionCommonMapV2.softwareAgentIndex ] ;
     owl:sameAs c2pa:action-common-map-v2 .
 
 c2pa:ActionTemplateMapV2 a owl:Class ;
     rdfs:label "ActionTemplateMapV2"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionTemplateMapV2.icon ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionTemplateMapV2.templateParameters ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionTemplateMapV2.action ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionTemplateMapV2.action ] ;
+            owl:onProperty c2pa:ActionTemplateMapV2.action ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ActionTemplateMapV2.icon ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ActionTemplateMapV2.templateParameters ] ;
     owl:sameAs c2pa:action-template-map-v2 .
 
 c2pa:BmffMerkleMap a owl:Class ;
@@ -3588,22 +3592,22 @@ c2pa:BmffMerkleMap a owl:Class ;
     rdfs:comment "The data structure used to store sufficient information to validate a single 'mdat' box or a portion of an 'mdat' box when a Merkle tree is used\","@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BmffMerkleMap.localId ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BmffMerkleMap.uniqueId ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BmffMerkleMap.location ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BmffMerkleMap.localId ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BmffMerkleMap.uniqueId ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BmffMerkleMap.location ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BmffMerkleMap.localId ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BmffMerkleMap.uniqueId ] ;
+            owl:onProperty c2pa:BmffMerkleMap.location ] ;
     owl:sameAs c2pa:bmff-merkle-map .
 
 c2pa:CoordinateMap a owl:Class ;
@@ -3612,11 +3616,11 @@ c2pa:CoordinateMap a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CoordinateMap.y ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CoordinateMap.x ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CoordinateMap.y ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CoordinateMap.x ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CoordinateMap.x ] ;
@@ -3627,9 +3631,6 @@ c2pa:EndorsementTargetMap a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:EndorsementTargetMap.notValidAfter ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:EndorsementTargetMap.endorseeCredential ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:EndorsementTargetMap.metadata ],
@@ -3644,42 +3645,45 @@ c2pa:EndorsementTargetMap a owl:Class ;
             owl:onProperty c2pa:EndorsementTargetMap.endorseeCredential ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:EndorsementTargetMap.notValidBefore ] ;
+            owl:onProperty c2pa:EndorsementTargetMap.notValidBefore ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:EndorsementTargetMap.endorseeCredential ] ;
     owl:sameAs c2pa:endorsement-target-map .
 
 c2pa:PartHashMap a owl:Class ;
     rdfs:label "PartHashMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:PartHashMap.location ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:PartHashMap.optional ],
+            owl:onProperty c2pa:PartHashMap.location ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:PartHashMap.hashAssertion ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:PartHashMap.hashAssertion ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:PartHashMap.location ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:PartHashMap.hashAssertion ] ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:PartHashMap.optional ] ;
     owl:sameAs c2pa:part-hash-map .
 
 c2pa:RatingMap a owl:Class ;
     rdfs:label "RatingMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RatingMap.explanation ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:RatingMap.value ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RatingMap.value ],
+            owl:onProperty c2pa:RatingMap.code ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RatingMap.explanation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RatingMap.code ] ;
+            owl:onProperty c2pa:RatingMap.value ] ;
     owl:sameAs c2pa:rating-map .
 
 c2pa:ShapeChoice a owl:Class ;
@@ -3690,13 +3694,13 @@ c2pa:SoftBindingScopeMap a owl:Class ;
     rdfs:label "SoftBindingScopeMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:SoftBindingScopeMap.extent ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SoftBindingScopeMap.region ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingScopeMap.timespan ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingScopeMap.extent ] ;
+            owl:onProperty c2pa:SoftBindingScopeMap.timespan ] ;
     owl:sameAs c2pa:soft-binding-scope-map .
 
 c2pa:TrainingMiningChoice a owl:Class ;
@@ -3711,45 +3715,45 @@ c2pa:ActionsMapV2 a owl:Class ;
     rdfs:label "ActionsMapV2"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionsMapV2.metadata ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionsMapV2.allActionsIncluded ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionsMapV2.actions ] ;
+            owl:onProperty c2pa:ActionsMapV2.actions ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ActionsMapV2.metadata ] ;
     owl:sameAs c2pa:actions-map-v2 .
 
 c2pa:CloudDataMap a owl:Class ;
     rdfs:label "CloudDataMap"@en ;
     rdfs:comment "Assertion that references the actual assertion stored in the cloud"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CloudDataMap.location ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CloudDataMap.content_type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CloudDataMap.metadata ],
         [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CloudDataMap.size ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CloudDataMap.content_type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CloudDataMap.label ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CloudDataMap.location ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:CloudDataMap.label ],
         [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:CloudDataMap.location ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CloudDataMap.size ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CloudDataMap.label ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CloudDataMap.content_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CloudDataMap.size ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:CloudDataMap.location ] ;
+            owl:onProperty c2pa:CloudDataMap.size ] ;
     owl:sameAs c2pa:cloud-data-map .
 
 c2pa:FontParameterCreatedFromVariableFontMap a owl:Class ;
@@ -3757,19 +3761,19 @@ c2pa:FontParameterCreatedFromVariableFontMap a owl:Class ;
     rdfs:comment "Font parameters used when creating an instance of a font from a variable font. The different 'variation axis` for the fonts are detailed here.  The tag names for the different axes are in parenthesis in the comments for each parameter."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.weight ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.italic ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.slant ],
+            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.width ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.optical_size ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.width ] ;
+            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.weight ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.slant ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontParameterCreatedFromVariableFontMap.italic ] ;
     owl:sameAs c2pa:font-parameter-created-from-variable-font-map .
 
 c2pa:StatusCodesMap a owl:Class ;
@@ -3781,10 +3785,10 @@ c2pa:TextSelectorMap a owl:Class ;
     rdfs:comment "this is modeled after the W3C Web Annotation selector model"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:TextSelectorMap.start ],
+            owl:onProperty c2pa:TextSelectorMap.fragment ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:TextSelectorMap.fragment ],
+            owl:onProperty c2pa:TextSelectorMap.start ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:TextSelectorMap.fragment ],
@@ -3797,13 +3801,13 @@ c2pa:TrainingMiningMap a owl:Class ;
     rdfs:label "TrainingMiningMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:TrainingMiningMap.c2pa_ai_generative_training ],
+            owl:onProperty c2pa:TrainingMiningMap.c2pa_ai_training ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:TrainingMiningMap.c2pa_ai_inference ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:TrainingMiningMap.c2pa_ai_training ],
+            owl:onProperty c2pa:TrainingMiningMap.c2pa_ai_generative_training ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:TrainingMiningMap.metadata ],
@@ -3822,11 +3826,11 @@ c2pa:BmffHashMap a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BmffHashMap.hash ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BmffHashMap.exclusions ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BmffHashMap.url ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BmffHashMap.exclusions ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BmffHashMap.alg ],
@@ -3838,60 +3842,60 @@ c2pa:BmffHashMap a owl:Class ;
 c2pa:BoxHashMap a owl:Class ;
     rdfs:label "BoxHashMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BoxHashMap.alg ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BoxHashMap.hash ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BoxHashMap.pad ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BoxHashMap.names ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BoxHashMap.pad ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BoxHashMap.hash ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BoxHashMap.alg ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:BoxHashMap.excluded ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:BoxHashMap.pad ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:BoxHashMap.pad ] ;
+            owl:onProperty c2pa:BoxHashMap.hash ] ;
     owl:sameAs c2pa:box-hash-map .
 
 c2pa:CommonSchema a owl:Class ;
     rdfs:label "CommonSchema"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@value> ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@container> ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty <https://c2pa.org/ontology/CommonSchema.@language> ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@value> ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@type> ],
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@container> ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty <https://c2pa.org/ontology/CommonSchema.@language> ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@value> ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty <https://c2pa.org/ontology/CommonSchema.@id> ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@container> ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty <https://c2pa.org/ontology/CommonSchema.@type> ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@id> ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@container> ],
+            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@type> ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@id> ] ;
+            owl:onProperty <https://c2pa.org/ontology/CommonSchema.@value> ] ;
     owl:sameAs c2pa:common-schema .
 
 c2pa:FontDesignerMap a owl:Class ;
@@ -3899,22 +3903,22 @@ c2pa:FontDesignerMap a owl:Class ;
     rdfs:comment "Data for a font designer"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontDesignerMap.contribution ],
+            owl:onProperty c2pa:FontDesignerMap.person ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontDesignerMap.startDate ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontDesignerMap.person ],
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontDesignerMap.endDate ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontDesignerMap.foundry ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontDesignerMap.person ],
+            owl:onProperty c2pa:FontDesignerMap.contribution ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontDesignerMap.endDate ] ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontDesignerMap.person ] ;
     owl:sameAs c2pa:font-designer-map .
 
 c2pa:FontStyle a owl:Class ;
@@ -3925,16 +3929,16 @@ c2pa:ParametersMapV2 a owl:Class ;
     rdfs:label "ParametersMapV2"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ParametersMapV2.multipleInstances ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ParametersMapV2.targetLanguage ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ParametersMapV2.sourceLanguage ],
+            owl:onProperty c2pa:ParametersMapV2.redacted ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ParametersMapV2.redacted ] ;
+            owl:onProperty c2pa:ParametersMapV2.multipleInstances ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ParametersMapV2.sourceLanguage ] ;
     owl:sameAs c2pa:parameters-map-v2 .
 
 c2pa:RangeChoice a owl:Class ;
@@ -3963,22 +3967,22 @@ c2pa:UriHashedDataMap a owl:Class ;
     rdfs:label "UriHashedDataMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:UriHashedDataMap.dc_format ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:UriHashedDataMap.uri ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:UriHashedDataMap.uri ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:UriHashedDataMap.size ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:UriHashedDataMap.hash ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:UriHashedDataMap.hash ] ;
+            owl:onProperty c2pa:UriHashedDataMap.hash ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:UriHashedDataMap.uri ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:UriHashedDataMap.dc_format ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:UriHashedDataMap.uri ] ;
     owl:sameAs <https://c2pa.org/ontology/$uri-hashed-data-map> ;
     c2pa:extensible true .
 
@@ -3987,28 +3991,28 @@ c2pa:DataHashMap a owl:Class ;
     rdfs:comment "Also check optionality within the hash-map The data structure used to store the cryptographic hash of some or all of the asset's data and additional information required to compute the hash."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataHashMap.pad ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataHashMap.url ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataHashMap.pad ],
+            owl:onProperty c2pa:DataHashMap.alg ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:DataHashMap.name ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataHashMap.pad2 ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DataHashMap.pad ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:DataHashMap.hash ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataHashMap.alg ],
+            owl:onProperty c2pa:DataHashMap.hash ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DataHashMap.hash ] ;
+            owl:onProperty c2pa:DataHashMap.url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DataHashMap.pad ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DataHashMap.pad2 ] ;
     owl:sameAs c2pa:data-hash-map .
 
 c2pa:FontEntityMap a owl:Class ;
@@ -4016,41 +4020,41 @@ c2pa:FontEntityMap a owl:Class ;
     rdfs:comment "Data for an entity with a name and credentials"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontEntityMap.name ],
+            owl:onProperty c2pa:FontEntityMap.url ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontEntityMap.name ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontEntityMap.url ] ;
+            owl:onProperty c2pa:FontEntityMap.name ] ;
     owl:sameAs c2pa:font-entity-map .
 
 c2pa:HashedExtUriMap a owl:Class ;
     rdfs:label "HashedExtUriMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedExtUriMap.alg ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedExtUriMap.alg ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:HashedExtUriMap.url ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedExtUriMap.hash ],
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:HashedExtUriMap.size ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedExtUriMap.hash ],
+            owl:onProperty c2pa:HashedExtUriMap.url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:HashedExtUriMap.alg ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:HashedExtUriMap.dc_format ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedExtUriMap.url ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:HashedExtUriMap.hash ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedExtUriMap.size ] ;
+            owl:onProperty c2pa:HashedExtUriMap.hash ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:HashedExtUriMap.alg ] ;
     owl:sameAs <https://c2pa.org/ontology/$hashed-ext-uri-map> ;
     c2pa:extensible true .
 
@@ -4058,25 +4062,25 @@ c2pa:RangeMap a owl:Class ;
     rdfs:label "RangeMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RangeMap.shape ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RangeMap.time ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RangeMap.type ],
+            owl:onProperty c2pa:RangeMap.text ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:RangeMap.frame ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RangeMap.text ],
+            owl:onProperty c2pa:RangeMap.shape ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RangeMap.type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:RangeMap.item ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RangeMap.type ] ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RangeMap.type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RangeMap.time ] ;
     owl:sameAs c2pa:range-map .
 
 c2pa:SoftBindingMap a owl:Class ;
@@ -4087,27 +4091,27 @@ c2pa:SoftBindingMap a owl:Class ;
             owl:onProperty c2pa:SoftBindingMap.blocks ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingMap.pad ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingMap.pad ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingMap.alg_params ],
+            owl:onProperty c2pa:SoftBindingMap.name ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SoftBindingMap.pad2 ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingMap.name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:SoftBindingMap.alg ],
+            owl:onProperty c2pa:SoftBindingMap.pad ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SoftBindingMap.url ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:SoftBindingMap.alg_params ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:SoftBindingMap.pad ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:SoftBindingMap.alg ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:SoftBindingMap.alg ] ;
     owl:sameAs c2pa:soft-binding-map .
 
@@ -4122,10 +4126,10 @@ c2pa:ActionItemMapV2 a owl:Class ;
             owl:onProperty c2pa:ActionItemMapV2.action ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionItemMapV2.parameters ],
+            owl:onProperty c2pa:ActionItemMapV2.reason ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionItemMapV2.reason ],
+            owl:onProperty c2pa:ActionItemMapV2.parameters ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionItemMapV2.action ] ;
@@ -4136,10 +4140,7 @@ c2pa:ActionItemsMap a owl:Class ;
     rdfs:comment "NOTE: an earlier version of this specification also included an \"actors\" field, however this was removed in version 2.0."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionItemsMap.changed ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionItemsMap.action ],
+            owl:onProperty c2pa:ActionItemsMap.when ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionItemsMap.instanceID ],
@@ -4148,13 +4149,16 @@ c2pa:ActionItemsMap a owl:Class ;
             owl:onProperty c2pa:ActionItemsMap.softwareAgent ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionItemsMap.when ],
+            owl:onProperty c2pa:ActionItemsMap.parameters ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionItemsMap.action ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ActionItemsMap.parameters ],
+            owl:onProperty c2pa:ActionItemsMap.changed ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ActionItemsMap.action ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ActionItemsMap.digitalSourceType ] ;
@@ -4164,118 +4168,106 @@ c2pa:AssetTypeMap a owl:Class ;
     rdfs:label "AssetTypeMap"@en ;
     rdfs:comment "The asset type assertion provides a way to more completely describe an asset, specifically additional context on how to parse or otherwise process it. This assertion allows for specifying an IANA Media Type value and/or additional type information, since many assets have formats that cannot be completely described by a single Media Type value."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:AssetTypeMap.type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:AssetTypeMap.version ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssetTypeMap.type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssetTypeMap.type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssetTypeMap.version ] ;
+            owl:onProperty c2pa:AssetTypeMap.type ] ;
     owl:sameAs c2pa:asset-type-map .
 
 c2pa:ExclusionsMap a owl:Class ;
     rdfs:label "ExclusionsMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ExclusionsMap.length ],
+            owl:onProperty c2pa:ExclusionsMap.version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ExclusionsMap.exact ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ExclusionsMap.xpath ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ExclusionsMap.version ],
+            owl:onProperty c2pa:ExclusionsMap.xpath ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ExclusionsMap.flags ],
+            owl:onProperty c2pa:ExclusionsMap.length ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ExclusionsMap.exact ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ExclusionsMap.xpath ] ;
+            owl:onProperty c2pa:ExclusionsMap.flags ] ;
     owl:sameAs c2pa:exclusions-map .
 
 c2pa:GeneratorInfoMap a owl:Class ;
     rdfs:label "GeneratorInfoMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:GeneratorInfoMap.icon ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:GeneratorInfoMap.name ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:GeneratorInfoMap.version ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:GeneratorInfoMap.operating_system ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:GeneratorInfoMap.name ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:GeneratorInfoMap.name ] ;
+            owl:onProperty c2pa:GeneratorInfoMap.icon ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:GeneratorInfoMap.operating_system ] ;
     owl:sameAs c2pa:generator-info-map .
 
 c2pa:ShapeMap a owl:Class ;
     rdfs:label "ShapeMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ShapeMap.unit ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ShapeMap.height ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ShapeMap.unit ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ShapeMap.origin ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ShapeMap.inside ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ShapeMap.height ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ShapeMap.type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ShapeMap.width ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ShapeMap.type ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ShapeMap.origin ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ShapeMap.unit ],
+            owl:onProperty c2pa:ShapeMap.type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ShapeMap.unit ] ;
+            owl:onProperty c2pa:ShapeMap.type ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ShapeMap.width ] ;
     owl:sameAs c2pa:shape-map .
 
 c2pa:IngredientMap a owl:Class ;
     rdfs:label "IngredientMap"@en ;
     rdfs:comment "Assertion that describes an ingredient used in the asset"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.dc_title ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.dc_title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.documentID ],
+            owl:onProperty c2pa:IngredientMap.relationship ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMap.metadata ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.c2pa_manifest ],
+            owl:onProperty c2pa:IngredientMap.documentID ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMap.dc_title ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMap.dc_format ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.instanceID ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.relationship ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMap.relationship ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMap.thumbnail ],
@@ -4283,7 +4275,19 @@ c2pa:IngredientMap a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMap.instanceID ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMap.c2pa_manifest ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMap.instanceID ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMap.relationship ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMap.dc_title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMap.dc_format ] ;
     owl:sameAs c2pa:ingredient-map .
 
@@ -4291,34 +4295,34 @@ c2pa:MerkleMap a owl:Class ;
     rdfs:label "MerkleMap"@en ;
     rdfs:comment "Each entry in a map is a Merkle tree rows and the associated data required to enable validation of a single 'mdat' box or multiple 'mdat' boxes within the asset.\","@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:MerkleMap.alg ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:MerkleMap.localId ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:MerkleMap.hashes ],
         [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:MerkleMap.count ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:MerkleMap.localId ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:MerkleMap.uniqueId ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:MerkleMap.fixedBlockSize ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:MerkleMap.uniqueId ],
+            owl:onProperty c2pa:MerkleMap.alg ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:MerkleMap.initHash ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:MerkleMap.localId ],
+            owl:onProperty c2pa:MerkleMap.count ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:MerkleMap.uniqueId ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:MerkleMap.count ] ;
     owl:sameAs c2pa:merkle-map .
 
@@ -4328,6 +4332,9 @@ c2pa:StatusMap a owl:Class ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:StatusMap.success ],
         [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:StatusMap.code ],
+        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:StatusMap.url ],
         [ a owl:Restriction ;
@@ -4335,9 +4342,6 @@ c2pa:StatusMap a owl:Class ;
             owl:onProperty c2pa:StatusMap.explanation ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:StatusMap.code ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:StatusMap.code ] ;
     owl:sameAs c2pa:status-map .
 
@@ -4346,19 +4350,10 @@ c2pa:ClaimMapV2 a owl:Class ;
     rdfs:comment "CDDL schema for a claim map in C2PA"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.metadata ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.claim_generator_info ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ClaimMapV2.signature ],
         [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.dc_title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.claim_generator_info ],
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMapV2.signature ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ClaimMapV2.created_assertions ],
@@ -4367,32 +4362,32 @@ c2pa:ClaimMapV2 a owl:Class ;
             owl:onProperty c2pa:ClaimMapV2.instanceID ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.instanceID ],
+            owl:onProperty c2pa:ClaimMapV2.metadata ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMapV2.alg_soft ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMapV2.dc_title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMapV2.claim_generator_info ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ClaimMapV2.alg ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.alg_soft ],
+            owl:onProperty c2pa:ClaimMapV2.instanceID ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMapV2.signature ] ;
+            owl:onProperty c2pa:ClaimMapV2.claim_generator_info ] ;
     owl:sameAs c2pa:claim-map-v2 .
 
 c2pa:RegionMap a owl:Class ;
     rdfs:label "RegionMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RegionMap.description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:RegionMap.name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RegionMap.metadata ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RegionMap.role ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:RegionMap.region ],
@@ -4401,7 +4396,16 @@ c2pa:RegionMap a owl:Class ;
             owl:onProperty c2pa:RegionMap.type ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:RegionMap.identifier ] ;
+            owl:onProperty c2pa:RegionMap.role ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RegionMap.identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RegionMap.description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:RegionMap.metadata ] ;
     owl:sameAs c2pa:region-map .
 
 c2pa:RoleChoice a owl:Class ;
@@ -4412,47 +4416,47 @@ c2pa:ClaimMap a owl:Class ;
     rdfs:label "ClaimMap"@en ;
     rdfs:comment "CDDL schema for a claim map in C2PA"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.signature ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.claim_generator_info ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.assertions ],
-        [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.claim_generator ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.dc_format ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.signature ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.dc_title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.alg ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.instanceID ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.dc_format ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.alg_soft ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ClaimMap.instanceID ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:ClaimMap.metadata ],
         [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.signature ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.dc_format ],
+        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:ClaimMap.claim_generator ] ;
+            owl:onProperty c2pa:ClaimMap.instanceID ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.assertions ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.claim_generator ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.signature ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.alg_soft ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.dc_title ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.claim_generator_info ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.alg ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.claim_generator ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:ClaimMap.dc_format ] ;
     owl:sameAs c2pa:claim-map .
 
 c2pa:ReviewCode a owl:Class ;
@@ -4468,46 +4472,46 @@ c2pa:IngredientMapV2 a owl:Class ;
     rdfs:comment "Version 2 (v2) of the ingredient assertion Assertion that describes an ingredient used in the asset"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.dc_format ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV2.instanceID ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.metadata ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.thumbnail ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.dc_format ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.informational_URI ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.relationship ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.documentID ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.dc_format ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.c2pa_manifest ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.dc_title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.relationship ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.dc_title ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV2.data ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV2.description ] ;
+            owl:onProperty c2pa:IngredientMapV2.relationship ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.c2pa_manifest ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.dc_title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.dc_title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.thumbnail ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.relationship ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.informational_URI ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.metadata ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.dc_format ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV2.documentID ] ;
     owl:sameAs c2pa:ingredient-map-v2 .
 
 c2pa:DepthmapGdepthMap a owl:Class ;
@@ -4518,25 +4522,7 @@ c2pa:DepthmapGdepthMap a owl:Class ;
             owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Near ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_MeasureType ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_ConfidenceMime ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Far ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Units ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Mime ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.metadata ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Mime ],
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_ImageHeight ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Data ],
@@ -4545,165 +4531,183 @@ c2pa:DepthmapGdepthMap a owl:Class ;
             owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Model ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_ImageWidth ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Software ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_ImageHeight ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Manufacturer ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Format ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Data ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Confidence ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Format ],
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_MeasureType ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Near ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Far ] ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Units ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_ConfidenceMime ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Software ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Confidence ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Format ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_ImageWidth ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.metadata ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Manufacturer ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Data ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Mime ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Far ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Far ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Mime ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:DepthmapGdepthMap.GDepth_Format ] ;
     owl:sameAs c2pa:depthmap-gdepth-map .
 
 c2pa:IngredientMapV3 a owl:Class ;
     rdfs:label "IngredientMapV3"@en ;
     rdfs:comment "Version 3 (v3) of the ingredient assertion Assertion that describes an ingredient used in the asset"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.relationship ],
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.informationalURI ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV3.description ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.metadata ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.dc_title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV3.relationship ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.instanceID ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.informationalURI ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.softBindingsMatched ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.activeManifest ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.validationResults ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV3.thumbnail ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.metadata ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.data ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.softBindingsMatched ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV3.dc_format ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.validationResults ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:IngredientMapV3.claimSignature ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:IngredientMapV3.data ] ;
+            owl:onProperty c2pa:IngredientMapV3.dc_title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.activeManifest ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.instanceID ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:IngredientMapV3.relationship ] ;
     owl:sameAs c2pa:ingredient-map-v3 .
 
 c2pa:FontInfoMap a owl:Class ;
     rdfs:label "FontInfoMap"@en ;
     rdfs:comment "Assertion data for font.info assertion."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.fullName ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.copyrightHolder ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontInfoMap.copyrightNotice ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.weight ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.postScriptName ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.format ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontInfoMap.familyName ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.designFoundry ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.identifier ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.weight ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.copyrightNotice ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.releaseDate ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.fullName ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.style ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.sourceFoundry ],
+            owl:onProperty c2pa:FontInfoMap.familyName ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontInfoMap.format ],
-        [ a owl:Restriction ;
-            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.style ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.postScriptName ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:FontInfoMap.versionUrl ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:FontInfoMap.familyName ] ;
+            owl:onProperty c2pa:FontInfoMap.designFoundry ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.postScriptName ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.style ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.copyrightHolder ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.weight ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.releaseDate ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.fullName ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.postScriptName ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.weight ],
+        [ a owl:Restriction ;
+            owl:minCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.fullName ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.sourceFoundry ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.format ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.style ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.identifier ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:FontInfoMap.copyrightNotice ] ;
     owl:sameAs c2pa:font-info-map .
 
 c2pa:HashedUriMap a owl:Class ;
     rdfs:label "HashedUriMap"@en ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedUriMap.alg ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:HashedUriMap.url ],
-        [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:HashedUriMap.hash ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:HashedUriMap.hash ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:HashedUriMap.alg ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:HashedUriMap.url ],
         [ a owl:Restriction ;
             owl:minCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:HashedUriMap.url ] ;
@@ -4715,16 +4719,16 @@ c2pa:AssertionMetadataMap a owl:Class ;
     rdfs:comment "In many cases, it is useful or even necessary to provide additional information about an assertion, such as the date and time when it was generated or other data that may help Manifest Consumers to make informed decisions about the provenance or veracity of the assertion data."@en ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssertionMetadataMap.dateTime ],
+            owl:onProperty c2pa:AssertionMetadataMap.reference ],
+        [ a owl:Restriction ;
+            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
+            owl:onProperty c2pa:AssertionMetadataMap.regionOfInterest ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
             owl:onProperty c2pa:AssertionMetadataMap.dataSource ],
         [ a owl:Restriction ;
             owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssertionMetadataMap.reference ],
-        [ a owl:Restriction ;
-            owl:maxCardinality "1"^^xsd:nonNegativeInteger ;
-            owl:onProperty c2pa:AssertionMetadataMap.regionOfInterest ] ;
+            owl:onProperty c2pa:AssertionMetadataMap.dateTime ] ;
     owl:sameAs <https://c2pa.org/ontology/$assertion-metadata-map> ;
     c2pa:extensible true .
 
