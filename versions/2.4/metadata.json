@@ -5163,7 +5163,7 @@
           "type": "string",
           "required": true,
           "cardinality": "1",
-          "description": "User-Agent string for the claim generator that created the claim (RFC 7231 §5.5.3)"
+          "description": "User-Agent string for the claim generator that created the claim (RFC 7231 \u00a75.5.3)"
         },
         {
           "name": "claim_generator_info",
@@ -13532,6 +13532,18 @@
       "category": "failure"
     },
     {
+      "code": "assertion.alternativeContentRepresentation.hashMismatch",
+      "meaning": "The hash of the original preservation image content does not match the hash declared in the assertion.",
+      "url_usage": "C2PA Assertion",
+      "category": "failure"
+    },
+    {
+      "code": "assertion.alternativeContentRepresentation.missing",
+      "meaning": "The original preservation image assertion, or its required content, could not be found or resolved.",
+      "url_usage": "C2PA Assertion",
+      "category": "failure"
+    },
+    {
       "code": "assertion.multipleHardBindings",
       "meaning": "The manifest has more than one hard binding assertion.",
       "url_usage": "C2PA Assertion Store Box",
@@ -13802,12 +13814,21 @@
       "category": "failure"
     }
   ],
+  "external_specs": [
+    {
+      "spec": "cawg-identity",
+      "version": "1.2",
+      "uri": "https://github.com/encypherai/cawg-knowledge-graph",
+      "description": "CAWG identity assertion extends the C2PA identity assertion path with a named_actor / credential_holder model. See also: cawg-metadata, cawg-training-mining, cawg-endorsement, cawg-ux-guidance."
+    }
+  ],
   "stats": {
     "entity_count": 148,
     "relationship_count": 208,
     "rule_count": 237,
     "enum_count": 37,
     "type_alias_count": 22,
-    "status_code_count": 114
+    "status_code_count": 114,
+    "external_spec_count": 1
   }
 }
