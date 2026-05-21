@@ -27,16 +27,40 @@ from c2pa_kg.models import (
 )
 from c2pa_kg.parsers.asciidoc import parse_assertion_docs, parse_validation_doc
 from c2pa_kg.parsers.cddl import parse_cddl_directory
+from c2pa_kg.parsers.html_spec import parse_html_spec_file
 from c2pa_kg.parsers.json_schema import parse_json_schema
 
 # ---------------------------------------------------------------------------
 # Spec path constants (relative to the spec source root)
 # ---------------------------------------------------------------------------
 
+# specs-core repo layout
 _CDDL_SUBPATH = "docs/modules/specs/partials/schemas/cddl"
 _CRJSON_SUBPATH = "docs/modules/crJSON/partials/crJSON.schema.json"
 _VALIDATION_SUBPATH = "docs/modules/specs/partials/Validation/Validation.adoc"
 _ASSERTIONS_SUBPATH = "docs/modules/specs/partials/Standard_Assertions"
+
+# Public ZIP extraction layout (flat structure)
+_CDDL_SUBPATH_ZIP = "cddl"
+_CRJSON_SUBPATH_ZIP = "crJSON/partials/crJSON.schema.json"
+
+
+def _resolve_cddl_dir(spec_source: Path) -> Path | None:
+    """Find the CDDL directory, checking both specs-core and ZIP layouts."""
+    for subpath in (_CDDL_SUBPATH, _CDDL_SUBPATH_ZIP):
+        candidate = spec_source / subpath
+        if candidate.is_dir():
+            return candidate
+    return None
+
+
+def _resolve_crjson_path(spec_source: Path) -> Path | None:
+    """Find the crJSON schema, checking both specs-core and ZIP layouts."""
+    for subpath in (_CRJSON_SUBPATH, _CRJSON_SUBPATH_ZIP):
+        candidate = spec_source / subpath
+        if candidate.is_file():
+            return candidate
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -472,12 +496,19 @@ def _build_spec_conventions(kg: KnowledgeGraph) -> None:
 def build_knowledge_graph(
     spec_source: Path,
     version: SpecVersion,
+    *,
+    html_spec: Path | None = None,
 ) -> KnowledgeGraph:
     """Build a complete KnowledgeGraph from C2PA specification source files.
 
     Args:
-        spec_source: Root path of the specs-core repository checkout.
+        spec_source: Root path of the specs-core repository checkout (or the
+            extracted schemas ZIP - must contain a cddl/ directory).
         version: SpecVersion metadata for the graph being built.
+        html_spec: Path to a locally saved rendered HTML spec from
+            spec.c2pa.org. When provided, validation rules and status codes
+            are extracted from the HTML instead of the AsciiDoc source. This
+            allows building from the public site without specs-core access.
 
     Returns:
         Fully populated KnowledgeGraph.
@@ -487,8 +518,8 @@ def build_knowledge_graph(
     # ------------------------------------------------------------------
     # 1. CDDL: primary source of structural entity definitions
     # ------------------------------------------------------------------
-    cddl_dir = spec_source / _CDDL_SUBPATH
-    if cddl_dir.is_dir():
+    cddl_dir = _resolve_cddl_dir(spec_source)
+    if cddl_dir is not None:
         cddl_entities, cddl_enums = parse_cddl_directory(cddl_dir)
         for entity in cddl_entities:
             kg.add_entity(entity)
@@ -498,22 +529,30 @@ def build_knowledge_graph(
     # ------------------------------------------------------------------
     # 2. JSON Schema: secondary source for descriptions and crJSON entities
     # ------------------------------------------------------------------
-    crjson_path = spec_source / _CRJSON_SUBPATH
+    crjson_path = _resolve_crjson_path(spec_source)
     js_entities: list[Entity] = []
-    if crjson_path.is_file():
+    if crjson_path is not None:
         js_entities = parse_json_schema(crjson_path)
         _merge_json_schema_descriptions(kg, js_entities)
 
     # ------------------------------------------------------------------
-    # 3. AsciiDoc: validation rules, status codes, assertion descriptions
+    # 3. Validation rules, status codes, assertion descriptions.
+    #    Prefer HTML spec when provided; fall back to AsciiDoc source.
     # ------------------------------------------------------------------
-    validation_path = spec_source / _VALIDATION_SUBPATH
-    if validation_path.is_file():
-        rules, status_codes = parse_validation_doc(validation_path)
+    if html_spec is not None and html_spec.is_file():
+        rules, status_codes = parse_html_spec_file(html_spec)
         for rule in rules:
             kg.add_rule(rule)
         for code in status_codes:
             kg.status_codes.append(code)
+    else:
+        validation_path = spec_source / _VALIDATION_SUBPATH
+        if validation_path.is_file():
+            rules, status_codes = parse_validation_doc(validation_path)
+            for rule in rules:
+                kg.add_rule(rule)
+            for code in status_codes:
+                kg.status_codes.append(code)
 
     assertions_dir = spec_source / _ASSERTIONS_SUBPATH
     if assertions_dir.is_dir():
