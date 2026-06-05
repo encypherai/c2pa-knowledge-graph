@@ -5163,7 +5163,7 @@
           "type": "string",
           "required": true,
           "cardinality": "1",
-          "description": "User-Agent string for the claim generator that created the claim (RFC 7231 \u00a75.5.3)"
+          "description": "User-Agent string for the claim generator that created the claim (RFC 7231 §5.5.3)"
         },
         {
           "name": "claim_generator_info",
@@ -12361,6 +12361,1760 @@
       ],
       "spec_section": "Extras for ZIP",
       "source_text": "If the hash does not match, then the manifest shall be rejected with a failure code of assertion.collectionHash.mismatch."
+    },
+    {
+      "rule_id": "GEN-VERSIO-0001",
+      "description": "In this specification, when a construct is marked as deprecated, that means that a claim generator shall not write that construct (or value), but that a validator should read it.",
+      "severity": "shall_not",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "TimeStampMap"
+      ],
+      "spec_section": "5.1. Compatibility",
+      "source_text": "In this specification, when a construct is marked as deprecated, that means that a claim generator shall not write that construct (or value), but that a validator should read it.",
+      "spec_area": "Versioning",
+      "applicability": "both"
+    },
+    {
+      "rule_id": "GEN-VERSIO-0002",
+      "description": "To facilitate testing and diagnosing interoperability issues between claim generators and validators, a claim generator should declare which version of the specification it is using to generate the C2PA Manifest by providing a specVersion key in the claim_generator_info field of the claim.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "specVersion",
+        "claim_generator_info"
+      ],
+      "spec_section": "5.1. Compatibility",
+      "source_text": "To facilitate testing and diagnosing interoperability issues between claim generators and validators, a claim generator should declare which version of the specification it is using to generate the C2",
+      "spec_area": "Versioning",
+      "applicability": "both"
+    },
+    {
+      "rule_id": "GEN-VERSIO-0003",
+      "description": "When a claim generator is performing ingredient validation, it should add a specVersion key to the validation-results-map to declare what version of the specification was used as the basis for the validation procedure.",
+      "severity": "should",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "specVersion",
+        "validation-results-map"
+      ],
+      "spec_section": "5.1. Compatibility",
+      "source_text": "When a claim generator is performing ingredient validation, it should add a specVersion key to the validation-results-map to declare what version of the specification was used as the basis for the val",
+      "spec_area": "Versioning",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-ASSERT-0001",
+      "description": "Claim generators shall not insert data into deprecated assertion fields when creating assertions.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "6.3. Versioning",
+      "source_text": "Claim generators shall not insert data into deprecated assertion fields when creating assertions.",
+      "spec_area": "Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-ASSERT-0002",
+      "description": "In addition, a record that something was removed shall be added to the claim in the form of a URI reference to the redacted assertion in the redacted_assertions field of the claim.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "redacted_assertions",
+        "c2pa.redacted",
+        "redacted"
+      ],
+      "spec_section": "6.8. Redaction of Assertions",
+      "source_text": "In addition, a record that something was removed shall be added to the claim in the form of a URI reference to the redacted assertion in the redacted_assertions field of the claim.",
+      "spec_area": "Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-ASSERT-0003",
+      "description": "It is also strongly recommended that the claim generator should add a c2pa.redacted action with a redacted field as described in Section 18.15.4.7, “Parameters”.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "redacted_assertions",
+        "c2pa.redacted",
+        "redacted"
+      ],
+      "spec_section": "6.8. Redaction of Assertions",
+      "source_text": "It is also strongly recommended that the claim generator should add a c2pa.redacted action with a redacted field as described in Section 18.15.4.7, “Parameters”.",
+      "spec_area": "Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-ASSERT-0004",
+      "description": "When redacting an ingredient assertion that references a C2PA Manifest, the associated manifest shall be removed from the C2PA Manifest Store if no other references to it remain after redacting.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "IngredientMap"
+      ],
+      "spec_section": "6.8. Redaction of Assertions",
+      "source_text": "When redacting an ingredient assertion that references a C2PA Manifest, the associated manifest shall be removed from the C2PA Manifest Store if no other references to it remain after redacting.",
+      "spec_area": "Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-ASSERT-0005",
+      "description": "Claim generators shall not redact assertions with a label of c2pa.actions or c2pa.actions.v2 as this assertion type represents essential information in understanding the history of an asset.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.actions",
+        "c2pa.actions.v2"
+      ],
+      "spec_section": "6.8. Redaction of Assertions",
+      "source_text": "Claim generators shall not redact assertions with a label of c2pa.actions or c2pa.actions.v2 as this assertion type represents essential information in understanding the history of an asset.",
+      "spec_area": "Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-ASSERT-0006",
+      "description": "When creating an update manifest, the claim generator shall not redact the hard binding to content assertion that applies to the current asset.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.actions",
+        "c2pa.actions.v2"
+      ],
+      "spec_section": "6.8. Redaction of Assertions",
+      "source_text": "When creating an update manifest, the claim generator shall not redact the hard binding to content assertion that applies to the current asset.",
+      "spec_area": "Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-UNIQUE-0001",
+      "description": "When present, the \"Claim Generator identifier\" string shall consist of no more than 32 characters from the ASCII range (as per RFC 20), but which are not Control Characters (RFC 20, 5.2) or Graphic Characters (RFC 20, 5.3).",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "8.1. Uniquely Identifying C2PA Manifests and Assets",
+      "source_text": "When present, the \"Claim Generator identifier\" string shall consist of no more than 32 characters from the ASCII range (as per RFC 20), but which are not Control Characters (RFC 20, 5.2) or Graphic Ch",
+      "spec_area": "Unique Identifiers",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-UNIQUE-0002",
+      "description": "In addition, when a \"Version and Reason\" string is present, a \"Claim Generator identifier\" string shall also be present but it may be empty.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "8.1. Uniquely Identifying C2PA Manifests and Assets",
+      "source_text": "In addition, when a \"Version and Reason\" string is present, a \"Claim Generator identifier\" string shall also be present but it may be empty.",
+      "spec_area": "Unique Identifiers",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-UNIQUE-0003",
+      "description": "In such a case, the modified version of the ingredient manifest needs to be copied into the asset’s C2PA Manifest Store, and shall be re-labeled.",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim",
+        "IngredientMap"
+      ],
+      "spec_section": "8.2. Versioning Manifests Due to Conflicts",
+      "source_text": "In such a case, the modified version of the ingredient manifest needs to be copied into the asset’s C2PA Manifest Store, and shall be re-labeled.",
+      "spec_area": "Unique Identifiers",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-UNIQUE-0004",
+      "description": "If the current URN does not contain a \"Claim Generator identifier string\", then the claim generator shall append a :.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "8.2. Versioning Manifests Due to Conflicts",
+      "source_text": "If the current URN does not contain a \"Claim Generator identifier string\", then the claim generator shall append a :.",
+      "spec_area": "Unique Identifiers",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-UNIQUE-0005",
+      "description": "In all cases, the claim generator shall append a : to the URN followed by a monotonically increasing integer, starting with 1, followed by an underscore (_) and then an integer from the list below representing the reason for the re-labeling.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "8.2. Versioning Manifests Due to Conflicts",
+      "source_text": "In all cases, the claim generator shall append a : to the URN followed by a monotonically increasing integer, starting with 1, followed by an underscore (_) and then an integer from the list below rep",
+      "spec_area": "Unique Identifiers",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-UNIQUE-0006",
+      "description": "When working with assets that do not contain a C2PA Manifest and do not contain embedded XMP, the claim generator may use any method of its choosing to provide it with a unique identifier.",
+      "severity": "may",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "8.3. Identifying Non-C2PA Assets",
+      "source_text": "When working with assets that do not contain a C2PA Manifest and do not contain embedded XMP, the claim generator may use any method of its choosing to provide it with a unique identifier.",
+      "spec_area": "Unique Identifiers",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-BINDIN-0001",
+      "description": "However, a Claim Generator should, where possible, include asset metadata (i.e., metadata outside a C2PA Manifest such as EXIF or XMP) in the hard binding, in order to protect its integrity throughout the asset’s lifecycle.",
+      "severity": "should",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim",
+        "DataHashMap"
+      ],
+      "spec_section": "9.2.6. Binding Non-C2PA Asset Metadata",
+      "source_text": "However, a Claim Generator should, where possible, include asset metadata (i.e., metadata outside a C2PA Manifest such as EXIF or XMP) in the hard binding, in order to protect its integrity throughout",
+      "spec_area": "Binding to Content",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0001",
+      "description": "Validators should still accept this label (and associated claim-map), but claim generators shall not produce such a claim.",
+      "severity": "shall_not",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.claim",
+        "claim-map"
+      ],
+      "spec_section": "10.1. Overview",
+      "source_text": "Validators should still accept this label (and associated claim-map), but claim generators shall not produce such a claim.",
+      "spec_area": "Claims",
+      "applicability": "both"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0002",
+      "description": "However, instead of setting dc:title, claim generators should create a metadata assertion containing the dc:title field.",
+      "severity": "should",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "10.2.2. Fields",
+      "source_text": "However, instead of setting dc:title, claim generators should create a metadata assertion containing the dc:title field.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0003",
+      "description": "Detailed information about the claim generator shall be present as the value of claim_generator_info.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim_generator_info"
+      ],
+      "spec_section": "10.2.3.1. General",
+      "source_text": "Detailed information about the claim generator shall be present as the value of claim_generator_info.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0004",
+      "description": "A claim generator may desire to provide a graphical representation of itself, referred here as an icon, to a Manifest Consumer that is presenting a user experience.",
+      "severity": "may",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "icon",
+        "c2pa.icon"
+      ],
+      "spec_section": "10.2.3.2. Generator Info Map",
+      "source_text": "A claim generator may desire to provide a graphical representation of itself, referred here as an icon, to a Manifest Consumer that is presenting a user experience.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0005",
+      "description": "The claim shall contain a created_assertions field and may contain a gathered_assertions field.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "created_assertions",
+        "gathered_assertions"
+      ],
+      "spec_section": "10.3.2.1. Adding Assertions and Redactions",
+      "source_text": "The claim shall contain a created_assertions field and may contain a gathered_assertions field.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0006",
+      "description": "In a standard manifest, the created_assertions field’s value shall include at least one assertion that represents a hard binding.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "created_assertions",
+        "gathered_assertions"
+      ],
+      "spec_section": "10.3.2.1. Adding Assertions and Redactions",
+      "source_text": "In a standard manifest, the created_assertions field’s value shall include at least one assertion that represents a hard binding.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0007",
+      "description": "If any assertions in ingredient claims are being redacted, their URI references shall be added to list which is the value of the redacted_assertions field.",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "redacted_assertions"
+      ],
+      "spec_section": "10.3.2.1. Adding Assertions and Redactions",
+      "source_text": "If any assertions in ingredient claims are being redacted, their URI references shall be added to list which is the value of the redacted_assertions field.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0008",
+      "description": "If a manifest with the same unique identifier is already present in the C2PA Manifest Store, the two shall be compared.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "IngredientMap"
+      ],
+      "spec_section": "10.3.2.2. Adding Ingredients",
+      "source_text": "If a manifest with the same unique identifier is already present in the C2PA Manifest Store, the two shall be compared.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0009",
+      "description": "If they are identical, the new manifest shall be ignored.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "IngredientMap"
+      ],
+      "spec_section": "10.3.2.2. Adding Ingredients",
+      "source_text": "If they are identical, the new manifest shall be ignored.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0010",
+      "description": "If they are different, the new manifest shall be added to the store after changing its unique identifier to a new value as described in Chapter 8, Unique Identifiers.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "IngredientMap"
+      ],
+      "spec_section": "10.3.2.2. Adding Ingredients",
+      "source_text": "If they are different, the new manifest shall be added to the store after changing its unique identifier to a new value as described in Chapter 8, Unique Identifiers.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0011",
+      "description": "If an ingredient’s manifest is remote, and the claim generator is unable to retrieve the manifest, it should use an error code of manifest.inaccessible to reflect that.",
+      "severity": "should",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest.inaccessible"
+      ],
+      "spec_section": "10.3.2.2. Adding Ingredients",
+      "source_text": "If an ingredient’s manifest is remote, and the claim generator is unable to retrieve the manifest, it should use an error code of manifest.inaccessible to reflect that.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0012",
+      "description": "For both types of manifests, standard and update, the payload field of Sig_structure shall be the serialized CBOR of the claim document, and shall use detached content mode.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "payload",
+        "Sig_structure"
+      ],
+      "spec_section": "10.3.2.4. Signing a Claim",
+      "source_text": "For both types of manifests, standard and update, the payload field of Sig_structure shall be the serialized CBOR of the claim document, and shall use detached content mode.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0013",
+      "description": "If possible, the claim generator should use a RFC 3161-compliant Time Stamping Authority (TSA) (RFC 3161) to obtain a trusted time-stamp proving that the signature itself actually existed at a certain date and time and incorporate that into the COSE_Sign1_Tagged structure as a countersignature.",
+      "severity": "should",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "COSE_Sign1_Tagged"
+      ],
+      "spec_section": "10.3.2.5.1. Use of RFC 3161",
+      "source_text": "If possible, the claim generator should use a RFC 3161-compliant Time Stamping Authority (TSA) (RFC 3161) to obtain a trusted time-stamp proving that the signature itself actually existed at a certain",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0014",
+      "description": "A claim generator shall not create one, but a validator shall process one if present.",
+      "severity": "shall_not",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "payload",
+        "Sig_signature"
+      ],
+      "spec_section": "10.3.2.5.2. Choosing the Payload",
+      "source_text": "A claim generator shall not create one, but a validator shall process one if present.",
+      "spec_area": "Claims",
+      "applicability": "both"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0015",
+      "description": "A \"v2 payload\" shall be used by claim generators performing a time-stamping operation.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "signature",
+        "COSE_Sign1_Tagged"
+      ],
+      "spec_section": "10.3.2.5.2. Choosing the Payload",
+      "source_text": "A \"v2 payload\" shall be used by claim generators performing a time-stamping operation.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0016",
+      "description": "All time-stamps shall be obtained as described in RFC 3161 with the following additional requirements:",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "TimeStampMap"
+      ],
+      "spec_section": "10.3.2.5.3. Obtaining the time-stamp",
+      "source_text": "All time-stamps shall be obtained as described in RFC 3161 with the following additional requirements:",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0017",
+      "description": "The MessageImprint of the TimeStampReq structure (RFC 3161, section 2.4.1) shall be computed by creating the ToBeSigned value in RFC 8152, section 4.4, with the following values for elements of Sig_structure:",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "Sig_structure",
+        "MessageImprint",
+        "TimeStampReq",
+        "ToBeSigned"
+      ],
+      "spec_section": "10.3.2.5.3. Obtaining the time-stamp",
+      "source_text": "The MessageImprint of the TimeStampReq structure (RFC 3161, section 2.4.1) shall be computed by creating the ToBeSigned value in RFC 8152, section 4.4, with the following values for elements of Sig_st",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0018",
+      "description": "The context element shall be CounterSignature.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "context",
+        "CounterSignature"
+      ],
+      "spec_section": "10.3.2.5.3. Obtaining the time-stamp",
+      "source_text": "The context element shall be CounterSignature.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0019",
+      "description": "The payload element shall be the value described by Section 10.3.2.5.2, “Choosing the Payload”.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "payload"
+      ],
+      "spec_section": "10.3.2.5.3. Obtaining the time-stamp",
+      "source_text": "The payload element shall be the value described by Section 10.3.2.5.2, “Choosing the Payload”.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0020",
+      "description": "The certReq boolean of the TimeStampReq structure shall be asserted in the request to the TSA, to ensure its certificate chain is provided in the response.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "certReq",
+        "TimeStampReq"
+      ],
+      "spec_section": "10.3.2.5.3. Obtaining the time-stamp",
+      "source_text": "The certReq boolean of the TimeStampReq structure shall be asserted in the request to the TSA, to ensure its certificate chain is provided in the response.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0021",
+      "description": "If present, the value of this header shall be a tstContainer defined by Example 2, “CDDL for tstContainer”.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst",
+        "tstContainer",
+        "val",
+        "tstTokens",
+        "TimeStampResp"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "If present, the value of this header shall be a tstContainer defined by Example 2, “CDDL for tstContainer”.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0022",
+      "description": "The content of the TimeStampResp structure received in reply from the TSA shall be stored as the value of the val property of an element of tstTokens.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst",
+        "tstContainer",
+        "val",
+        "tstTokens",
+        "TimeStampResp"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "The content of the TimeStampResp structure received in reply from the TSA shall be stored as the value of the val property of an element of tstTokens.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0023",
+      "description": "v2 time-stamps shall be stored in a COSE unprotected header whose label is the string sigTst2.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst2",
+        "tstContainer",
+        "timeStampToken",
+        "val",
+        "tstTokens",
+        "TimeStampResp",
+        "TimeStampToken"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "v2 time-stamps shall be stored in a COSE unprotected header whose label is the string sigTst2.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0024",
+      "description": "When present, the value of this header shall be a tstContainer defined by Example 2, “CDDL for tstContainer”.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst2",
+        "tstContainer",
+        "timeStampToken",
+        "val",
+        "tstTokens",
+        "TimeStampResp",
+        "TimeStampToken"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "When present, the value of this header shall be a tstContainer defined by Example 2, “CDDL for tstContainer”.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0025",
+      "description": "The value of the timeStampToken field of the TimeStampResp structure received in reply from the TSA shall be stored as the value of the val property of an element of tstTokens.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst2",
+        "tstContainer",
+        "timeStampToken",
+        "val",
+        "tstTokens",
+        "TimeStampResp",
+        "TimeStampToken"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "The value of the timeStampToken field of the TimeStampResp structure received in reply from the TSA shall be stored as the value of the val property of an element of tstTokens.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0026",
+      "description": "It shall be formatted as a DER-encoded RFC 3161 TimeStampToken wrapped in a CBOR byte string.",
+      "severity": "shall",
+      "phase": "timestamp",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst2",
+        "tstContainer",
+        "timeStampToken",
+        "val",
+        "tstTokens",
+        "TimeStampResp",
+        "TimeStampToken"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "It shall be formatted as a DER-encoded RFC 3161 TimeStampToken wrapped in a CBOR byte string.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0027",
+      "description": "If no time-stamps are included, then neither header (sigTst nor sigTst2) shall be present in the COSE unprotected header.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "sigTst",
+        "sigTst2"
+      ],
+      "spec_section": "10.3.2.5.4. Storing the time-stamp",
+      "source_text": "If no time-stamps are included, then neither header (sigTst nor sigTst2) shall be present in the COSE unprotected header.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0028",
+      "description": "If the signer’s credential supports querying its online credential status, and the credential contains a pointer to a service to provide time-stamped credential status information, the claim generator should query the service, capture the response, and store it in the manner described for credentials in the Trust Model.",
+      "severity": "should",
+      "phase": "trust",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "TimeStampMap"
+      ],
+      "spec_section": "10.3.2.6. Credential Revocation Information",
+      "source_text": "If the signer’s credential supports querying its online credential status, and the credential contains a pointer to a service to provide time-stamped credential status information, the claim generator",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0029",
+      "description": "If credential revocation information is attached in this manner, a trusted time-stamp shall also be obtained after signing, as described in Section 10.3.2.5, “Time-stamps”.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "TimeStampMap"
+      ],
+      "spec_section": "10.3.2.6. Credential Revocation Information",
+      "source_text": "If credential revocation information is attached in this manner, a trusted time-stamp shall also be obtained after signing, as described in Section 10.3.2.5, “Time-stamps”.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0030",
+      "description": "When creating a standard manifest, its claim shall include one or more content binding assertions in its list of assertions to ensure that the asset is tamper-evident.",
+      "severity": "shall",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest"
+      ],
+      "spec_section": "10.4.1. Create content bindings",
+      "source_text": "When creating a standard manifest, its claim shall include one or more content binding assertions in its list of assertions to ensure that the asset is tamper-evident.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0031",
+      "description": "When the size or location (or both) of the manifest in the asset is not known, then the start and length values in the data hash assertion shall both be zero and the size of the pad value should be large enough to accommodate writing in the values during the second pass.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "start",
+        "length",
+        "pad"
+      ],
+      "spec_section": "10.4.1. Create content bindings",
+      "source_text": "When the size or location (or both) of the manifest in the asset is not known, then the start and length values in the data hash assertion shall both be zero and the size of the pad value should be la",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0032",
+      "description": "The value of the pad key shall consist of all 0x00’s.",
+      "severity": "shall",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "start",
+        "length",
+        "pad"
+      ],
+      "spec_section": "10.4.1. Create content bindings",
+      "source_text": "The value of the pad key shall consist of all 0x00’s.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0033",
+      "description": "Claim generators shall ensure that changes to pad data (or any other excluded asset data) cannot change how the asset is interpreted.",
+      "severity": "shall",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "10.4.1. Create content bindings",
+      "source_text": "Claim generators shall ensure that changes to pad data (or any other excluded asset data) cannot change how the asset is interpreted.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0034",
+      "description": "If the serialized COSE_Sign1_Tagged structure exceeds the reserved size of the C2PA Claim Signature box, multiple step processing shall be repeated with a larger padding size chosen in Section 10.4.2, “Create a temporary Claim and Signature”.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "COSE_Sign1_Tagged"
+      ],
+      "spec_section": "10.4.4. Going back and filling in",
+      "source_text": "If the serialized COSE_Sign1_Tagged structure exceeds the reserved size of the C2PA Claim Signature box, multiple step processing shall be repeated with a larger padding size chosen in Section 10.4.2,",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0035",
+      "description": "As such, the claim generator may no longer be able to change the file layout and/or offsets in a data hash assertion.",
+      "severity": "may",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "10.4.4. Going back and filling in",
+      "source_text": "As such, the claim generator may no longer be able to change the file layout and/or offsets in a data hash assertion.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CLAIMS-0036",
+      "description": "In this case, claim generators should use padding prior to assertion creation to ensure that the file layout need not change once the assertion has been finalized.",
+      "severity": "should",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "10.4.4. Going back and filling in",
+      "source_text": "In this case, claim generators should use padding prior to assertion creation to ensure that the file layout need not change once the assertion has been finalized.",
+      "spec_area": "Claims",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-MANIFE-0001",
+      "description": "Manifest Consumers shall also accept standard C2PA Manifests specified with JUMBF type UUID 63326D64-0011-0010-8000-00AA00389B71 (c2md), but claim generators shall not create manifests with this JUMBF type UUID.",
+      "severity": "shall_not",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "11.2.2. Standard Manifests",
+      "source_text": "Manifest Consumers shall also accept standard C2PA Manifests specified with JUMBF type UUID 63326D64-0011-0010-8000-00AA00389B71 (c2md), but claim generators shall not create manifests with this JUMBF",
+      "spec_area": "Manifests",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CRYPTO-0001",
+      "description": "A claim generator may also wish to establish a \"claimed time of signing\" by adding an iat protected header, whose value is a NumericDate.",
+      "severity": "may",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "iat",
+        "NumericDate"
+      ],
+      "spec_section": "13.2.4. Adding a claimed time of signing",
+      "source_text": "A claim generator may also wish to establish a \"claimed time of signing\" by adding an iat protected header, whose value is a NumericDate.",
+      "spec_area": "Cryptography",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-CRYPTO-0002",
+      "description": "When producing a signature, if the claim generator can also act as a validator, the claim generator should validate that the signing credential is acceptable according to Chapter 14, Trust Model and produce a warning if it is not.",
+      "severity": "should",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "13.2.5. Signature Validation",
+      "source_text": "When producing a signature, if the claim generator can also act as a validator, the claim generator should validate that the signing credential is acceptable according to Chapter 14, Trust Model and p",
+      "spec_area": "Cryptography",
+      "applicability": "both"
+    },
+    {
+      "rule_id": "GEN-CRYPTO-0003",
+      "description": "The claim generator may still allow signing with that credential if so desired.",
+      "severity": "may",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "13.2.5. Signature Validation",
+      "source_text": "The claim generator may still allow signing with that credential if so desired.",
+      "spec_area": "Cryptography",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0001",
+      "description": "Therefore, when creating the x5chain header as part of signing, the claim generator shall include the signer’s certificate and all intermediate certificate authorities in the header’s value.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "x5chain"
+      ],
+      "spec_section": "14.5. X.509 Certificates",
+      "source_text": "Therefore, when creating the x5chain header as part of signing, the claim generator shall include the signer’s certificate and all intermediate certificate authorities in the header’s value.",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0002",
+      "description": "Claim generators should use only the integer 33 as the label when inserting this header into a COSE signature.",
+      "severity": "should",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "x5chain"
+      ],
+      "spec_section": "14.5. X.509 Certificates",
+      "source_text": "Claim generators should use only the integer 33 as the label when inserting this header into a COSE signature.",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0003",
+      "description": "Claim generators may continue to write the string label x5chain but this behaviour is now deprecated and claim generators should be updated to use the integer label only.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "x5chain"
+      ],
+      "spec_section": "14.5. X.509 Certificates",
+      "source_text": "Claim generators may continue to write the string label x5chain but this behaviour is now deprecated and claim generators should be updated to use the integer label only.",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0004",
+      "description": "Claim generators shall place this header only in the protected header bucket of the COSE signature as required above.",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "x5chain"
+      ],
+      "spec_section": "14.5. X.509 Certificates",
+      "source_text": "Claim generators shall place this header only in the protected header bucket of the COSE signature as required above.",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0005",
+      "description": "A claim generator should use the Online Certificate Status Protocol (OCSP, RFC 6960) and OCSP stapling (as originally conceptualized in RFC 6066, Section 8, but implemented as described in this clause) to implement revocation.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "certificateInfo"
+      ],
+      "spec_section": "14.5.2. Certificate Revocation",
+      "source_text": "A claim generator should use the Online Certificate Status Protocol (OCSP, RFC 6960) and OCSP stapling (as originally conceptualized in RFC 6066, Section 8, but implemented as described in this clause",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0006",
+      "description": "The claim generator shall not use Certificate Revocation Lists (CRLs, RFC 5280).",
+      "severity": "shall_not",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "certificateInfo"
+      ],
+      "spec_section": "14.5.2. Certificate Revocation",
+      "source_text": "The claim generator shall not use Certificate Revocation Lists (CRLs, RFC 5280).",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0007",
+      "description": "Before signing a claim, if a signer’s certificate has the AIA extension, a claim generator should query the OCSP service indicated therein, capture the response, and store it in an element of the ocspVals array of the rVals header.",
+      "severity": "should",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "ocspVals",
+        "rVals"
+      ],
+      "spec_section": "14.5.2. Certificate Revocation",
+      "source_text": "Before signing a claim, if a signer’s certificate has the AIA extension, a claim generator should query the OCSP service indicated therein, capture the response, and store it in an element of the ocsp",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-TRUST_-0008",
+      "description": "The claim generator should do the same for any intermediate CA certificates it includes with the claim signature.",
+      "severity": "should",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "ocspVals",
+        "rVals"
+      ],
+      "spec_section": "14.5.2. Certificate Revocation",
+      "source_text": "The claim generator should do the same for any intermediate CA certificates it includes with the claim signature.",
+      "spec_area": "Trust Model",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0001",
+      "description": "In order for a Manifest Consumer to display human-readable information about these keys and values, the claim generator should provide the strings via this localization approach.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "com.litware"
+      ],
+      "spec_section": "18.3.9.2. Localization Dictionary",
+      "source_text": "In order for a Manifest Consumer to display human-readable information about these keys and values, the claim generator should provide the strings via this localization approach.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0002",
+      "description": "Furthermore, the claim generator shall ensure the exclusion range only contains content from C2PA Manifest Store, or asset metadata (e.g., EXIF, IPTC metadata).",
+      "severity": "shall",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.5.1. Description",
+      "source_text": "Furthermore, the claim generator shall ensure the exclusion range only contains content from C2PA Manifest Store, or asset metadata (e.g., EXIF, IPTC metadata).",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0003",
+      "description": "Claim generators shall not add this field to a data hash assertion, and consumers shall ignore the field when present, except this shall not affect inclusion of the field as part of the content being validated as described in Section 15.10.3, “Assertion Validation”.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "url"
+      ],
+      "spec_section": "18.5.1. Description",
+      "source_text": "Claim generators shall not add this field to a data hash assertion, and consumers shall ignore the field when present, except this shall not affect inclusion of the field as part of the content being ",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0004",
+      "description": "Claim generators shall not add this field to a BMFF hash assertion, and consumers shall ignore the field when present, except this shall not affect inclusion of the field as part of the content being validated as described in Section 15.10.3, “Assertion Validation”.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "url"
+      ],
+      "spec_section": "18.6.1. Description",
+      "source_text": "Claim generators shall not add this field to a BMFF hash assertion, and consumers shall ignore the field when present, except this shall not affect inclusion of the field as part of the content being ",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0005",
+      "description": "A claim generator should use a general box hash assertion to verify the integrity, with a hard binding (i.e., cryptographic hash), of assets whose formats use a non-BMFF-based box format such as JPEG, PNG, or GIF.",
+      "severity": "should",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "DataHashMap"
+      ],
+      "spec_section": "18.7.1. Description",
+      "source_text": "A claim generator should use a general box hash assertion to verify the integrity, with a hard binding (i.e., cryptographic hash), of assets whose formats use a non-BMFF-based box format such as JPEG,",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0006",
+      "description": "For boxes that have an excluded field with a value of true, the claim generator should include an accurate hash for compatibility with older validators that do not recognize the excluded field.",
+      "severity": "should",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "excluded",
+        "false",
+        "true"
+      ],
+      "spec_section": "18.7.1. Description",
+      "source_text": "For boxes that have an excluded field with a value of true, the claim generator should include an accurate hash for compatibility with older validators that do not recognize the excluded field.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0007",
+      "description": "If the claim generator is not concerned with backwards compatibility, it should write the binary string 00 (a single byte with a value of 0) for the hash.",
+      "severity": "should",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "excluded",
+        "false",
+        "true"
+      ],
+      "spec_section": "18.7.1. Description",
+      "source_text": "If the claim generator is not concerned with backwards compatibility, it should write the binary string 00 (a single byte with a value of 0) for the hash.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0008",
+      "description": "Furthermore, the claim generator shall ensure the exclusion range only contains content from C2PA Manifest Store, or asset metadata (e.g., EXIF, IPTC metadata).",
+      "severity": "shall",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.7.1. Description",
+      "source_text": "Furthermore, the claim generator shall ensure the exclusion range only contains content from C2PA Manifest Store, or asset metadata (e.g., EXIF, IPTC metadata).",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0009",
+      "description": "A claim generator shall validate or sanitize the URIs before use, ensuring that neither . nor .. appear as part of the URI.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "uri-hashed-data-map",
+        "uri"
+      ],
+      "spec_section": "18.8.3. Fields",
+      "source_text": "A claim generator shall validate or sanitize the URIs before use, ensuring that neither . nor .. appear as part of the URI.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0010",
+      "description": "If a claim generator will be providing a soft binding for the asset’s content, it shall be described using a soft binding assertion.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim",
+        "SoftBindingMap"
+      ],
+      "spec_section": "18.10.1. Description",
+      "source_text": "If a claim generator will be providing a soft binding for the asset’s content, it shall be described using a soft binding assertion.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0011",
+      "description": "Claim generators shall not add this field to a soft binding assertion, and consumers shall ignore the field when present, except this shall not affect inclusion of the field as part of the content being validated as described in Section 15.10.3, “Assertion Validation”.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "url"
+      ],
+      "spec_section": "18.10.1. Description",
+      "source_text": "Claim generators shall not add this field to a soft binding assertion, and consumers shall ignore the field when present, except this shall not affect inclusion of the field as part of the content bei",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0012",
+      "description": "Claim generators shall not add this field to a soft binding assertion, and consumers should ignore the field when present.",
+      "severity": "shall_not",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "extent",
+        "scope",
+        "region"
+      ],
+      "spec_section": "18.10.1. Description",
+      "source_text": "Claim generators shall not add this field to a soft binding assertion, and consumers should ignore the field when present.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0013",
+      "description": "There shall be at least one actions assertion present in the created_assertions array of the Claim of a standard C2PA Manifest.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "created_assertions"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "There shall be at least one actions assertion present in the created_assertions array of the Claim of a standard C2PA Manifest.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0014",
+      "description": "If the asset was created de novo (for example, as a result of performing a File → New operation in a creative tool, capturing a photo or video, or generating the media by a generative AI model), then the actions array in the first c2pa.actions assertion in the created_assertions array of the Claim shall have a c2pa.created action as its first element.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "actions",
+        "c2pa.actions",
+        "created_assertions",
+        "c2pa.created"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "If the asset was created de novo (for example, as a result of performing a File → New operation in a creative tool, capturing a photo or video, or generating the media by a generative AI model), then ",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0015",
+      "description": "For all assets, a corresponding digitalSourceType field, with an appropriate value, shall be recorded with the c2pa.created action, to indicate the nature of the asset at its inception.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "digitalSourceType",
+        "c2pa.created"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "For all assets, a corresponding digitalSourceType field, with an appropriate value, shall be recorded with the c2pa.created action, to indicate the nature of the asset at its inception.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0016",
+      "description": "If the asset is created with no digital content, then the digitalSourceType field shall have the value http://c2pa.org/digitalsourcetype/empty.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "digitalSourceType",
+        "c2pa.created"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "If the asset is created with no digital content, then the digitalSourceType field shall have the value http://c2pa.org/digitalsourcetype/empty.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0017",
+      "description": "If the asset was created by opening an existing asset as a parentOf ingredient for editing, then the actions array in the first c2pa.actions assertion in the created_assertions array of the Claim shall have a c2pa.opened action as its first element.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "parentOf",
+        "actions",
+        "c2pa.actions",
+        "created_assertions",
+        "c2pa.opened",
+        "c2pa.ingredient.v3",
+        "ingredients",
+        "parameters"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "If the asset was created by opening an existing asset as a parentOf ingredient for editing, then the actions array in the first c2pa.actions assertion in the created_assertions array of the Claim shal",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0018",
+      "description": "The claim generator shall also add a corresponding c2pa.ingredient.v3 assertion for the ingredient that was opened, and include a hashed-uri reference to it in the value of the ingredients field of its parameters object.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "parentOf",
+        "actions",
+        "c2pa.actions",
+        "created_assertions",
+        "c2pa.opened",
+        "c2pa.ingredient.v3",
+        "ingredients",
+        "parameters"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "The claim generator shall also add a corresponding c2pa.ingredient.v3 assertion for the ingredient that was opened, and include a hashed-uri reference to it in the value of the ingredients field of it",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0019",
+      "description": "The full set of actions assertions in a C2PA Manifest shall contain no more than one action whose type is either c2pa.created or c2pa.opened.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.created",
+        "c2pa.opened"
+      ],
+      "spec_section": "18.15.2. Mandatory presence of at least one actions assertion",
+      "source_text": "The full set of actions assertions in a C2PA Manifest shall contain no more than one action whose type is either c2pa.created or c2pa.opened.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0020",
+      "description": "If allActionsIncluded has a value of false, then the claim generator is stating that additional, unrecorded actions may have been performed.",
+      "severity": "may",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "actions-map-v2",
+        "allActionsIncluded"
+      ],
+      "spec_section": "18.15.3. All actions included",
+      "source_text": "If allActionsIncluded has a value of false, then the claim generator is stating that additional, unrecorded actions may have been performed.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0021",
+      "description": "In the situation where a claim generator is opening an asset strictly for the purposes of recording its c2pa.opened action and then immediately re-saving it without making any other changes, the claim generator shall set allActionsIncluded to true to assert that no other actions were performed on the asset.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.opened",
+        "allActionsIncluded"
+      ],
+      "spec_section": "18.15.3. All actions included",
+      "source_text": "In the situation where a claim generator is opening an asset strictly for the purposes of recording its c2pa.opened action and then immediately re-saving it without making any other changes, the claim",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0022",
+      "description": "A claim generator that performs the same action over and over, with the same parameters & settings, may use the multipleInstances field to indicate that the action was performed multiple times or not.",
+      "severity": "may",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "multipleInstances"
+      ],
+      "spec_section": "18.15.4.7. Parameters",
+      "source_text": "A claim generator that performs the same action over and over, with the same parameters & settings, may use the multipleInstances field to indicate that the action was performed multiple times or not.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0023",
+      "description": "When performing either a c2pa.opened or c2pa.placed action with an asset that does not contain a C2PA Manifest, the claim generator may use a soft binding lookup to find the C2PA Manifest for that asset.",
+      "severity": "may",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.opened",
+        "c2pa.placed",
+        "activeManifest",
+        "softBindingsMatched",
+        "softBindingAlgorithmsMatched"
+      ],
+      "spec_section": "18.15.10. Soft Binding Lookup",
+      "source_text": "When performing either a c2pa.opened or c2pa.placed action with an asset that does not contain a C2PA Manifest, the claim generator may use a soft binding lookup to find the C2PA Manifest for that ass",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0024",
+      "description": "If successful, the claim generator should add the located C2PA Manifest as the value of the activeManifest field in the ingredient assertion.",
+      "severity": "should",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.opened",
+        "c2pa.placed",
+        "activeManifest",
+        "softBindingsMatched",
+        "softBindingAlgorithmsMatched"
+      ],
+      "spec_section": "18.15.10. Soft Binding Lookup",
+      "source_text": "If successful, the claim generator should add the located C2PA Manifest as the value of the activeManifest field in the ingredient assertion.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0025",
+      "description": "When the claim generator provides the optional instanceID field of the ingredient assertion, then the value of the unique identifier shall be determined as specified by Section 8.3, “Identifying Non-C2PA Assets”.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "instanceID"
+      ],
+      "spec_section": "18.16.2. Establishing unique identifiers",
+      "source_text": "When the claim generator provides the optional instanceID field of the ingredient assertion, then the value of the unique identifier shall be determined as specified by Section 8.3, “Identifying Non-C",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0026",
+      "description": "When adding an ingredient assertion, a claim generator shall add a c2pa.actions assertion (see Section 18.15, “Actions”), if one does not already exist in the active manifest.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.actions",
+        "actions"
+      ],
+      "spec_section": "18.16.3. Relationship",
+      "source_text": "When adding an ingredient assertion, a claim generator shall add a c2pa.actions assertion (see Section 18.15, “Actions”), if one does not already exist in the active manifest.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0027",
+      "description": "However, claim generators should not set this value if the information is available in the ingredient’s active C2PA Manifest.",
+      "severity": "should_not",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.4. Title",
+      "source_text": "However, claim generators should not set this value if the information is available in the ingredient’s active C2PA Manifest.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0028",
+      "description": "It is recommended that a claim generator should provide this field and it shall contain a valid value.",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "18.16.5. Format",
+      "source_text": "It is recommended that a claim generator should provide this field and it shall contain a valid value.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0029",
+      "description": "If present, the content of this field should be produced by the claim generator, and should not contain user-provided information.",
+      "severity": "should_not",
+      "phase": "content",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "description"
+      ],
+      "spec_section": "18.16.7. Description field",
+      "source_text": "If present, the content of this field should be produced by the claim generator, and should not contain user-provided information.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0030",
+      "description": "Claim generators should take the size of this field into consideration when choosing whether to embed data.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.8.1. Standard Usage",
+      "source_text": "Claim generators should take the size of this field into consideration when choosing whether to embed data.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0031",
+      "description": "The claim generator should also copy into the asset’s C2PA Manifest Store any additional C2PA Manifests that were not validated, as well as any additional JUMBF boxes and superboxes appearing in the C2PA Manifest Store that are not recognized as C2PA Manifests.",
+      "severity": "should",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.11.1. General",
+      "source_text": "The claim generator should also copy into the asset’s C2PA Manifest Store any additional C2PA Manifests that were not validated, as well as any additional JUMBF boxes and superboxes appearing in the C",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0032",
+      "description": "To determine whether or not an existing manifest from the ingredient’s C2PA Manifest Store needs to be copied into the asset’s C2PA Manifest Store, the claim generator shall:",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "To determine whether or not an existing manifest from the ingredient’s C2PA Manifest Store needs to be copied into the asset’s C2PA Manifest Store, the claim generator shall:",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0033",
+      "description": "In case of validation failures, the claim generator may skip the rest of these steps if directed to do so (for example, via user input or via configuration).",
+      "severity": "may",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "In case of validation failures, the claim generator may skip the rest of these steps if directed to do so (for example, via user input or via configuration).",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0034",
+      "description": "If the hashes match, then the claim generator shall not copy the manifest from the ingredient’s C2PA Manifest Store to the asset’s C2PA Manifest Store.",
+      "severity": "shall_not",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "If the hashes match, then the claim generator shall not copy the manifest from the ingredient’s C2PA Manifest Store to the asset’s C2PA Manifest Store.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0035",
+      "description": "The claim generator shall check if any assertions from either manifest were redacted (optionally utilizing the list of redactions compiled in the Performing explicit validation process).",
+      "severity": "shall",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "The claim generator shall check if any assertions from either manifest were redacted (optionally utilizing the list of redactions compiled in the Performing explicit validation process).",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0036",
+      "description": "If all redactions were applied against the manifest already present in the asset’s C2PA Manifest Store, then the claim generator shall not copy the manifest from the ingredient’s C2PA Manifest Store into the asset’s C2PA Manifest Store.",
+      "severity": "shall_not",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "If all redactions were applied against the manifest already present in the asset’s C2PA Manifest Store, then the claim generator shall not copy the manifest from the ingredient’s C2PA Manifest Store i",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0037",
+      "description": "If all redactions were applied against the manifest from the ingredient’s Manifest Store, then the claim generator shall replace the manifest in the asset’s C2PA Manifest Store with the manifest from the ingredient’s C2PA Manifest Store.",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "If all redactions were applied against the manifest from the ingredient’s Manifest Store, then the claim generator shall replace the manifest in the asset’s C2PA Manifest Store with the manifest from ",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0038",
+      "description": "If different redactions were applied against both the C2PA Manifest from the ingredient’s C2PA Manifest Store and the asset’s C2PA Manifest Store, then the claim generator shall redact as many assertions as needed from the existing manifest in the asset’s C2PA Manifest Store to result in a union of the two sets of redactions.",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "If different redactions were applied against both the C2PA Manifest from the ingredient’s C2PA Manifest Store and the asset’s C2PA Manifest Store, then the claim generator shall redact as many asserti",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0039",
+      "description": "In all other cases, then the claim generator shall copy the manifest from the ingredient’s C2PA Manifest Store, re-label it with an updated URN per the process described in Unique Identifiers, and insert the re-labeled version into the asset’s C2PA Manifest Store.",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "manifest",
+        "claim"
+      ],
+      "spec_section": "18.16.12.1. Determining the need",
+      "source_text": "In all other cases, then the claim generator shall copy the manifest from the ingredient’s C2PA Manifest Store, re-label it with an updated URN per the process described in Unique Identifiers, and ins",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0040",
+      "description": "In addition, when the ingredient assertion references a C2PA Manifest, the claim generator shall also act as a validator, performing validation of the ingredient as described in validation steps.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "validationResults",
+        "validationStatus"
+      ],
+      "spec_section": "18.16.12.4.1. General",
+      "source_text": "In addition, when the ingredient assertion references a C2PA Manifest, the claim generator shall also act as a validator, performing validation of the ingredient as described in validation steps.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0041",
+      "description": "If the Claim Generator does include such a C2PA Manifest, then it shall include a softBindingsMatched field indicating true, and a softBindingAlgorithmsMatched field containing an array of strings (of soft binding algorithm names that were used to discover the ingredient C2PA Manifest).",
+      "severity": "shall",
+      "phase": "ingredient",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "parentOf",
+        "softBindingsMatched",
+        "softBindingAlgorithmsMatched",
+        "alg"
+      ],
+      "spec_section": "18.16.14. Soft Bindings",
+      "source_text": "If the Claim Generator does include such a C2PA Manifest, then it shall include a softBindingsMatched field indicating true, and a softBindingAlgorithmsMatched field containing an array of strings (of",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0042",
+      "description": "Claim generators shall include in this assertion only the specific metadata fields enumerated in Appendix B, Implementation Details for c2pa.metadata.",
+      "severity": "shall",
+      "phase": "assertion",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "c2pa.metadata"
+      ],
+      "spec_section": "18.17.3. The c2pa.metadata assertion",
+      "source_text": "Claim generators shall include in this assertion only the specific metadata fields enumerated in Appendix B, Implementation Details for c2pa.metadata.",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-STANDA-0043",
+      "description": "As described in Section 14.5.2, “Certificate Revocation”, the claim generator queries the OCSP service indicated by the signing certificate, captures the response, and shall store it the same binary format as used when it is stored as an element of the ocspVals array of the rVals header (see Example 3, “CDDL for rVals”).",
+      "severity": "shall",
+      "phase": "cryptographic",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "certificate-status-map",
+        "ocspVals",
+        "rVals"
+      ],
+      "spec_section": "18.19.3. Requirements",
+      "source_text": "As described in Section 14.5.2, “Certificate Revocation”, the claim generator queries the OCSP service indicated by the signing certificate, captures the response, and shall store it the same binary f",
+      "spec_area": "Standard Assertions",
+      "applicability": "claim_generator"
+    },
+    {
+      "rule_id": "GEN-GENERA-0001",
+      "description": "Claim generators may derive additional per-segment validation values (e.g., anchor-point-based chaining values) from segment hashes and embed them in the Manifest.",
+      "severity": "may",
+      "phase": "structural",
+      "condition": "",
+      "action": "",
+      "referenced_entities": [
+        "claim"
+      ],
+      "spec_section": "19.3.1. Description",
+      "source_text": "Claim generators may derive additional per-segment validation values (e.g., anchor-point-based chaining values) from segment hashes and embed them in the Manifest.",
+      "spec_area": "General",
+      "applicability": "claim_generator"
     }
   ],
   "enum_types": {
@@ -13532,18 +15286,6 @@
       "category": "failure"
     },
     {
-      "code": "assertion.alternativeContentRepresentation.hashMismatch",
-      "meaning": "The hash of the original preservation image content does not match the hash declared in the assertion.",
-      "url_usage": "C2PA Assertion",
-      "category": "failure"
-    },
-    {
-      "code": "assertion.alternativeContentRepresentation.missing",
-      "meaning": "The original preservation image assertion, or its required content, could not be found or resolved.",
-      "url_usage": "C2PA Assertion",
-      "category": "failure"
-    },
-    {
       "code": "assertion.multipleHardBindings",
       "meaning": "The manifest has more than one hard binding assertion.",
       "url_usage": "C2PA Assertion Store Box",
@@ -13825,7 +15567,7 @@
   "stats": {
     "entity_count": 148,
     "relationship_count": 208,
-    "rule_count": 237,
+    "rule_count": 345,
     "enum_count": 37,
     "type_alias_count": 22,
     "status_code_count": 114,

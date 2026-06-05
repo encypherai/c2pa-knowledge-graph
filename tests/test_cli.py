@@ -69,6 +69,13 @@ class TestGenerateCommand:
         assert result.exit_code != 0
 
 
+    def test_generate_help_mentions_html_spec(self) -> None:
+        runner = CliRunner()
+        result = runner.invoke(cli, ["generate", "--help"])
+        assert result.exit_code == 0
+        assert "--html-spec" in result.output
+
+
 class TestCliGroup:
     def test_help_exits_zero(self) -> None:
         runner = CliRunner()

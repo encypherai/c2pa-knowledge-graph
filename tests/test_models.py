@@ -11,6 +11,7 @@ from c2pa_kg.models import (
     PropertyType,
     Relationship,
     RelationshipType,
+    RuleApplicability,
     RuleSeverity,
     SpecVersion,
     StatusCode,
@@ -334,3 +335,52 @@ class TestKgFromDict:
         restored = kg_from_dict(kg.to_dict())
         assert len(restored.status_codes) == 1
         assert restored.status_codes[0].code == "claimSignature.validated"
+
+    def test_round_trip_applicability(self) -> None:
+        kg = self._minimal_kg()
+        gen_rule = ValidationRule(
+            rule_id="GEN-CLAIM-0001",
+            description="Claim generators shall include a hard binding assertion.",
+            severity=RuleSeverity.SHALL,
+            phase=ValidationPhase.ASSERTION,
+            applicability=RuleApplicability.CLAIM_GENERATOR,
+            spec_area="Claims",
+        )
+        kg.add_rule(gen_rule)
+        restored = kg_from_dict(kg.to_dict())
+        gen = next(r for r in restored.validation_rules if r.rule_id == "GEN-CLAIM-0001")
+        assert gen.applicability == RuleApplicability.CLAIM_GENERATOR
+        assert gen.spec_area == "Claims"
+
+    def test_applicability_unspecified_not_in_dict(self) -> None:
+        rule = ValidationRule(
+            rule_id="VAL-STRU-0001",
+            description="Must be valid.",
+            severity=RuleSeverity.MUST,
+            phase=ValidationPhase.STRUCTURAL,
+        )
+        d = rule.to_dict()
+        assert "applicability" not in d
+
+    def test_applicability_claim_generator_in_dict(self) -> None:
+        rule = ValidationRule(
+            rule_id="GEN-ASSE-0001",
+            description="Claim generators shall include a hard binding.",
+            severity=RuleSeverity.SHALL,
+            phase=ValidationPhase.ASSERTION,
+            applicability=RuleApplicability.CLAIM_GENERATOR,
+        )
+        d = rule.to_dict()
+        assert d["applicability"] == "claim_generator"
+
+    def test_spec_area_in_dict_when_present(self) -> None:
+        rule = ValidationRule(
+            rule_id="GEN-STANDA-0001",
+            description="Claim generators shall include the required assertion.",
+            severity=RuleSeverity.SHALL,
+            phase=ValidationPhase.ASSERTION,
+            spec_area="Standard Assertions",
+            applicability=RuleApplicability.CLAIM_GENERATOR,
+        )
+        d = rule.to_dict()
+        assert d["spec_area"] == "Standard Assertions"

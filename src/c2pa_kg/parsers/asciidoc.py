@@ -76,6 +76,41 @@ _SUCCESS_RE = re.compile(r"\bsuccess\b", re.IGNORECASE)
 _INFO_RE = re.compile(r"\binformational\b", re.IGNORECASE)
 _FAILURE_RE = re.compile(r"\bfailure\b", re.IGNORECASE)
 
+_INCLUDE_RE = re.compile(r"^include::([^\[]+)\[[^\]]*\]\s*$", re.MULTILINE)
+
+
+def _resolve_adoc_includes(path: Path, *, seen: frozenset[Path] = frozenset()) -> str:
+    """Read an AsciiDoc file and inline relative ``include::*.adoc[]`` files.
+
+    The validation clause is split across partials, and the status-code tables
+    put their rows in included files. Non-AsciiDoc includes, such as CDDL source
+    snippets, are intentionally dropped from the parsed text: they are examples
+    or schemas, not normative prose for this parser.
+    """
+    resolved = path.resolve()
+    if resolved in seen:
+        return ""
+    seen = seen | {resolved}
+    text = path.read_text(encoding="utf-8")
+
+    def _replace(match: re.Match[str]) -> str:
+        include_target = match.group(1).strip()
+        include_path = (path.parent / include_target).resolve()
+        if include_path.suffix.lower() != ".adoc" or not include_path.is_file():
+            return ""
+        return _resolve_adoc_includes(include_path, seen=seen)
+
+    return _INCLUDE_RE.sub(_replace, text)
+
+
+def _read_validation_adoc(validation_path: Path) -> str:
+    """Read Validation.adoc with validation partials and status-code annex."""
+    text = _resolve_adoc_includes(validation_path)
+    annex = validation_path.with_name("ValidationCodes_Annex.adoc")
+    if annex.is_file():
+        text = f"{text}\n\n{_resolve_adoc_includes(annex)}"
+    return text
+
 
 def _category_from_context(text_before: str) -> str:
     """Determine status code category from the text preceding a table."""
@@ -232,7 +267,7 @@ def parse_validation_doc(
     Returns:
         Tuple of (list[ValidationRule], list[StatusCode]).
     """
-    text = validation_path.read_text(encoding="utf-8")
+    text = _read_validation_adoc(validation_path)
 
     status_codes = _parse_status_code_tables(text)
     rules = _parse_normative_rules(text)
