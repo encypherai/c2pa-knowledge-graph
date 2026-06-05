@@ -209,18 +209,20 @@ def create_server(output_dir: Path) -> FastMCP:
 
         gen_rules = [
             r for r in all_rules
-            if r.get("applicability") in ("claim_generator", "both")
+            if r.get("rule_id", "").startswith("GEN-")
+            and r.get("applicability") in ("claim_generator", "both")
         ]
 
         if spec_area is not None:
             area_lower = spec_area.lower()
             gen_rules = [
                 r for r in gen_rules
-                if area_lower in r.get("spec_section", "").lower()
+                if area_lower in r.get("spec_area", "").lower()
             ]
 
         if severity is not None:
-            gen_rules = [r for r in gen_rules if r.get("severity") == severity]
+            severity_key = severity.lower().replace(" ", "_").replace("-", "_")
+            gen_rules = [r for r in gen_rules if r.get("severity") == severity_key]
 
         # Group by spec section for readability
         by_section: dict[str, list[dict]] = {}

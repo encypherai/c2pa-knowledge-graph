@@ -274,50 +274,53 @@ def parse_html_status_codes(html_text: str) -> list[StatusCode]:
 # Claim-generator applicability detection
 # ---------------------------------------------------------------------------
 
-# Explicit "claim generator shall/must" patterns.
+# Explicit claim-generator actor patterns. These intentionally allow the
+# normative verb to appear after a short conditional clause, e.g.
+# "When a claim generator is performing validation, it should ...".
 _CG_EXPLICIT_RE = re.compile(
-    r"\bclaim\s+generators?\s+(?:shall|must|should|may)\b"
-    r"|\bclaim\s+generators?\s+(?:shall\s+not|must\s+not|should\s+not)\b",
+    r"\bclaim\s+generators?\b(?![’']s\b)[^.?!]{0,160}"
+    r"\b(?:shall\s+not|must\s+not|should\s+not|shall|must|should|may)\b",
     re.IGNORECASE,
 )
 
 # Sentence subject is a signer or creator entity.
 _CG_SUBJECT_RE = re.compile(
-    r"^\s*(?:the\s+)?(?:claim\s+generator|signer|creator|manifest\s+creator)"
-    r"\s+(?:shall|must|should|may)\b",
+    r"^\s*(?:the\s+)?(?:signer|creator|manifest\s+creator)"
+    r"\s+(?:shall\s+not|must\s+not|should\s+not|shall|must|should|may)\b",
     re.IGNORECASE,
 )
 
-# Explicit "a validator shall/must" — marks VALIDATOR applicability.
+# Explicit validator-directed patterns. Include plural validators and all RFC
+# 2119 severities so mixed generator/validator sentences can be classified BOTH.
 _VAL_EXPLICIT_RE = re.compile(
-    r"\b(?:a\s+)?validator\s+(?:shall|must)\b"
+    r"\bvalidators?\b[^.?!]{0,160}"
+    r"\b(?:shall\s+not|must\s+not|should\s+not|shall|must|should|may)\b"
     r"|\bwhen\s+validating\b"
     r"|\bduring\s+validation\b",
     re.IGNORECASE,
 )
 
-# Section headings strongly associated with manifest creation / generation.
-_CG_SECTION_KEYWORDS = frozenset(
-    [
-        "creating a claim",
-        "claim fields",
-        "ingredient",
-        "assertion",
-        "assertions",
-        "binding to content",
-        "hard binding",
-        "soft binding",
-        "embedding",
-        "manifest store",
-        "adding ingredients",
-        "versioning",
-        "redaction",
-        "signing",
-        "time-stamp",
-        "timestamp",
-        "credential",
-        "claim generator",
-    ]
+# Section headings where passive/impersonal requirements usually describe
+# manifest construction steps performed by claim generators. Keep this narrow:
+# broad headings like "Assertions", "Ingredients", or "Credentials" produce
+# false positives for generic implementer or validator requirements.
+_CG_CONSTRUCTION_SECTION_RE = re.compile(
+    r"creating\s+a\s+claim"
+    r"|adding\s+assertions?"
+    r"|adding\s+ingredients?"
+    r"|signing\s+a\s+claim"
+    r"|choosing\s+the\s+payload"
+    r"|obtaining\s+the\s+time-?stamp"
+    r"|storing\s+the\s+time-?stamp"
+    r"|credential\s+revocation\s+information"
+    r"|create\s+content\s+bindings?"
+    r"|going\s+back\s+and\s+filling\s+in"
+    r"|redaction\s+of\s+assertions?"
+    r"|versioning\s+manifests?\s+due\s+to\s+conflicts?"
+    r"|mandatory\s+presence\s+of\s+at\s+least\s+one\s+actions?\s+assertion"
+    r"|fields\s+in\s+the\s+actions?\s+assertion"
+    r"|determining\s+the\s+need\s+to\s+copy",
+    re.IGNORECASE,
 )
 
 
@@ -338,13 +341,12 @@ def _infer_applicability(sentence: str, section: str) -> RuleApplicability:
     if has_val:
         return RuleApplicability.VALIDATOR
 
-    # Check section context: if the section is about manifest construction and
-    # the rule has no explicit validator language, lean toward CG.
-    if any(kw in section_lower for kw in _CG_SECTION_KEYWORDS):
+    # Check section context: only tightly scoped construction procedure
+    # sections get passive / impersonal CG inference. Generic structural
+    # sections remain UNSPECIFIED unless they name the responsible actor.
+    if _CG_CONSTRUCTION_SECTION_RE.search(section_lower):
         if not has_val and ("shall" in s_lower or "must" in s_lower):
-            # Passive / impersonal constructs in creation sections often imply CG.
             return RuleApplicability.CLAIM_GENERATOR
-
     return RuleApplicability.UNSPECIFIED
 
 
@@ -399,6 +401,23 @@ def _spec_area_for_section(section_title: str) -> str:
         if pattern.search(section_title):
             return area
     return "General"
+
+
+_VERSION_HISTORY_SECTION_RE = re.compile(
+    r"^\d+(?:\.\d+)+\.\s+\d+\.\d+\s+-\s+",
+    re.IGNORECASE,
+)
+
+
+def _is_non_normative_generation_section(section_title: str) -> bool:
+    """Return True for change-log/history sections that quote normative words."""
+    title_lower = section_title.lower()
+    if "version history" in title_lower:
+        return True
+    if "changes in this version" in title_lower:
+        return True
+    return bool(_VERSION_HISTORY_SECTION_RE.search(section_title))
+
 
 
 def _extract_spec_body_sections(html_text: str) -> list[tuple[str, str, str]]:
@@ -655,6 +674,8 @@ def parse_html_generation_rules(html_text: str) -> list[ValidationRule]:
                 continue
 
             sub_section = _section_at(offset, sub_headers) or section_title
+            if _is_non_normative_generation_section(sub_section):
+                continue
             block_entities = _extract_html_entities(raw_html, sub_section)
 
             for sentence in split_sentences(plain):
@@ -687,6 +708,7 @@ def parse_html_generation_rules(html_text: str) -> list[ValidationRule]:
                         action="",
                         referenced_entities=block_entities[:10],
                         spec_section=sub_section,
+                        spec_area=area,
                         source_text=sentence[:200],
                         applicability=applicability,
                     )

@@ -50,6 +50,8 @@ def _rule_to_dict(rule: ValidationRule) -> dict[str, Any]:
         "phase": rule.phase.value,
         "spec_section": rule.spec_section,
     }
+    if rule.spec_area:
+        d["spec_area"] = rule.spec_area
     if rule.applicability != RuleApplicability.UNSPECIFIED:
         d["applicability"] = rule.applicability.value
     if rule.condition:
@@ -132,8 +134,7 @@ def _group_generation_rules_by_area(
 
     areas: dict[str, list[ValidationRule]] = {}
     for rule in gen_rules:
-        # Derive area from spec_section: use text before first number or whole thing.
-        area = rule.spec_section or "General"
+        area = rule.spec_area or rule.spec_section or "General"
         areas.setdefault(area, []).append(rule)
 
     result: dict[str, list[dict[str, Any]]] = {}
@@ -185,7 +186,7 @@ def emit_rules_json(kg: KnowledgeGraph, output_path: Path) -> None:
         ...
       },
       "generation_rules": {
-        "<spec section>": [ ...GEN- rules for claim generators... ],
+        "<spec area>": [ ...GEN- rules for claim generators... ],
         ...
       },
       "status_codes": {

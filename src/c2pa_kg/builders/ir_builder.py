@@ -27,7 +27,7 @@ from c2pa_kg.models import (
 )
 from c2pa_kg.parsers.asciidoc import parse_assertion_docs, parse_validation_doc
 from c2pa_kg.parsers.cddl import parse_cddl_directory
-from c2pa_kg.parsers.html_spec import parse_html_spec_file
+from c2pa_kg.parsers.html_spec import parse_html_generation_rules, parse_html_spec_file
 from c2pa_kg.parsers.json_schema import parse_json_schema
 
 # ---------------------------------------------------------------------------
@@ -506,9 +506,11 @@ def build_knowledge_graph(
             extracted schemas ZIP - must contain a cddl/ directory).
         version: SpecVersion metadata for the graph being built.
         html_spec: Path to a locally saved rendered HTML spec from
-            spec.c2pa.org. When provided, validation rules and status codes
-            are extracted from the HTML instead of the AsciiDoc source. This
-            allows building from the public site without specs-core access.
+            spec.c2pa.org. When provided alongside specs-core AsciiDoc,
+            claim-generator requirements are extracted from HTML and appended
+            to the AsciiDoc validation rules. If AsciiDoc validation sources
+            are unavailable, validation rules and status codes are extracted
+            from HTML as a fallback.
 
     Returns:
         Fully populated KnowledgeGraph.
@@ -537,22 +539,30 @@ def build_knowledge_graph(
 
     # ------------------------------------------------------------------
     # 3. Validation rules, status codes, assertion descriptions.
-    #    Prefer HTML spec when provided; fall back to AsciiDoc source.
+    #    Use AsciiDoc for validation/status codes when available: it preserves
+    #    the established VAL-* rule IDs used by predicates. HTML is used to add
+    #    claim-generator GEN-* requirements from non-validation sections.
     # ------------------------------------------------------------------
-    if html_spec is not None and html_spec.is_file():
-        rules, status_codes = parse_html_spec_file(html_spec)
+    validation_path = spec_source / _VALIDATION_SUBPATH
+    used_html_for_validation = False
+    if validation_path.is_file():
+        rules, status_codes = parse_validation_doc(validation_path)
         for rule in rules:
             kg.add_rule(rule)
         for code in status_codes:
             kg.status_codes.append(code)
-    else:
-        validation_path = spec_source / _VALIDATION_SUBPATH
-        if validation_path.is_file():
-            rules, status_codes = parse_validation_doc(validation_path)
-            for rule in rules:
-                kg.add_rule(rule)
-            for code in status_codes:
-                kg.status_codes.append(code)
+    elif html_spec is not None and html_spec.is_file():
+        rules, status_codes = parse_html_spec_file(html_spec)
+        used_html_for_validation = True
+        for rule in rules:
+            kg.add_rule(rule)
+        for code in status_codes:
+            kg.status_codes.append(code)
+
+    if html_spec is not None and html_spec.is_file() and not used_html_for_validation:
+        html_text = html_spec.read_text(encoding="utf-8")
+        for rule in parse_html_generation_rules(html_text):
+            kg.add_rule(rule)
 
     assertions_dir = spec_source / _ASSERTIONS_SUBPATH
     if assertions_dir.is_dir():

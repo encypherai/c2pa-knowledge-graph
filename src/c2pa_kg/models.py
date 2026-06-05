@@ -202,6 +202,7 @@ class ValidationRule:
     action: str = ""
     referenced_entities: list[str] = field(default_factory=list)
     spec_section: str = ""
+    spec_area: str = ""
     source_text: str = ""
     applicability: RuleApplicability = RuleApplicability.UNSPECIFIED
 
@@ -217,6 +218,8 @@ class ValidationRule:
             "spec_section": self.spec_section,
             "source_text": self.source_text,
         }
+        if self.spec_area:
+            d["spec_area"] = self.spec_area
         if self.applicability != RuleApplicability.UNSPECIFIED:
             d["applicability"] = self.applicability.value
         return d
@@ -525,6 +528,7 @@ def kg_from_dict(data: dict) -> KnowledgeGraph:
             action=rud.get("action", ""),
             referenced_entities=rud.get("referenced_entities", []),
             spec_section=rud.get("spec_section", ""),
+            spec_area=rud.get("spec_area", ""),
             source_text=rud.get("source_text", ""),
             applicability=RuleApplicability(
                 rud.get("applicability", "unspecified")

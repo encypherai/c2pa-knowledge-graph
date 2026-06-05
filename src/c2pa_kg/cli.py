@@ -82,7 +82,20 @@ def cli() -> None:
     type=click.Path(file_okay=False, path_type=Path),
     help="Directory where output artifacts are written.",
 )
-def generate(spec_source: Path, version: str, output_dir: Path) -> None:
+@click.option(
+    "--html-spec",
+    type=click.Path(exists=True, dir_okay=False, path_type=Path),
+    help=(
+        "Path to a rendered C2PA spec HTML page. When provided, validation "
+        "status codes and claim-generator requirements are extracted from HTML."
+    ),
+)
+def generate(
+    spec_source: Path,
+    version: str,
+    output_dir: Path,
+    html_spec: Path | None,
+) -> None:
     """Build knowledge graph artifacts for a single spec version."""
     try:
         spec_version: SpecVersion = get_version(version)
@@ -103,7 +116,11 @@ def generate(spec_source: Path, version: str, output_dir: Path) -> None:
         ) from exc
 
     click.echo(f"Building knowledge graph for version {version} ...")
-    kg: KnowledgeGraph = build_knowledge_graph(spec_source, spec_version)
+    kg: KnowledgeGraph = build_knowledge_graph(
+        spec_source,
+        spec_version,
+        html_spec=html_spec,
+    )
 
     version_dir = output_dir / version
     version_dir.mkdir(parents=True, exist_ok=True)

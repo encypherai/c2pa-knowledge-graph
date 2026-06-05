@@ -253,7 +253,8 @@ class TestInferApplicability:
 
     def test_both_when_cg_and_validator(self) -> None:
         result = _infer_applicability(
-            "A claim generator shall not create one, but a validator shall process one if present.",
+            "A claim generator shall not create one, but a validator shall "
+            "process one if present.",
             "",
         )
         assert result == RuleApplicability.BOTH

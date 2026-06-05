@@ -23,7 +23,11 @@ from c2pa_kg.models import (
     KnowledgeGraph,
     Property,
     PropertyType,
+    RuleApplicability,
+    RuleSeverity,
     SpecVersion,
+    ValidationPhase,
+    ValidationRule,
 )
 
 # ---------------------------------------------------------------------------
@@ -174,6 +178,24 @@ class TestRulesEmitter:
         emit_rules_json(sample_kg, out)
         data = json.loads(out.read_text(encoding="utf-8"))
         assert data["version"] == sample_kg.version.version
+
+    def test_generation_rules_grouped_by_spec_area(
+        self, sample_kg: KnowledgeGraph, tmp_output: Path
+    ) -> None:
+        sample_kg.add_rule(ValidationRule(
+            rule_id="GEN-CLAIMS-0001",
+            description="Claim generators shall include a hard binding.",
+            severity=RuleSeverity.SHALL,
+            phase=ValidationPhase.ASSERTION,
+            spec_section="10.3.2.1. Adding Assertions and Redactions",
+            spec_area="Claims",
+            applicability=RuleApplicability.CLAIM_GENERATOR,
+        ))
+        out = tmp_output / "validation-rules.json"
+        emit_rules_json(sample_kg, out)
+        data = json.loads(out.read_text(encoding="utf-8"))
+        assert "Claims" in data["generation_rules"]
+        assert data["generation_rules"]["Claims"][0]["spec_area"] == "Claims"
 
 
 # ---------------------------------------------------------------------------

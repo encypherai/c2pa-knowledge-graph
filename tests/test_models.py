@@ -344,11 +344,13 @@ class TestKgFromDict:
             severity=RuleSeverity.SHALL,
             phase=ValidationPhase.ASSERTION,
             applicability=RuleApplicability.CLAIM_GENERATOR,
+            spec_area="Claims",
         )
         kg.add_rule(gen_rule)
         restored = kg_from_dict(kg.to_dict())
         gen = next(r for r in restored.validation_rules if r.rule_id == "GEN-CLAIM-0001")
         assert gen.applicability == RuleApplicability.CLAIM_GENERATOR
+        assert gen.spec_area == "Claims"
 
     def test_applicability_unspecified_not_in_dict(self) -> None:
         rule = ValidationRule(
@@ -370,3 +372,15 @@ class TestKgFromDict:
         )
         d = rule.to_dict()
         assert d["applicability"] == "claim_generator"
+
+    def test_spec_area_in_dict_when_present(self) -> None:
+        rule = ValidationRule(
+            rule_id="GEN-STANDA-0001",
+            description="Claim generators shall include the required assertion.",
+            severity=RuleSeverity.SHALL,
+            phase=ValidationPhase.ASSERTION,
+            spec_area="Standard Assertions",
+            applicability=RuleApplicability.CLAIM_GENERATOR,
+        )
+        d = rule.to_dict()
+        assert d["spec_area"] == "Standard Assertions"
