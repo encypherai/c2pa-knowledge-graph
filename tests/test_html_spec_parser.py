@@ -12,8 +12,9 @@ from pathlib import Path
 
 import pytest
 
-from c2pa_kg.models import RuleSeverity, ValidationPhase
+from c2pa_kg.models import RuleApplicability, RuleSeverity, ValidationPhase
 from c2pa_kg.parsers.html_spec import (
+    _infer_applicability,
     parse_html_spec,
     parse_html_status_codes,
     parse_html_validation_rules,
@@ -210,3 +211,63 @@ class TestParseHtmlSpec:
         rules, codes = parse_html_spec(html_text)
         assert len(rules) > 100
         assert len(codes) > 100
+
+    def test_generation_rules_included(self, html_text) -> None:
+        rules, _ = parse_html_spec(html_text)
+        gen_rules = [r for r in rules if r.rule_id.startswith("GEN-")]
+        assert len(gen_rules) > 0, "Expected at least some GEN- rules"
+
+    def test_generation_rules_have_applicability(self, html_text) -> None:
+        rules, _ = parse_html_spec(html_text)
+        gen_rules = [r for r in rules if r.rule_id.startswith("GEN-")]
+        for rule in gen_rules:
+            assert rule.applicability in (
+                RuleApplicability.CLAIM_GENERATOR,
+                RuleApplicability.BOTH,
+            ), f"GEN- rule {rule.rule_id} has unexpected applicability {rule.applicability}"
+
+
+# -----------------------------------------------------------------------
+# Applicability inference tests (no HTML file required)
+# -----------------------------------------------------------------------
+
+
+class TestInferApplicability:
+    def test_explicit_claim_generator_shall(self) -> None:
+        result = _infer_applicability(
+            "Claim generators shall not redact the hard binding assertion.", ""
+        )
+        assert result == RuleApplicability.CLAIM_GENERATOR
+
+    def test_explicit_claim_generators_must(self) -> None:
+        result = _infer_applicability(
+            "Claim generators must include at least one assertion.", ""
+        )
+        assert result == RuleApplicability.CLAIM_GENERATOR
+
+    def test_explicit_validator(self) -> None:
+        result = _infer_applicability(
+            "A validator shall check the signature against the claim hash.", ""
+        )
+        assert result == RuleApplicability.VALIDATOR
+
+    def test_both_when_cg_and_validator(self) -> None:
+        result = _infer_applicability(
+            "A claim generator shall not create one, but a validator shall process one if present.",
+            "",
+        )
+        assert result == RuleApplicability.BOTH
+
+    def test_section_context_claim(self) -> None:
+        result = _infer_applicability(
+            "The created_assertions field shall be present.",
+            "Creating a Claim",
+        )
+        assert result == RuleApplicability.CLAIM_GENERATOR
+
+    def test_unrelated_sentence_unspecified(self) -> None:
+        result = _infer_applicability(
+            "The entity diagram shows the relationships between data structures.",
+            "Entity Diagram",
+        )
+        assert result == RuleApplicability.UNSPECIFIED

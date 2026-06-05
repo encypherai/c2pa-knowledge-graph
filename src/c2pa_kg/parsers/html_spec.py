@@ -24,7 +24,7 @@ import html as html_module
 import re
 from pathlib import Path
 
-from c2pa_kg.models import StatusCode, ValidationRule
+from c2pa_kg.models import RuleApplicability, StatusCode, ValidationRule
 from c2pa_kg.parsers._normative import (
     CAMEL_RE,
     detect_severity,
@@ -271,6 +271,175 @@ def parse_html_status_codes(html_text: str) -> list[StatusCode]:
 
 
 # ---------------------------------------------------------------------------
+# Claim-generator applicability detection
+# ---------------------------------------------------------------------------
+
+# Explicit "claim generator shall/must" patterns.
+_CG_EXPLICIT_RE = re.compile(
+    r"\bclaim\s+generators?\s+(?:shall|must|should|may)\b"
+    r"|\bclaim\s+generators?\s+(?:shall\s+not|must\s+not|should\s+not)\b",
+    re.IGNORECASE,
+)
+
+# Sentence subject is a signer or creator entity.
+_CG_SUBJECT_RE = re.compile(
+    r"^\s*(?:the\s+)?(?:claim\s+generator|signer|creator|manifest\s+creator)"
+    r"\s+(?:shall|must|should|may)\b",
+    re.IGNORECASE,
+)
+
+# Explicit "a validator shall/must" — marks VALIDATOR applicability.
+_VAL_EXPLICIT_RE = re.compile(
+    r"\b(?:a\s+)?validator\s+(?:shall|must)\b"
+    r"|\bwhen\s+validating\b"
+    r"|\bduring\s+validation\b",
+    re.IGNORECASE,
+)
+
+# Section headings strongly associated with manifest creation / generation.
+_CG_SECTION_KEYWORDS = frozenset(
+    [
+        "creating a claim",
+        "claim fields",
+        "ingredient",
+        "assertion",
+        "assertions",
+        "binding to content",
+        "hard binding",
+        "soft binding",
+        "embedding",
+        "manifest store",
+        "adding ingredients",
+        "versioning",
+        "redaction",
+        "signing",
+        "time-stamp",
+        "timestamp",
+        "credential",
+        "claim generator",
+    ]
+)
+
+
+def _infer_applicability(sentence: str, section: str) -> RuleApplicability:
+    """Classify whether a rule targets claim generators, validators, or both."""
+    s_lower = sentence.lower()
+    section_lower = section.lower()
+
+    has_cg = bool(_CG_EXPLICIT_RE.search(sentence)) or bool(
+        _CG_SUBJECT_RE.match(sentence)
+    )
+    has_val = bool(_VAL_EXPLICIT_RE.search(sentence))
+
+    if has_cg and has_val:
+        return RuleApplicability.BOTH
+    if has_cg:
+        return RuleApplicability.CLAIM_GENERATOR
+    if has_val:
+        return RuleApplicability.VALIDATOR
+
+    # Check section context: if the section is about manifest construction and
+    # the rule has no explicit validator language, lean toward CG.
+    if any(kw in section_lower for kw in _CG_SECTION_KEYWORDS):
+        if not has_val and ("shall" in s_lower or "must" in s_lower):
+            # Passive / impersonal constructs in creation sections often imply CG.
+            return RuleApplicability.CLAIM_GENERATOR
+
+    return RuleApplicability.UNSPECIFIED
+
+
+# ---------------------------------------------------------------------------
+# Full-spec section extraction
+# ---------------------------------------------------------------------------
+
+# H2 section headers across the whole spec body.
+_H2_HEADER_RE = re.compile(
+    r'<h2\s+(?:id="([^"]*)"[^>]*)?>(?:<a[^>]*></a>)?\s*([\d.]*\s*.+?)</h2>',
+    re.DOTALL,
+)
+
+# H3-H4 sub-section headers for finer-grained context.
+_H3H4_HEADER_RE = re.compile(
+    r'<h([34])\s+(?:id="([^"]*)"[^>]*)?>(?:<a[^>]*></a>)?\s*([\d.]*\s*.+?)</h\1>',
+    re.DOTALL,
+)
+
+# Map spec section number/name to a canonical spec area label.
+# Number-prefixed patterns are checked first (most specific to least specific).
+_SPEC_AREA_MAP: list[tuple[re.Pattern[str], str]] = [
+    # Match by section number prefix (catches subsections like 18.12.2 etc.)
+    (re.compile(r"^18\.", re.IGNORECASE), "Standard Assertions"),
+    (re.compile(r"^10\.", re.IGNORECASE), "Claims"),
+    (re.compile(r"^11\.", re.IGNORECASE), "Manifests"),
+    (re.compile(r"^13\.", re.IGNORECASE), "Cryptography"),
+    (re.compile(r"^14\.", re.IGNORECASE), "Trust Model"),
+    (re.compile(r"^15\.", re.IGNORECASE), "Validation"),
+    (re.compile(r"^9\.", re.IGNORECASE), "Binding to Content"),
+    (re.compile(r"^8\.", re.IGNORECASE), "Unique Identifiers"),
+    (re.compile(r"^7\.", re.IGNORECASE), "Data Boxes"),
+    (re.compile(r"^6\.", re.IGNORECASE), "Assertions"),
+    (re.compile(r"^5\.", re.IGNORECASE), "Versioning"),
+    # Fallback: match by section title keywords (for H2 section titles without numbers)
+    (re.compile(r"standard.assertions", re.IGNORECASE), "Standard Assertions"),
+    (re.compile(r"\bclaims?\b", re.IGNORECASE), "Claims"),
+    (re.compile(r"\bmanifests?\b", re.IGNORECASE), "Manifests"),
+    (re.compile(r"cryptograph", re.IGNORECASE), "Cryptography"),
+    (re.compile(r"trust.model", re.IGNORECASE), "Trust Model"),
+    (re.compile(r"validation", re.IGNORECASE), "Validation"),
+    (re.compile(r"binding.to.content", re.IGNORECASE), "Binding to Content"),
+    (re.compile(r"unique.identifiers?", re.IGNORECASE), "Unique Identifiers"),
+    (re.compile(r"data.boxes", re.IGNORECASE), "Data Boxes"),
+    (re.compile(r"\bassertions?\b", re.IGNORECASE), "Assertions"),
+]
+
+
+def _spec_area_for_section(section_title: str) -> str:
+    """Map a section title to a high-level spec area name."""
+    for pattern, area in _SPEC_AREA_MAP:
+        if pattern.search(section_title):
+            return area
+    return "General"
+
+
+def _extract_spec_body_sections(html_text: str) -> list[tuple[str, str, str]]:
+    """Return (area, section_title, section_html) for each h2 section.
+
+    Skips the Validation section (Section 15) since that is handled by
+    parse_html_validation_rules. Also skips preamble, appendices, and
+    non-normative sections.
+    """
+    sections: list[tuple[str, str, str]] = []
+
+    h2_matches = list(_H2_HEADER_RE.finditer(html_text))
+    for i, m in enumerate(h2_matches):
+        raw_title = _strip_tags(m.group(2))
+        if not raw_title:
+            continue
+        # Skip validation section (handled separately), appendices, TOC, etc.
+        skip_keywords = [
+            "validation",
+            "appendix",
+            "patent",
+            "table of contents",
+            "introduction",
+            "glossary",
+            "normative references",
+            "standard terms",
+        ]
+        if any(kw in raw_title.lower() for kw in skip_keywords):
+            continue
+
+        area = _spec_area_for_section(raw_title)
+
+        start = m.start()
+        end = h2_matches[i + 1].start() if i + 1 < len(h2_matches) else len(html_text)
+        section_html = html_text[start:end]
+        sections.append((area, raw_title, section_html))
+
+    return sections
+
+
+# ---------------------------------------------------------------------------
 # Validation rule extraction
 # ---------------------------------------------------------------------------
 
@@ -449,6 +618,83 @@ def parse_html_validation_rules(html_text: str) -> list[ValidationRule]:
     return rules
 
 
+def parse_html_generation_rules(html_text: str) -> list[ValidationRule]:
+    """Extract claim-generator-directed normative rules from all spec sections.
+
+    Scans the entire specification (excluding Section 15, which is handled by
+    parse_html_validation_rules) for SHALL/MUST statements that target claim
+    generators or describe manifest construction requirements.
+
+    Rules are tagged with applicability=CLAIM_GENERATOR (or BOTH when a
+    sentence also addresses validators). Rules with no discernible applicability
+    are omitted — this function is specifically for generation-time constraints.
+
+    Returns ValidationRule objects with rule_id prefix "GEN-".
+    """
+    sections = _extract_spec_body_sections(html_text)
+
+    rules: list[ValidationRule] = []
+    rule_counter: dict[str, int] = {}
+
+    for area, section_title, section_html in sections:
+        cleaned = _clean_section(section_html)
+        sub_headers = _extract_section_headers(cleaned)
+
+        text_blocks: list[tuple[int, str]] = []
+        for m in _PARAGRAPH_TEXT_RE.finditer(cleaned):
+            text_blocks.append((m.start(), m.group(1)))
+        for m in _LIST_ITEM_RE.finditer(cleaned):
+            text_blocks.append((m.start(), m.group(1)))
+        text_blocks.sort(key=lambda x: x[0])
+
+        for offset, raw_html in text_blocks:
+            plain = _strip_tags(raw_html)
+            if not plain or len(plain) < 20:
+                continue
+            if not has_normative_keyword(plain):
+                continue
+
+            sub_section = _section_at(offset, sub_headers) or section_title
+            block_entities = _extract_html_entities(raw_html, sub_section)
+
+            for sentence in split_sentences(plain):
+                if not has_normative_keyword(sentence):
+                    continue
+                if len(sentence) < 20:
+                    continue
+
+                applicability = _infer_applicability(sentence, sub_section)
+                if applicability not in (
+                    RuleApplicability.CLAIM_GENERATOR,
+                    RuleApplicability.BOTH,
+                ):
+                    continue
+
+                severity = detect_severity(sentence)
+                phase = infer_phase(sub_section, sentence)
+
+                area_key = area.upper().replace(" ", "_")[:6]
+                rule_counter[area_key] = rule_counter.get(area_key, 0) + 1
+                rule_id = f"GEN-{area_key}-{rule_counter[area_key]:04d}"
+
+                rules.append(
+                    ValidationRule(
+                        rule_id=rule_id,
+                        description=sentence[:500],
+                        severity=severity,
+                        phase=phase,
+                        condition="",
+                        action="",
+                        referenced_entities=block_entities[:10],
+                        spec_section=sub_section,
+                        source_text=sentence[:200],
+                        applicability=applicability,
+                    )
+                )
+
+    return rules
+
+
 # ---------------------------------------------------------------------------
 # Public convenience API
 # ---------------------------------------------------------------------------
@@ -459,18 +705,21 @@ def parse_html_spec(
 ) -> tuple[list[ValidationRule], list[StatusCode]]:
     """Parse a rendered C2PA spec HTML page.
 
-    Extracts both validation rules (from Section 15 prose) and status codes
-    (from the 3 standard tables).
+    Extracts validation rules (Section 15), generation rules (all other
+    sections, claim-generator-directed), and status codes.
 
     Args:
         html_text: Full HTML content of the C2PA specification page.
 
     Returns:
-        Tuple of (list[ValidationRule], list[StatusCode]).
+        Tuple of (list[ValidationRule], list[StatusCode]) where the rule list
+        includes both Section 15 validation rules and claim-generator
+        generation rules from all other sections.
     """
-    rules = parse_html_validation_rules(html_text)
+    val_rules = parse_html_validation_rules(html_text)
+    gen_rules = parse_html_generation_rules(html_text)
     codes = parse_html_status_codes(html_text)
-    return rules, codes
+    return val_rules + gen_rules, codes
 
 
 def parse_html_spec_file(

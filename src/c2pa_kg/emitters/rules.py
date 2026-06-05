@@ -12,6 +12,7 @@ from typing import Any
 
 from c2pa_kg.models import (
     KnowledgeGraph,
+    RuleApplicability,
     RuleSeverity,
     StatusCode,
     ValidationPhase,
@@ -49,6 +50,8 @@ def _rule_to_dict(rule: ValidationRule) -> dict[str, Any]:
         "phase": rule.phase.value,
         "spec_section": rule.spec_section,
     }
+    if rule.applicability != RuleApplicability.UNSPECIFIED:
+        d["applicability"] = rule.applicability.value
     if rule.condition:
         d["condition"] = rule.condition
     if rule.action:
@@ -117,21 +120,49 @@ def _group_status_codes(
     return result
 
 
+def _group_generation_rules_by_area(
+    rules: list[ValidationRule],
+) -> dict[str, list[dict[str, Any]]]:
+    """Group GEN- rules by spec section area, sorted by severity."""
+    gen_rules = [
+        r for r in rules
+        if r.applicability in (RuleApplicability.CLAIM_GENERATOR, RuleApplicability.BOTH)
+        and r.rule_id.startswith("GEN-")
+    ]
+
+    areas: dict[str, list[ValidationRule]] = {}
+    for rule in gen_rules:
+        # Derive area from spec_section: use text before first number or whole thing.
+        area = rule.spec_section or "General"
+        areas.setdefault(area, []).append(rule)
+
+    result: dict[str, list[dict[str, Any]]] = {}
+    for area in sorted(areas):
+        sorted_rules = sorted(areas[area], key=lambda r: _SEVERITY_ORDER.get(r.severity, 99))
+        result[area] = [_rule_to_dict(r) for r in sorted_rules]
+
+    return result
+
+
 # ---------------------------------------------------------------------------
 # Summary statistics
 # ---------------------------------------------------------------------------
 
 def _build_summary(rules: list[ValidationRule]) -> dict[str, Any]:
-    """Build a summary dict of rule counts by phase and severity."""
+    """Build a summary dict of rule counts by phase, severity, and applicability."""
     by_phase: dict[str, int] = {}
     by_severity: dict[str, int] = {}
+    by_applicability: dict[str, int] = {}
     for rule in rules:
         by_phase[rule.phase.value] = by_phase.get(rule.phase.value, 0) + 1
         by_severity[rule.severity.value] = by_severity.get(rule.severity.value, 0) + 1
+        app = rule.applicability.value
+        by_applicability[app] = by_applicability.get(app, 0) + 1
     return {
         "total": len(rules),
         "by_phase": by_phase,
         "by_severity": by_severity,
+        "by_applicability": by_applicability,
     }
 
 
@@ -146,10 +177,15 @@ def emit_rules_json(kg: KnowledgeGraph, output_path: Path) -> None:
     {
       "version": "2.4",
       "rule_count": N,
-      "summary": { "total": N, "by_phase": {...}, "by_severity": {...} },
+      "summary": { "total": N, "by_phase": {...}, "by_severity": {...},
+                   "by_applicability": {...} },
       "phases": {
         "structural": [ ...rules... ],
         "cryptographic": [ ...rules... ],
+        ...
+      },
+      "generation_rules": {
+        "<spec section>": [ ...GEN- rules for claim generators... ],
         ...
       },
       "status_codes": {
@@ -163,7 +199,10 @@ def emit_rules_json(kg: KnowledgeGraph, output_path: Path) -> None:
         kg: The knowledge graph containing rules and status codes.
         output_path: Destination .json file path.
     """
-    phases = _group_rules_by_phase(kg.validation_rules)
+    # Separate validation rules (VAL-) from generation rules (GEN-)
+    val_rules = [r for r in kg.validation_rules if r.rule_id.startswith("VAL-")]
+    phases = _group_rules_by_phase(val_rules)
+    generation_rules = _group_generation_rules_by_area(kg.validation_rules)
     status_codes = _group_status_codes(kg.status_codes)
     summary = _build_summary(kg.validation_rules)
 
@@ -172,6 +211,7 @@ def emit_rules_json(kg: KnowledgeGraph, output_path: Path) -> None:
         "rule_count": kg.rule_count,
         "summary": summary,
         "phases": phases,
+        "generation_rules": generation_rules,
         "status_codes": status_codes,
     }
 

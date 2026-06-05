@@ -179,6 +179,67 @@ def create_server(output_dir: Path) -> FastMCP:
         )
 
     @mcp.tool(
+        name="query_generation_rules",
+        description=(
+            "Retrieve normative rules directed at claim generators (manifest "
+            "construction requirements) for a spec version, optionally filtered "
+            "by spec area (Assertions, Claims, Manifests, Binding to Content, "
+            "Cryptography, Standard Assertions, etc.) or by severity "
+            "(shall, must, should, may)."
+        ),
+    )
+    def query_generation_rules(
+        version: str,
+        spec_area: str | None = None,
+        severity: str | None = None,
+    ) -> str:
+        """Get claim-generator-directed rules, optionally filtered.
+
+        Args:
+            version: Spec version string (e.g. "2.4").
+            spec_area: Optional spec area name to filter on (e.g. "Claims").
+                       Substring match, case-insensitive.
+            severity: Optional severity to filter on (e.g. "shall").
+
+        Returns:
+            JSON string with matching generation rules grouped by spec section.
+        """
+        kg = _load_version(version)
+        all_rules: list[dict] = kg.get("validation_rules", [])
+
+        gen_rules = [
+            r for r in all_rules
+            if r.get("applicability") in ("claim_generator", "both")
+        ]
+
+        if spec_area is not None:
+            area_lower = spec_area.lower()
+            gen_rules = [
+                r for r in gen_rules
+                if area_lower in r.get("spec_section", "").lower()
+            ]
+
+        if severity is not None:
+            gen_rules = [r for r in gen_rules if r.get("severity") == severity]
+
+        # Group by spec section for readability
+        by_section: dict[str, list[dict]] = {}
+        for rule in gen_rules:
+            section = rule.get("spec_section", "General")
+            by_section.setdefault(section, []).append(rule)
+
+        return json.dumps(
+            {
+                "version": version,
+                "spec_area": spec_area,
+                "severity": severity,
+                "total": len(gen_rules),
+                "by_section": by_section,
+            },
+            indent=2,
+        )
+
+    @mcp.tool(
         name="diff_versions",
         description=(
             "Produce a structured diff between two C2PA spec versions, "

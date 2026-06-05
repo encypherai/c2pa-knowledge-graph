@@ -75,6 +75,15 @@ class ValidationPhase(Enum):
     CONTENT = "content"
 
 
+class RuleApplicability(Enum):
+    """Who a normative rule is directed at."""
+
+    CLAIM_GENERATOR = "claim_generator"
+    VALIDATOR = "validator"
+    BOTH = "both"
+    UNSPECIFIED = "unspecified"
+
+
 class ChangeType(Enum):
     """Type of change between spec versions."""
 
@@ -194,9 +203,10 @@ class ValidationRule:
     referenced_entities: list[str] = field(default_factory=list)
     spec_section: str = ""
     source_text: str = ""
+    applicability: RuleApplicability = RuleApplicability.UNSPECIFIED
 
     def to_dict(self) -> dict:
-        return {
+        d: dict = {
             "rule_id": self.rule_id,
             "description": self.description,
             "severity": self.severity.value,
@@ -207,6 +217,9 @@ class ValidationRule:
             "spec_section": self.spec_section,
             "source_text": self.source_text,
         }
+        if self.applicability != RuleApplicability.UNSPECIFIED:
+            d["applicability"] = self.applicability.value
+        return d
 
 
 @dataclass
@@ -513,6 +526,9 @@ def kg_from_dict(data: dict) -> KnowledgeGraph:
             referenced_entities=rud.get("referenced_entities", []),
             spec_section=rud.get("spec_section", ""),
             source_text=rud.get("source_text", ""),
+            applicability=RuleApplicability(
+                rud.get("applicability", "unspecified")
+            ),
         ))
 
     for en, ed in data.get("enum_types", {}).items():
